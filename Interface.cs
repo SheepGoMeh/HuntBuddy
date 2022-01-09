@@ -116,7 +116,7 @@ namespace HuntBuddy
 						}
 
 						ImGui.SameLine();
-						if (currentKills == mobHuntEntry.NeededKills)
+						if (currentKills != mobHuntEntry.NeededKills)
 						{
 							ImGui.Text($"({currentKills}/{mobHuntEntry.NeededKills})");
 						}

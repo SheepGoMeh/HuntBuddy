@@ -29,7 +29,7 @@ namespace HuntBuddy
 
 			var fontGlobalScale = ImGui.GetIO().FontGlobalScale;
 
-			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Always);
+			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Once);
 
 			if (!ImGui.Begin($"{_plugin.Name}", ref draw))
 			{

@@ -20,7 +20,7 @@ namespace HuntBuddy
 
 		public Interface(Plugin plugin)
 		{
-			_plugin = plugin;
+			this._plugin = plugin;
 		}
 
 		public unsafe bool Draw()
@@ -31,23 +31,23 @@ namespace HuntBuddy
 
 			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Once);
 
-			if (!ImGui.Begin($"{_plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
+			if (!ImGui.Begin($"{this._plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
 			{
 				return draw;
 			}
 
-			if (!_plugin.MobHuntEntriesReady)
+			if (!this._plugin.MobHuntEntriesReady)
 			{
 				ImGui.Text("Reloading data ...");
 				ImGui.End();
 				return draw;
 			}
 
-			if (IconButton(FontAwesomeIcon.Redo, "Reload"))
+			if (Interface.IconButton(FontAwesomeIcon.Redo, "Reload"))
 			{
 				ImGui.End();
-				_plugin.MobHuntEntriesReady = false;
-				Task.Run(() => _plugin.ReloadData());
+				this._plugin.MobHuntEntriesReady = false;
+				Task.Run(() => this._plugin.ReloadData());
 				return draw;
 			}
 
@@ -60,24 +60,24 @@ namespace HuntBuddy
 			
 			ImGui.SameLine();
 
-			if (IconButton(FontAwesomeIcon.Cog, "Config"))
+			if (Interface.IconButton(FontAwesomeIcon.Cog, "Config"))
 			{
 				this._drawConfigurationInterface = !this._drawConfigurationInterface;
 			}
 
-			foreach (var expansionEntry in _plugin.MobHuntEntries.Where(expansionEntry =>
+			foreach (var expansionEntry in this._plugin.MobHuntEntries.Where(expansionEntry =>
 				         ImGui.TreeNode(expansionEntry.Key)))
 			{
 				foreach (var entry in expansionEntry.Value.Where(entry =>
 					         ImGui.TreeNode(
-						         $"{entry.Key.Value} ({entry.Value.Count(x => _plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills)}/{entry.Value.Count})")))
+						         $"{entry.Key.Value} ({entry.Value.Count(x => this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills)}/{entry.Value.Count})")))
 				{
 					ImGui.Indent();
 					foreach (var mobHuntEntry in entry.Value)
 					{
 						if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 						{
-							if (IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
+							if (Interface.IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
 							{
 								Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
 									mobHuntEntry.MobHuntId);
@@ -86,7 +86,7 @@ namespace HuntBuddy
 							ImGui.SameLine();
 						}
 
-						var currentKills = _plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+						var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
 						ImGui.Text(mobHuntEntry.Name);
 						if (ImGui.IsItemHovered())
 						{
@@ -101,11 +101,11 @@ namespace HuntBuddy
 							    mobHuntEntry.MobHuntType == 1) // Endwalker uses circle for non elite mobs
 							{
 								drawList.AddCircleFilled(cursorPos + new Vector2(imageSize / 2f), imageSize / 2f,
-									_plugin.Configuration.IconBackgroundColourU32);
+									this._plugin.Configuration.IconBackgroundColourU32);
 							}
 							else
 							{
-								drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), _plugin.Configuration.IconBackgroundColourU32);
+								drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), this._plugin.Configuration.IconBackgroundColourU32);
 							}
 
 							drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos,
@@ -135,7 +135,7 @@ namespace HuntBuddy
 
 			ImGui.End();
 
-			if (_drawConfigurationInterface)
+			if (this._drawConfigurationInterface)
 			{
 				this.DrawConfiguration();
 			}
@@ -145,11 +145,11 @@ namespace HuntBuddy
 
 		public unsafe void DrawLocalHunts()
 		{
-			if (!_plugin.Configuration.ShowLocalHunts ||
-			    _plugin.CurrentAreaMobHuntEntries.IsEmpty ||
-			    _plugin.CurrentAreaMobHuntEntries.Count(x =>
-				    _plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) ==
-			    _plugin.CurrentAreaMobHuntEntries.Count)
+			if (!this._plugin.Configuration.ShowLocalHunts ||
+			    this._plugin.CurrentAreaMobHuntEntries.IsEmpty ||
+			    this._plugin.CurrentAreaMobHuntEntries.Count(x =>
+				    this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) ==
+			    this._plugin.CurrentAreaMobHuntEntries.Count)
 			{
 				return;
 			}
@@ -160,7 +160,7 @@ namespace HuntBuddy
 
 			var windowFlags = ImGuiWindowFlags.NoNavInputs | ImGuiWindowFlags.NoDocking;
 
-			if (_plugin.Configuration.HideLocalHuntBackground)
+			if (this._plugin.Configuration.HideLocalHuntBackground)
 			{
 				windowFlags |= ImGuiWindowFlags.NoBackground;
 			}
@@ -170,18 +170,18 @@ namespace HuntBuddy
 				return;
 			}
 
-			foreach (var mobHuntEntry in _plugin.CurrentAreaMobHuntEntries)
+			foreach (var mobHuntEntry in this._plugin.CurrentAreaMobHuntEntries)
 			{
-				var currentKills = _plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+				var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
 
-				if (_plugin.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills)
+				if (this._plugin.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills)
 				{
 					continue;
 				}
 
 				if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 				{
-					if (IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
+					if (Interface.IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
 					{
 						Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
 							mobHuntEntry.MobHuntId);
@@ -192,7 +192,7 @@ namespace HuntBuddy
 
 				ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
 
-				if (!_plugin.Configuration.ShowLocalHuntIcons)
+				if (!this._plugin.Configuration.ShowLocalHuntIcons)
 				{
 					continue;
 				}
@@ -206,11 +206,11 @@ namespace HuntBuddy
 				if (mobHuntEntry.ExpansionId == 4 &&
 				    mobHuntEntry.MobHuntType == 1) // Endwalker uses circle for non elite mobs
 				{
-					drawList.AddCircleFilled(cursorPos + new Vector2(imageSize / 2f), imageSize / 2f, _plugin.Configuration.IconBackgroundColourU32);
+					drawList.AddCircleFilled(cursorPos + new Vector2(imageSize / 2f), imageSize / 2f, this._plugin.Configuration.IconBackgroundColourU32);
 				}
 				else
 				{
-					drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), _plugin.Configuration.IconBackgroundColourU32);
+					drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), this._plugin.Configuration.IconBackgroundColourU32);
 				}
 
 				drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos,
@@ -224,29 +224,29 @@ namespace HuntBuddy
 		{
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
-			if (!ImGui.Begin($"{_plugin.Name} settings", ImGuiWindowFlags.NoDocking))
+			if (!ImGui.Begin($"{this._plugin.Name} settings", ImGuiWindowFlags.NoDocking))
 			{
 				return;
 			}
 
 			var save = false;
 
-			save |= ImGui.Checkbox("Show hunts in local area", ref _plugin.Configuration.ShowLocalHunts);
-			save |= ImGui.Checkbox("Show icons of hunts in local area", ref _plugin.Configuration.ShowLocalHuntIcons);
+			save |= ImGui.Checkbox("Show hunts in local area", ref this._plugin.Configuration.ShowLocalHunts);
+			save |= ImGui.Checkbox("Show icons of hunts in local area", ref this._plugin.Configuration.ShowLocalHuntIcons);
 			save |= ImGui.Checkbox("Hide background of local hunts window",
-				ref _plugin.Configuration.HideLocalHuntBackground);
+				ref this._plugin.Configuration.HideLocalHuntBackground);
 			save |= ImGui.Checkbox("Hide completed targets in local hunts window",
-				ref _plugin.Configuration.HideCompletedHunts);
-			if (ImGui.ColorEdit4("Hunt icon background colour", ref _plugin.Configuration.IconBackgroundColour))
+				ref this._plugin.Configuration.HideCompletedHunts);
+			if (ImGui.ColorEdit4("Hunt icon background colour", ref this._plugin.Configuration.IconBackgroundColour))
 			{
-				_plugin.Configuration.IconBackgroundColourU32 =
-					ImGui.ColorConvertFloat4ToU32(_plugin.Configuration.IconBackgroundColour);
+				this._plugin.Configuration.IconBackgroundColourU32 =
+					ImGui.ColorConvertFloat4ToU32(this._plugin.Configuration.IconBackgroundColour);
 				save = true;
 			}
 
 			if (save)
 			{
-				_plugin.Configuration.Save();
+				this._plugin.Configuration.Save();
 			}
 
 

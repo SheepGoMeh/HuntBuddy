@@ -79,32 +79,32 @@ namespace HuntBuddy
 						"D1 48 8D 0D ?? ?? ?? ?? 48 83 C4 20 5F E9 ?? ?? ?? ??");
 			}
 
-			ClientState.TerritoryChanged += ClientStateOnTerritoryChanged;
-			PluginInterface.UiBuilder.Draw += DrawInterface;
-			PluginInterface.UiBuilder.Draw += _interface.DrawLocalHunts;
-			PluginInterface.UiBuilder.OpenConfigUi += OpenConfigUi;
+			Plugin.ClientState.TerritoryChanged += ClientStateOnTerritoryChanged;
+			Plugin.PluginInterface.UiBuilder.Draw += DrawInterface;
+			Plugin.PluginInterface.UiBuilder.Draw += _interface.DrawLocalHunts;
+			Plugin.PluginInterface.UiBuilder.OpenConfigUi += OpenConfigUi;
 		}
 
 		private void ClientStateOnTerritoryChanged(object? sender, ushort e)
 		{
-			CurrentAreaMobHuntEntries.Clear();
+			this.CurrentAreaMobHuntEntries.Clear();
 
-			foreach (var mobHuntEntry in MobHuntEntries.SelectMany(expansionEntry => expansionEntry.Value
-				         .Where(entry => entry.Key.Key == ClientState.TerritoryType)
+			foreach (var mobHuntEntry in this.MobHuntEntries.SelectMany(expansionEntry => expansionEntry.Value
+				         .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
 				         .SelectMany(entry => entry.Value)))
 			{
-				CurrentAreaMobHuntEntries.Add(mobHuntEntry);
+				this.CurrentAreaMobHuntEntries.Add(mobHuntEntry);
 			}
 		}
 
 		private void OpenConfigUi()
 		{
-			_interface.DrawInterface = !_interface.DrawInterface;
+			this._interface.DrawInterface = !this._interface.DrawInterface;
 		}
 
 		private void DrawInterface()
 		{
-			_interface.DrawInterface = _interface.DrawInterface && _interface.Draw();
+			this._interface.DrawInterface = this._interface.DrawInterface && this._interface.Draw();
 		}
 
 		private void Dispose(bool disposing)
@@ -114,19 +114,19 @@ namespace HuntBuddy
 				return;
 			}
 
-			MobHuntEntriesReady = false;
-			PluginInterface.UiBuilder.Draw -= DrawInterface;
-			PluginInterface.UiBuilder.Draw -= _interface.DrawLocalHunts;
-			PluginInterface.UiBuilder.OpenConfigUi -= OpenConfigUi;
+			this.MobHuntEntriesReady = false;
+			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
+			Plugin.PluginInterface.UiBuilder.Draw -= this._interface.DrawLocalHunts;
+			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
 
-			_commandManager.Dispose();
+			this._commandManager.Dispose();
 		}
 
 		[Command("/phb")]
 		[HelpMessage("Toggles UI")]
 		public void PluginCommand(string command, string args)
 		{
-			OpenConfigUi();
+			this.OpenConfigUi();
 		}
 
 		public unsafe void ReloadData()
@@ -158,7 +158,7 @@ namespace HuntBuddy
 
 				var inventoryItem = *inventoryItemPtr;
 
-				foreach (var row in DataManager.Excel.GetSheet<MobHuntOrderType>()!)
+				foreach (var row in Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!)
 				{
 					if (inventoryItem.ItemID == row.EventItem.Row)
 					{
@@ -168,13 +168,13 @@ namespace HuntBuddy
 				}
 			}
 			
-			MobHuntEntries.Clear();
+			this.MobHuntEntries.Clear();
 			var mobHuntList = new List<MobHuntEntry>();
-			var mobHuntOrderSheet = DataManager.Excel.GetSheet<MobHuntOrder>()!;
+			var mobHuntOrderSheet = Plugin.DataManager.Excel.GetSheet<MobHuntOrder>()!;
 			
 			foreach (var (mobHuntType, billNumber) in huntBills)
 			{
-				var mobHuntOrderTypeRow = DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow(billNumber)!;
+				var mobHuntOrderTypeRow = Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow(billNumber)!;
 					
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
 				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
@@ -205,7 +205,7 @@ namespace HuntBuddy
 							MobHuntType = mobHuntType,
 							CurrentKillsOffset = 5 * billNumber + mobHuntOrderRow.SubRowId,
 							NeededKills = mobHuntOrderRow.NeededKills,
-							Icon = LoadIcon(mobHuntOrderRow.Target.Value.Icon)
+							Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
 						});
 					}
 					else
@@ -223,42 +223,42 @@ namespace HuntBuddy
 				var key = entry.ExpansionName ?? "Unknown";
 				var subKey = new KeyValuePair<uint, string>(entry.TerritoryType, entry.TerritoryName ?? "Unknown");
 					
-				if (!MobHuntEntries.ContainsKey(key))
+				if (!this.MobHuntEntries.ContainsKey(key))
 				{
-					MobHuntEntries[key] = new Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>();
+					this.MobHuntEntries[key] = new Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>();
 				}
 
-				if (!MobHuntEntries[key].ContainsKey(subKey))
+				if (!this.MobHuntEntries[key].ContainsKey(subKey))
 				{
-					MobHuntEntries[key][subKey] = new List<MobHuntEntry>();
+					this.MobHuntEntries[key][subKey] = new List<MobHuntEntry>();
 				}
 					
-				MobHuntEntries[key][subKey].Add(entry);
+				this.MobHuntEntries[key][subKey].Add(entry);
 			}
 
-			ClientStateOnTerritoryChanged(null, 0);
+			this.ClientStateOnTerritoryChanged(null, 0);
 
-			MobHuntEntriesReady = true;
-			_interface.DrawInterface = true;
+			this.MobHuntEntriesReady = true;
+			this._interface.DrawInterface = true;
 		}
 		
 		private static TexFile? GetHdIcon(uint id)
 		{
 			var path = $"ui/icon/{id / 1000 * 1000:000000}/{id:000000}_hr1.tex";
-			return DataManager.GetFile<TexFile>(path);
+			return Plugin.DataManager.GetFile<TexFile>(path);
 		}
 
 		private static TextureWrap LoadIcon(uint id)
 		{
-			var icon     = GetHdIcon(id) ?? DataManager.GetIcon(id)!;
+			var icon     = Plugin.GetHdIcon(id) ?? Plugin.DataManager.GetIcon(id)!;
 			var iconData = icon.GetRgbaImageData();
 
-			return PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);
+			return Plugin.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);
 		}
 
 		public void Dispose()
 		{
-			Dispose(true);
+			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 	}

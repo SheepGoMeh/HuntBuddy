@@ -16,7 +16,6 @@ namespace HuntBuddy
 		private readonly Plugin _plugin;
 
 		public bool DrawInterface;
-		public bool DrawLocalHuntsInterface = true;
 		private bool _drawConfigurationInterface;
 
 		public unsafe Interface(Plugin plugin)

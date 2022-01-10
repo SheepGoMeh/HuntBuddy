@@ -156,7 +156,7 @@ namespace HuntBuddy
 
 			var fontGlobalScale = ImGui.GetIO().FontGlobalScale;
 
-			ImGui.SetNextWindowSize(new Vector2(0, 0), ImGuiCond.Always);
+			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
 			var windowFlags = ImGuiWindowFlags.NoNavInputs;
 
@@ -222,7 +222,7 @@ namespace HuntBuddy
 
 		private void DrawConfiguration()
 		{
-			ImGui.SetNextWindowSize(new Vector2(0, 0), ImGuiCond.Always);
+			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
 			if (!ImGui.Begin($"{_plugin.Name} settings"))
 			{

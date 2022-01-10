@@ -31,7 +31,7 @@ namespace HuntBuddy
 
 			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Once);
 
-			if (!ImGui.Begin($"{_plugin.Name}", ref draw))
+			if (!ImGui.Begin($"{_plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
 			{
 				return draw;
 			}
@@ -158,7 +158,7 @@ namespace HuntBuddy
 
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
-			var windowFlags = ImGuiWindowFlags.NoNavInputs;
+			var windowFlags = ImGuiWindowFlags.NoNavInputs | ImGuiWindowFlags.NoDocking;
 
 			if (_plugin.Configuration.HideLocalHuntBackground)
 			{
@@ -224,7 +224,7 @@ namespace HuntBuddy
 		{
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
-			if (!ImGui.Begin($"{_plugin.Name} settings"))
+			if (!ImGui.Begin($"{_plugin.Name} settings", ImGuiWindowFlags.NoDocking))
 			{
 				return;
 			}

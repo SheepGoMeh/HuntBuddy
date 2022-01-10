@@ -3,7 +3,7 @@ using Dalamud.Game.Text.SeStringHandling.Payloads;
 
 namespace HuntBuddy
 {
-	public static class LocationDb
+	public static class Location
 	{
 		public class PositionInfo
 		{

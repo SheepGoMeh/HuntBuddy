@@ -76,11 +76,11 @@ namespace HuntBuddy
 					ImGui.Indent();
 					foreach (var mobHuntEntry in entry.Value)
 					{
-						if (LocationDb.Database.ContainsKey(mobHuntEntry.MobHuntId))
+						if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 						{
 							if (IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
 							{
-								LocationDb.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+								Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
 									mobHuntEntry.MobHuntId);
 							}
 
@@ -180,11 +180,11 @@ namespace HuntBuddy
 					continue;
 				}
 
-				if (LocationDb.Database.ContainsKey(mobHuntEntry.MobHuntId))
+				if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 				{
 					if (IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
 					{
-						LocationDb.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+						Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
 							mobHuntEntry.MobHuntId);
 					}
 

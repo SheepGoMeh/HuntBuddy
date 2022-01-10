@@ -148,7 +148,7 @@ namespace HuntBuddy
 			// Garlemald
 			{ 10648, new PositionInfo { X = 18.8f, Y = 09.8f } }, // Automated Satellite
 			{ 10649, new PositionInfo { X = 25.5f, Y = 17.5f } }, // Automated Death Machine
-			{ 10650, new PositionInfo { X = 15.5f, Y = 29.5f } }, // Automated Cavalry
+			{ 10650, new PositionInfo { X = 15.5f, Y = 19.5f } }, // Automated Cavalry
 			{ 10651, new PositionInfo { X = 21.8f, Y = 17.4f } }, // Automated Bit
 			{ 10652, new PositionInfo { X = 15.7f, Y = 09.8f } }, // Automated Roader
 			{ 10653, new PositionInfo { X = 29.5f, Y = 13.7f } }, // Automated Slasher

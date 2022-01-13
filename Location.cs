@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Lumina.Excel.GeneratedSheets;
 
 namespace HuntBuddy
 {
@@ -9,6 +12,7 @@ namespace HuntBuddy
 		{
 			public float X { get; set; }
 			public float Y { get; set; }
+			public Vector2 Coordinate => new (this.X, this.Y);
 		}
 
 		// MobHuntId as key
@@ -220,6 +224,51 @@ namespace HuntBuddy
 		{
 			var mapLinkPayload = new MapLinkPayload(territoryType, mapId, Database[mobHuntId].X, Database[mobHuntId].Y);
 			Plugin.GameGui.OpenMapWithMapLink(mapLinkPayload);
+		}
+		
+		private static Vector2 ConvertPixelPositionToMapCoordinate(int x, int y, float scale)
+		{
+			var num = scale / 100f;
+			return new Vector2(ConvertRawPositionToMapCoordinate((int)((x - 1024) * num * 1000f), scale),
+				ConvertRawPositionToMapCoordinate((int)((y - 1024) * num * 1000f), scale));
+		}
+		
+		private static float ConvertRawPositionToMapCoordinate(int pos, float scale)
+		{
+			var num1 = scale / 100f;
+			var num2 = (float) (pos * (double) num1 / 1000.0);
+			return (float) (41.0 / num1 * ((num2 + 1024.0) / 2048.0) + 1.0);
+		}
+		
+		public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId)
+		{
+			var mapRow = Plugin.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
+
+			if (mapRow == null)
+			{
+				return;
+			}
+
+			var nearestAetheryteId = Plugin.DataManager.Excel.GetSheet<MapMarker>()
+				?.Where(x => x.DataType == 3 && x.RowId == mapRow.MapMarkerRange)
+				.Select(x => new
+				{
+					distance = Vector2.DistanceSquared(Database[mobHuntId].Coordinate,
+						ConvertPixelPositionToMapCoordinate(x.X, x.Y, mapRow.SizeFactor)),
+					rowId = x.DataKey
+				})
+				.OrderBy(x => x.distance)
+				.FirstOrDefault()?.rowId;
+
+			var nearestAetheryte = Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(x =>
+				x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
+
+			if (nearestAetheryte == null)
+			{
+				return;
+			}
+
+			Plugin.TeleportConsumer?.Teleport(nearestAetheryte.RowId);
 		}
 	}
 }

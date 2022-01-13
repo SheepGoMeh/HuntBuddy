@@ -84,6 +84,14 @@ namespace HuntBuddy
 							}
 
 							ImGui.SameLine();
+
+							if (Interface.IconButton(FontAwesomeIcon.StreetView, $"t##{mobHuntEntry.MobHuntId}"))
+							{
+								Location.TeleportToNearestAetheryte(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+									mobHuntEntry.MobHuntId);
+							}
+
+							ImGui.SameLine();
 						}
 
 						var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];

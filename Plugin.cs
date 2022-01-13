@@ -15,6 +15,7 @@ using Dalamud.Utility;
 using Lumina.Excel.GeneratedSheets;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using HuntBuddy.Attributes;
+using HuntBuddy.Ipc;
 using HuntBuddy.Structs;
 using ImGuiNET;
 using ImGuiScene;
@@ -61,6 +62,7 @@ namespace HuntBuddy
 		public bool MobHuntEntriesReady = true;
 		public readonly unsafe MobHuntStruct* MobHuntStruct;
 		public readonly Configuration Configuration;
+		public static TeleportConsumer? TeleportConsumer;
 
 		public Plugin()
 		{
@@ -79,6 +81,7 @@ namespace HuntBuddy
 						"D1 48 8D 0D ?? ?? ?? ?? 48 83 C4 20 5F E9 ?? ?? ?? ??");
 			}
 
+			Plugin.TeleportConsumer = new TeleportConsumer();
 			Plugin.ClientState.TerritoryChanged += ClientStateOnTerritoryChanged;
 			Plugin.PluginInterface.UiBuilder.Draw += DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw += _interface.DrawLocalHunts;

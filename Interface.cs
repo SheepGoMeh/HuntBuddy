@@ -83,15 +83,32 @@ namespace HuntBuddy
 									mobHuntEntry.MobHuntId);
 							}
 
-							ImGui.SameLine();
-
-							if (Interface.IconButton(FontAwesomeIcon.StreetView, $"t##{mobHuntEntry.MobHuntId}"))
+							if (ImGui.IsItemHovered())
 							{
-								Location.TeleportToNearestAetheryte(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
-									mobHuntEntry.MobHuntId);
+								ImGui.BeginTooltip();
+								ImGui.Text("Show hunt location on the map");
+								ImGui.EndTooltip();
 							}
 
 							ImGui.SameLine();
+
+							if (Plugin.TeleportConsumer?.Subscribed == true)
+							{
+								if (Interface.IconButton(FontAwesomeIcon.StreetView, $"t##{mobHuntEntry.MobHuntId}"))
+								{
+									Location.TeleportToNearestAetheryte(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+										mobHuntEntry.MobHuntId);
+								}
+
+								if (ImGui.IsItemHovered())
+								{
+									ImGui.BeginTooltip();
+									ImGui.Text("Teleport to nearest aetheryte");
+									ImGui.EndTooltip();
+								}
+
+								ImGui.SameLine();
+							}
 						}
 
 						var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];

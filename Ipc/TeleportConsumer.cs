@@ -6,6 +6,7 @@ namespace HuntBuddy.Ipc
 {
 	public class TeleportConsumer
 	{
+		public bool Subscribed { get; private set; }
 		private ICallGateSubscriber<uint, byte, bool> _consumerTeleport = null!;
 
 		private void Subscribe()
@@ -13,9 +14,12 @@ namespace HuntBuddy.Ipc
 			try
 			{
 				this._consumerTeleport = Plugin.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
+
+				this.Subscribed = true;
 			}
 			catch (Exception ex)
 			{
+				this.Subscribed = false;
 				PluginLog.LogDebug($"Failed to subscribe to Teleporter\nReason: {ex}");
 			}
 		}

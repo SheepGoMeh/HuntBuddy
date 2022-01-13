@@ -77,7 +77,7 @@ namespace HuntBuddy
 					{
 						if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 						{
-							if (Interface.IconButton(FontAwesomeIcon.Search, $"##{mobHuntEntry.MobHuntId}"))
+							if (Interface.IconButton(FontAwesomeIcon.MapMarked, $"##{mobHuntEntry.MobHuntId}"))
 							{
 								Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
 									mobHuntEntry.MobHuntId);

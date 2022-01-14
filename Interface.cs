@@ -69,8 +69,24 @@ namespace HuntBuddy
 				         ImGui.TreeNode(expansionEntry.Key)))
 			{
 				foreach (var entry in expansionEntry.Value.Where(entry =>
-					         ImGui.TreeNode(
-						         $"{entry.Key.Value} ({entry.Value.Count(x => this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills)}/{entry.Value.Count})")))
+				         {
+					         var treeOpen = ImGui.TreeNodeEx(entry.Key.Value, ImGuiTreeNodeFlags.AllowItemOverlap);
+					         ImGui.SameLine();
+					         var killedCount = entry.Value.Count(x =>
+						         this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills);
+
+					         if (killedCount != entry.Value.Count)
+					         {
+						         ImGui.Text($"({killedCount}/{entry.Value.Count})");
+					         }
+					         else
+					         {
+						         ImGui.TextColored(new Vector4(0f, 1f, 0f, 1f),
+							         $"({killedCount}/{entry.Value.Count})");
+					         }
+
+					         return treeOpen;
+				         }))
 				{
 					ImGui.Indent();
 					foreach (var mobHuntEntry in entry.Value)

@@ -18,6 +18,236 @@ namespace HuntBuddy
 		// MobHuntId as key
 		public static readonly Dictionary<uint, PositionInfo> Database = new()
 		{
+			// Heavensward
+			// Coerthas Western Highlands
+			{ 03481, new PositionInfo { X = 15.0f, Y = 12.0f } }, // Archaeornis
+			{ 03472, new PositionInfo { X = 32.0f, Y = 24.0f } }, // Bergthurs
+			{ 03471, new PositionInfo { X = 30.0f, Y = 31.0f } }, // Deepeye
+			{ 03476, new PositionInfo { X = 28.0f, Y = 12.0f } }, // Frost Grenade
+			{ 03480, new PositionInfo { X = 11.0f, Y = 17.0f } }, // Gelato
+			{ 03484, new PositionInfo { X = 10.0f, Y = 14.0f } }, // Ice Commander
+			{ 03475, new PositionInfo { X = 23.0f, Y = 16.0f } }, // Icetrap
+			{ 03487, new PositionInfo { X = 28.0f, Y = 09.0f } }, // Inland Tursus
+			{ 03483, new PositionInfo { X = 19.0f, Y = 29.0f } }, // Lone Yeti
+			{ 03485, new PositionInfo { X = 22.0f, Y = 21.0f } }, // Polar Bear
+			{ 03482, new PositionInfo { X = 16.0f, Y = 20.0f } }, // Rheum
+			{ 03473, new PositionInfo { X = 26.0f, Y = 24.0f } }, // Silver Wolf
+			{ 03490, new PositionInfo { X = 25.0f, Y = 32.0f } }, // Slate Yeti
+			{ 03478, new PositionInfo { X = 25.0f, Y = 12.0f } }, // Slush Zoblyn
+			{ 03470, new PositionInfo { X = 30.0f, Y = 32.0f } }, // Steinbock
+			{ 03474, new PositionInfo { X = 31.0f, Y = 20.0f } }, // Upland Mylodon
+			{ 03493, new PositionInfo { X = 09.0f, Y = 09.0f } }, // Vindthurs
+			{ 03479, new PositionInfo { X = 15.0f, Y = 17.0f } }, // Wooly Yak
+
+			// The Sea of Clouds
+			{ 03524, new PositionInfo { X = 21.0f, Y = 06.0f } }, // Anzu
+			{ 03498, new PositionInfo { X = 28.0f, Y = 29.0f } }, // Cloudworm
+			{ 03496, new PositionInfo { X = 27.0f, Y = 30.0f } }, // Conodont
+			{ 03505, new PositionInfo { X = 19.0f, Y = 30.0f } }, // Dhalmel
+			{ 03511, new PositionInfo { X = 17.0f, Y = 10.0f } }, // Endymion
+			{ 03494, new PositionInfo { X = 11.0f, Y = 33.0f } }, // Gaelicat
+			{ 03495, new PositionInfo { X = 16.0f, Y = 36.0f } }, // Gastornis
+			{ 03512, new PositionInfo { X = 23.0f, Y = 09.0f } }, // Groundskeeper
+			{ 03506, new PositionInfo { X = 20.0f, Y = 30.0f } }, // Korrigan
+			{ 03501, new PositionInfo { X = 36.0f, Y = 24.0f } }, // Lan'laii Gundu
+			{ 03502, new PositionInfo { X = 36.0f, Y = 20.0f } }, // Nat'laii Gundu
+			{ 03516, new PositionInfo { X = 28.0f, Y = 10.0f } }, // Nat'laii Vundu
+			{ 03497, new PositionInfo { X = 29.0f, Y = 30.0f } }, // Obdella
+			{ 03499, new PositionInfo { X = 20.0f, Y = 34.0f } }, // Paissa
+			{ 03500, new PositionInfo { X = 36.0f, Y = 24.0f } }, // Sanuwa
+			{ 03514, new PositionInfo { X = 30.0f, Y = 14.0f } }, // Sanuwa Vundu
+			{ 03525, new PositionInfo { X = 21.0f, Y = 07.0f } }, // Toco Toco
+			{ 03523, new PositionInfo { X = 14.0f, Y = 07.0f } }, // Tsanahale
+			{ 03503, new PositionInfo { X = 35.0f, Y = 25.0f } }, // Vuk'laii Gundu
+			{ 03513, new PositionInfo { X = 18.0f, Y = 17.0f } }, // Vundu Totem
+			{ 03509, new PositionInfo { X = 09.0f, Y = 16.0f } }, // Window Wamoura
+			{ 03510, new PositionInfo { X = 10.0f, Y = 17.0f } }, // Window Wamouracampa
+			{ 03504, new PositionInfo { X = 20.0f, Y = 38.0f } }, // Wisent
+
+			// The Dravanian Forelands
+			{ 03565, new PositionInfo { X = 30.0f, Y = 16.0f } }, // Bandersnatch
+			{ 03566, new PositionInfo { X = 26.0f, Y = 11.0f } }, // Brown Bear
+			{ 03570, new PositionInfo { X = 28.0f, Y = 22.0f } }, // Clearwater Nanka
+			{ 03569, new PositionInfo { X = 27.0f, Y = 25.0f } }, // Clearwater Ninki Nanka
+			{ 03572, new PositionInfo { X = 28.0f, Y = 32.0f } }, // Dragonfly Watcher
+			{ 03567, new PositionInfo { X = 27.0f, Y = 22.0f } }, // Dravanian Aevis
+			{ 03576, new PositionInfo { X = 16.0f, Y = 33.0f } }, // Dravanian Wyvern
+			{ 03563, new PositionInfo { X = 36.0f, Y = 24.0f } }, // Feather Flea
+			{ 03578, new PositionInfo { X = 17.0f, Y = 26.0f } }, // Forelands Hippocerf
+			{ 03579, new PositionInfo { X = 18.0f, Y = 12.0f } }, // Gallimimus
+			{ 03592, new PositionInfo { X = 27.0f, Y = 35.0f } }, // Loth Cultivator
+			{ 03590, new PositionInfo { X = 27.0f, Y = 35.0f } }, // Loth Firedrone
+			{ 03591, new PositionInfo { X = 29.0f, Y = 36.0f } }, // Loth Steeldrone
+			{ 03568, new PositionInfo { X = 28.0f, Y = 25.0f } }, // Melia
+			{ 03577, new PositionInfo { X = 18.0f, Y = 31.0f } }, // Miacid
+			{ 03555, new PositionInfo { X = 18.0f, Y = 12.0f } }, // Syricta
+			{ 03586, new PositionInfo { X = 31.0f, Y = 08.0f } }, // Thunder Dragon
+			{ 03582, new PositionInfo { X = 13.0f, Y = 15.0f } }, // Tyrannosaur
+			{ 03581, new PositionInfo { X = 13.0f, Y = 14.0f } }, // Vinegaroon
+			{ 03564, new PositionInfo { X = 35.0f, Y = 21.0f } }, // Wild Chocobo
+
+			// The Churning Mists
+			{ 03619, new PositionInfo { X = 17.0f, Y = 27.0f } }, // Amphiptere
+			{ 03620, new PositionInfo { X = 24.0f, Y = 26.0f } }, // Archaeosaur
+			{ 03625, new PositionInfo { X = 18.0f, Y = 24.0f } }, // Bladed Vinegaroon
+			{ 03630, new PositionInfo { X = 25.0f, Y = 10.0f } }, // Blood Dragon
+			{ 03631, new PositionInfo { X = 09.0f, Y = 36.0f } }, // Cloud Aevis
+			{ 03629, new PositionInfo { X = 08.0f, Y = 19.0f } }, // Diresaur
+			{ 03623, new PositionInfo { X = 20.0f, Y = 12.0f } }, // Dragonet
+			{ 03626, new PositionInfo { X = 34.0f, Y = 21.0f } }, // Elder Syricta
+			{ 03628, new PositionInfo { X = 25.0f, Y = 30.0f } }, // Elder Wyvern
+			{ 03668, new PositionInfo { X = 10.0f, Y = 20.0f } }, // Gnarled Melia
+			{ 03614, new PositionInfo { X = 34.0f, Y = 28.0f } }, // Hropken
+			{ 03621, new PositionInfo { X = 09.0f, Y = 12.0f } }, // Limestone Golem
+			{ 03618, new PositionInfo { X = 20.0f, Y = 28.0f } }, // Lower Skylord
+			{ 03627, new PositionInfo { X = 33.0f, Y = 31.0f } }, // Mists Biast
+			{ 03622, new PositionInfo { X = 10.0f, Y = 18.0f } }, // Mists Drake
+			{ 03617, new PositionInfo { X = 23.0f, Y = 25.0f } }, // Moss Dragon
+			{ 03613, new PositionInfo { X = 28.0f, Y = 32.0f } }, // Sankchinni
+			{ 03615, new PositionInfo { X = 32.0f, Y = 15.0f } }, // Tulihand
+			{ 03616, new PositionInfo { X = 26.0f, Y = 20.0f } }, // Wadjet
+
+			// The Dravanian Hinterlands
+			{ 03612, new PositionInfo { X = 25.0f, Y = 37.0f } }, // Bifericeras
+			{ 03609, new PositionInfo { X = 18.0f, Y = 36.0f } }, // Cockatrice
+			{ 03603, new PositionInfo { X = 12.0f, Y = 16.0f } }, // Crawler
+			{ 03594, new PositionInfo { X = 24.0f, Y = 21.0f } }, // Damselfly
+			{ 03598, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Brandisher
+			{ 03601, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Glider
+			{ 03600, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Sharpshooter
+			{ 03599, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Tinkerer
+			{ 03605, new PositionInfo { X = 10.0f, Y = 21.0f } }, // Great Morbol
+			{ 03571, new PositionInfo { X = 24.0f, Y = 31.0f } }, // Loaghtan
+			{ 03597, new PositionInfo { X = 37.0f, Y = 24.0f } }, // Narbrooi
+			{ 03610, new PositionInfo { X = 17.0f, Y = 33.0f } }, // Okeanis
+			{ 03608, new PositionInfo { X = 12.0f, Y = 33.0f } }, // Opken
+			{ 03604, new PositionInfo { X = 11.0f, Y = 27.0f } }, // Orn Kite
+			{ 03607, new PositionInfo { X = 09.0f, Y = 34.0f } }, // Poroggo
+			{ 03595, new PositionInfo { X = 28.0f, Y = 27.0f } }, // Ratel
+			{ 03611, new PositionInfo { X = 12.0f, Y = 32.0f } }, // Sun Leech
+			{ 03593, new PositionInfo { X = 21.0f, Y = 16.0f } }, // Tarantula Hawk
+			{ 03624, new PositionInfo { X = 20.0f, Y = 17.0f } }, // Vouivre
+			{ 03596, new PositionInfo { X = 34.0f, Y = 19.0f } }, // Wildebeest
+
+			// Azys Lla
+			{ 03545, new PositionInfo { X = 35.0f, Y = 24.0f } }, // 6th Legion Vanguard
+			{ 03552, new PositionInfo { X = 27.0f, Y = 33.0f } }, // Adamantite Claw
+			{ 03540, new PositionInfo { X = 31.0f, Y = 06.0f } }, // Allagan Chimera
+			{ 03534, new PositionInfo { X = 15.0f, Y = 13.0f } }, // Clockwork Engineer
+			{ 03536, new PositionInfo { X = 13.0f, Y = 08.0f } }, // Clockwork Harvestman
+			{ 03535, new PositionInfo { X = 18.0f, Y = 13.0f } }, // Clockwork Paladin
+			{ 03542, new PositionInfo { X = 35.0f, Y = 09.0f } }, // Corpse Flower
+			{ 03541, new PositionInfo { X = 29.5f, Y = 12.0f } }, // Empuse
+			{ 03537, new PositionInfo { X = 13.0f, Y = 17.0f } }, // Enforcement Droid
+			{ 03539, new PositionInfo { X = 27.0f, Y = 11.0f } }, // Lamia Cybrid
+			{ 03538, new PositionInfo { X = 28.0f, Y = 13.0f } }, // Lamia Thelytoke
+			{ 03580, new PositionInfo { X = 13.0f, Y = 33.0f } }, // Lesser Hydra
+			{ 03559, new PositionInfo { X = 18.0f, Y = 31.0f } }, // Meracydian Amphiptere
+			{ 03557, new PositionInfo { X = 08.0f, Y = 32.0f } }, // Meracydian Brobinyak
+			{ 03560, new PositionInfo { X = 08.0f, Y = 27.0f } }, // Meracydian Dragon
+			{ 03558, new PositionInfo { X = 06.0f, Y = 35.0f } }, // Meracydian Dragonet
+			{ 03554, new PositionInfo { X = 15.0f, Y = 29.0f } }, // Meracydian Falak
+			{ 03556, new PositionInfo { X = 14.0f, Y = 35.0f } }, // Meracydian Vouivre
+			{ 03533, new PositionInfo { X = 12.0f, Y = 15.0f } }, // Owlbear
+			{ 03543, new PositionInfo { X = 35.0f, Y = 08.0f } }, // Proto-naga
+			{ 03544, new PositionInfo { X = 33.0f, Y = 13.0f } }, // Reptoid
+			{ 03532, new PositionInfo { X = 09.0f, Y = 12.0f } }, // Snapper-rook
+
+			// Stormblood
+			// The Fringes
+			{ 05685, new PositionInfo { X = 10.0f, Y = 27.0f } }, // Diakka
+			{ 05674, new PositionInfo { X = 22.0f, Y = 16.0f } }, // Foper
+			{ 05697, new PositionInfo { X = 25.0f, Y = 27.0f } }, // Gazelle
+			{ 05676, new PositionInfo { X = 10.0f, Y = 11.0f } }, // Gazelle Hawk
+			{ 05679, new PositionInfo { X = 25.0f, Y = 15.0f } }, // Gelid Bhoot
+			{ 05686, new PositionInfo { X = 10.0f, Y = 27.0f } }, // Goosefish
+			{ 05671, new PositionInfo { X = 11.0f, Y = 11.0f } }, // Leshy
+			{ 05687, new PositionInfo { X = 11.0f, Y = 17.0f } }, // Mossling
+			{ 05683, new PositionInfo { X = 12.0f, Y = 17.0f } }, // Mountain Grizzly
+			{ 05691, new PositionInfo { X = 35.0f, Y = 25.0f } }, // Qalyana Brahmin
+			{ 05689, new PositionInfo { X = 35.0f, Y = 25.0f } }, // Qalyana Kshatriya
+			{ 05690, new PositionInfo { X = 35.0f, Y = 25.0f } }, // Qalyana Shudra
+			{ 05688, new PositionInfo { X = 35.0f, Y = 25.0f } }, // Sacred Marid
+			{ 05675, new PositionInfo { X = 10.0f, Y = 12.0f } }, // Sapria
+			{ 05677, new PositionInfo { X = 22.0f, Y = 11.0f } }, // Spinner
+			{ 05693, new PositionInfo { X = 29.0f, Y = 24.0f } }, // Teleoceras
+			{ 05678, new PositionInfo { X = 28.0f, Y = 15.0f } }, // Velodyna Pugil
+			{ 05680, new PositionInfo { X = 17.0f, Y = 10.0f } }, // Velodyna Sarcosuchus
+
+			// The Peaks
+			{ 05705, new PositionInfo { X = 25.0f, Y = 11.0f } }, // Crag Claw
+			{ 05701, new PositionInfo { X = 18.7f, Y = 12.9f } }, // Bloodglider
+			{ 05702, new PositionInfo { X = 14.0f, Y = 08.0f } }, // Fluturini
+			{ 05703, new PositionInfo { X = 12.0f, Y = 08.0f } }, // Gyr Abanian Hornbill
+			{ 05713, new PositionInfo { X = 25.0f, Y = 33.0f } }, // Highland Eruca
+			{ 05712, new PositionInfo { X = 24.0f, Y = 29.0f } }, // Jhammel
+			{ 05714, new PositionInfo { X = 15.0f, Y = 27.0f } }, // Kongamato
+			{ 05707, new PositionInfo { X = 34.0f, Y = 09.0f } }, // Marble Urolith
+			{ 05715, new PositionInfo { X = 09.0f, Y = 26.0f } }, // Pantera
+			{ 05708, new PositionInfo { X = 24.0f, Y = 14.0f } }, // Scarab Beetle
+			{ 05711, new PositionInfo { X = 24.0f, Y = 24.0f } }, // True Griffin
+
+			// The Ruby Sea
+			{ 05737, new PositionInfo { X = 31.0f, Y = 35.0f } }, // Bombfish
+			{ 05736, new PositionInfo { X = 34.0f, Y = 05.0f } }, // Coralshell
+			{ 05740, new PositionInfo { X = 26.0f, Y = 30.0f } }, // Flying Shark
+			{ 05742, new PositionInfo { X = 23.0f, Y = 33.0f } }, // Gasame
+			{ 05734, new PositionInfo { X = 14.0f, Y = 10.0f } }, // Gyuki
+			{ 05751, new PositionInfo { X = 25.0f, Y = 25.0f } }, // Naked Yumemi
+			{ 05743, new PositionInfo { X = 07.0f, Y = 30.0f } }, // Red Bukan
+			{ 05745, new PositionInfo { X = 08.0f, Y = 28.0f } }, // Red Honkan
+			{ 05744, new PositionInfo { X = 09.5f, Y = 25.2f } }, // Red Hyoe
+			{ 05738, new PositionInfo { X = 33.0f, Y = 11.0f } }, // Sea Serpent
+			{ 05739, new PositionInfo { X = 26.0f, Y = 06.0f } }, // Shiranui
+			{ 05746, new PositionInfo { X = 07.0f, Y = 27.0f } }, // Striped Ray
+			{ 05733, new PositionInfo { X = 29.0f, Y = 37.0f } }, // Tatsunoko
+			{ 05735, new PositionInfo { X = 35.0f, Y = 21.0f } }, // Unkiu
+			{ 05750, new PositionInfo { X = 25.0f, Y = 25.0f } }, // Yumemi
+
+			// Yanxia
+			{ 05761, new PositionInfo { X = 18.0f, Y = 31.0f } }, // Bi Fang
+			{ 05769, new PositionInfo { X = 28.0f, Y = 08.0f } }, // Ebisu Catfish
+			{ 05752, new PositionInfo { X = 27.0f, Y = 34.0f } }, // Lupin Bladehand
+			{ 05754, new PositionInfo { X = 24.0f, Y = 32.0f } }, // Lupin Bowhand
+			{ 05753, new PositionInfo { X = 23.0f, Y = 28.0f } }, // Lupin Spearhand
+			{ 05768, new PositionInfo { X = 19.0f, Y = 11.0f } }, // Magatsu Kiyofusa
+			{ 05763, new PositionInfo { X = 33.0f, Y = 17.0f } }, // Minobi
+			{ 05757, new PositionInfo { X = 30.0f, Y = 23.0f } }, // Rhino Beetle
+			{ 05765, new PositionInfo { X = 30.0f, Y = 34.0f } }, // Taoquan
+			{ 05755, new PositionInfo { X = 24.0f, Y = 32.0f } }, // Tenaga
+			{ 05764, new PositionInfo { X = 23.0f, Y = 30.0f } }, // Vanara
+			{ 05762, new PositionInfo { X = 25.0f, Y = 26.0f } }, // Water Serpent
+
+			// The Azim Steppe
+			{ 05785, new PositionInfo { X = 15.0f, Y = 19.0f } }, // Baras
+			{ 05788, new PositionInfo { X = 17.0f, Y = 26.0f } }, // Chaochu
+			{ 05777, new PositionInfo { X = 23.0f, Y = 15.0f } }, // Halgai
+			{ 05778, new PositionInfo { X = 16.0f, Y = 11.0f } }, // Khun Chuluu
+			{ 05781, new PositionInfo { X = 31.0f, Y = 17.0f } }, // Mammoth
+			{ 05783, new PositionInfo { X = 12.0f, Y = 29.0f } }, // Manzasiri
+			{ 05775, new PositionInfo { X = 28.0f, Y = 13.0f } }, // Matamata
+			{ 05782, new PositionInfo { X = 09.0f, Y = 21.0f } }, // Matanga
+			{ 05779, new PositionInfo { X = 23.0f, Y = 10.0f } }, // Muu Shuwuu
+			{ 05780, new PositionInfo { X = 34.0f, Y = 18.0f } }, // Purbol
+			{ 05776, new PositionInfo { X = 26.0f, Y = 29.0f } }, // Steppe Dhole
+			{ 05773, new PositionInfo { X = 31.0f, Y = 32.0f } }, // Steppe Dzo
+
+			// The Lochs
+			{ 05723, new PositionInfo { X = 18.0f, Y = 32.0f } }, // Abaddon
+			{ 05725, new PositionInfo { X = 26.0f, Y = 11.0f } }, // Abalathian Minotaur
+			{ 05720, new PositionInfo { X = 25.0f, Y = 18.0f } }, // Chelone
+			{ 05727, new PositionInfo { X = 29.0f, Y = 15.0f } }, // Creeping Edila
+			{ 05729, new PositionInfo { X = 05.7f, Y = 26.7f } }, // Dark Clay Beast
+			{ 05732, new PositionInfo { X = 23.0f, Y = 10.0f } }, // Guard Bhoot
+			{ 05716, new PositionInfo { X = 08.0f, Y = 17.0f } }, // Kaluk
+			{ 05724, new PositionInfo { X = 16.0f, Y = 12.0f } }, // Loch Leech
+			{ 05730, new PositionInfo { X = 17.0f, Y = 16.0f } }, // Loch Nanka
+			{ 05717, new PositionInfo { X = 20.0f, Y = 18.0f } }, // Phoebad
+			{ 05721, new PositionInfo { X = 16.0f, Y = 21.0f } }, // Soblyn
+			{ 05722, new PositionInfo { X = 22.0f, Y = 23.0f } }, // Salt Dhruva
+			{ 05728, new PositionInfo { X = 17.0f, Y = 08.0f } }, // Specter
+			{ 05726, new PositionInfo { X = 25.0f, Y = 29.0f } }, // Vepar
+			{ 05719, new PositionInfo { X = 20.0f, Y = 25.0f } }, // Yabby			
 			// Shadowbringers
 			// Lakeland
 			{ 08498, new PositionInfo { X = 19.0f, Y = 09.0f } }, // Chiliad Cama

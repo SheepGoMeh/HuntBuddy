@@ -75,6 +75,7 @@ namespace HuntBuddy
 			{ 03563, new PositionInfo { X = 36.0f, Y = 24.0f } }, // Feather Flea
 			{ 03578, new PositionInfo { X = 17.0f, Y = 26.0f } }, // Forelands Hippocerf
 			{ 03579, new PositionInfo { X = 18.0f, Y = 12.0f } }, // Gallimimus
+			{ 03571, new PositionInfo { X = 25.0f, Y = 29.0f } }, // Loaghtan
 			{ 03592, new PositionInfo { X = 27.0f, Y = 35.0f } }, // Loth Cultivator
 			{ 03590, new PositionInfo { X = 27.0f, Y = 35.0f } }, // Loth Firedrone
 			{ 03591, new PositionInfo { X = 29.0f, Y = 36.0f } }, // Loth Steeldrone
@@ -105,6 +106,7 @@ namespace HuntBuddy
 			{ 03617, new PositionInfo { X = 23.0f, Y = 25.0f } }, // Moss Dragon
 			{ 03613, new PositionInfo { X = 28.0f, Y = 32.0f } }, // Sankchinni
 			{ 03615, new PositionInfo { X = 32.0f, Y = 15.0f } }, // Tulihand
+			{ 03624, new PositionInfo { X = 37.0f, Y = 18.0f } }, // Vouivre
 			{ 03616, new PositionInfo { X = 26.0f, Y = 20.0f } }, // Wadjet
 
 			// The Dravanian Hinterlands
@@ -117,7 +119,6 @@ namespace HuntBuddy
 			{ 03600, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Sharpshooter
 			{ 03599, new PositionInfo { X = 31.0f, Y = 22.0f } }, // Goblin Tinkerer
 			{ 03605, new PositionInfo { X = 10.0f, Y = 21.0f } }, // Great Morbol
-			{ 03571, new PositionInfo { X = 24.0f, Y = 31.0f } }, // Loaghtan
 			{ 03597, new PositionInfo { X = 37.0f, Y = 24.0f } }, // Narbrooi
 			{ 03610, new PositionInfo { X = 17.0f, Y = 33.0f } }, // Okeanis
 			{ 03608, new PositionInfo { X = 12.0f, Y = 33.0f } }, // Opken
@@ -126,7 +127,6 @@ namespace HuntBuddy
 			{ 03595, new PositionInfo { X = 28.0f, Y = 27.0f } }, // Ratel
 			{ 03611, new PositionInfo { X = 12.0f, Y = 32.0f } }, // Sun Leech
 			{ 03593, new PositionInfo { X = 21.0f, Y = 16.0f } }, // Tarantula Hawk
-			{ 03624, new PositionInfo { X = 20.0f, Y = 17.0f } }, // Vouivre
 			{ 03596, new PositionInfo { X = 34.0f, Y = 19.0f } }, // Wildebeest
 
 			// Azys Lla

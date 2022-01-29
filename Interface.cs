@@ -133,24 +133,7 @@ namespace HuntBuddy
 						{
 							ImGui.PushStyleColor(ImGuiCol.PopupBg, Vector4.Zero);
 							ImGui.BeginTooltip();
-							var imageSize = 256f * fontGlobalScale;
-							var cursorPos = ImGui.GetCursorScreenPos();
-							ImGui.InvisibleButton("canvas", new Vector2(imageSize));
-
-							var drawList = ImGui.GetWindowDrawList();
-							if (mobHuntEntry.ExpansionId == 4 &&
-							    mobHuntEntry.MobHuntType == 1) // Endwalker uses circle for non elite mobs
-							{
-								drawList.AddCircleFilled(cursorPos + new Vector2(imageSize / 2f), imageSize / 2f,
-									this._plugin.Configuration.IconBackgroundColourU32);
-							}
-							else
-							{
-								drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), this._plugin.Configuration.IconBackgroundColourU32);
-							}
-
-							drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos,
-								new Vector2(cursorPos.X + imageSize, cursorPos.Y + imageSize));
+							this.DrawHuntIcon(mobHuntEntry);
 							ImGui.PopStyleColor();
 							ImGui.EndTooltip();
 						}
@@ -238,24 +221,7 @@ namespace HuntBuddy
 					continue;
 				}
 
-				var imageSize = 128f * fontGlobalScale;
-				ImGui.SetCursorPosX(ImGui.GetWindowWidth() / 2f * fontGlobalScale - imageSize / 2f);
-				var cursorPos = ImGui.GetCursorScreenPos();
-				ImGui.InvisibleButton("canvas", new Vector2(imageSize));
-
-				var drawList = ImGui.GetWindowDrawList();
-				if (mobHuntEntry.ExpansionId == 4 &&
-				    mobHuntEntry.MobHuntType == 1) // Endwalker uses circle for non elite mobs
-				{
-					drawList.AddCircleFilled(cursorPos + new Vector2(imageSize / 2f), imageSize / 2f, this._plugin.Configuration.IconBackgroundColourU32);
-				}
-				else
-				{
-					drawList.AddRectFilled(cursorPos, cursorPos + new Vector2(imageSize), this._plugin.Configuration.IconBackgroundColourU32);
-				}
-
-				drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos,
-					new Vector2(cursorPos.X + imageSize, cursorPos.Y + imageSize));
+				this.DrawHuntIcon(mobHuntEntry);
 			}
 
 			ImGui.End();
@@ -309,6 +275,30 @@ namespace HuntBuddy
 			ImGui.PopFont();
 
 			return result;
+		}
+
+		private void DrawHuntIcon(MobHuntEntry mobHuntEntry)
+		{
+			var cursorPos = ImGui.GetCursorScreenPos();
+			var imageSize = mobHuntEntry.ExpansionId < 3 ? new Vector2(192f, 128f) : new Vector2(210f);
+			imageSize *= ImGui.GetIO().FontGlobalScale;
+
+			ImGui.InvisibleButton("canvas", imageSize);
+
+			var drawList = ImGui.GetWindowDrawList();
+			if (mobHuntEntry.ExpansionId == 4 &&
+			    mobHuntEntry.MobHuntType == 1) // Endwalker uses circle for non elite mobs
+			{
+				drawList.AddCircleFilled(cursorPos + imageSize / 2f, imageSize.X / 2f,
+					this._plugin.Configuration.IconBackgroundColourU32);
+			}
+			else
+			{
+				drawList.AddRectFilled(cursorPos, cursorPos + imageSize,
+					this._plugin.Configuration.IconBackgroundColourU32);
+			}
+
+			drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos, cursorPos + imageSize);
 		}
 	}
 }

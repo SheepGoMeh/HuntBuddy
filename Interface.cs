@@ -244,6 +244,7 @@ namespace HuntBuddy
 				ref this._plugin.Configuration.HideLocalHuntBackground);
 			save |= ImGui.Checkbox("Hide completed targets in local hunts window",
 				ref this._plugin.Configuration.HideCompletedHunts);
+			save |= ImGui.SliderFloat("Hunt icon scale", ref this._plugin.Configuration.IconScale, 0.2f, 2f, "%.2f");
 			if (ImGui.ColorEdit4("Hunt icon background colour", ref this._plugin.Configuration.IconBackgroundColour))
 			{
 				this._plugin.Configuration.IconBackgroundColourU32 =
@@ -281,7 +282,7 @@ namespace HuntBuddy
 		{
 			var cursorPos = ImGui.GetCursorScreenPos();
 			var imageSize = mobHuntEntry.ExpansionId < 3 ? new Vector2(192f, 128f) : new Vector2(210f);
-			imageSize *= ImGui.GetIO().FontGlobalScale;
+			imageSize *= ImGui.GetIO().FontGlobalScale * this._plugin.Configuration.IconScale;
 
 			ImGui.InvisibleButton("canvas", imageSize);
 

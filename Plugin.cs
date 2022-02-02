@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Dalamud.Data;
 using Dalamud.Game;
 using Dalamud.Game.ClientState;
@@ -126,10 +127,18 @@ namespace HuntBuddy
 		}
 
 		[Command("/phb")]
-		[HelpMessage("Toggles UI")]
+		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data")]
 		public void PluginCommand(string command, string args)
 		{
-			this.OpenConfigUi();
+			if (args == "reload")
+			{
+				this.MobHuntEntriesReady = false;
+				Task.Run(this.ReloadData);
+			}
+			else
+			{
+				this.OpenConfigUi();
+			}
 		}
 
 		public unsafe void ReloadData()

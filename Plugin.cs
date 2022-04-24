@@ -56,8 +56,13 @@ namespace HuntBuddy
 		[RequiredVersion("1.0")]
 		public static ClientState ClientState { get; set; } = null!;
 
+		[PluginService]
+		[RequiredVersion("1.0")]
+		public static Framework Framework { get; set; } = null!;
+
 		private readonly PluginCommandManager<Plugin> _commandManager;
 		private readonly Interface _interface;
+		private ObtainedBillEnum _lastState;
 		public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
 		public readonly ConcurrentBag<MobHuntEntry> CurrentAreaMobHuntEntries;
 		public bool MobHuntEntriesReady = true;
@@ -87,6 +92,18 @@ namespace HuntBuddy
 			Plugin.PluginInterface.UiBuilder.Draw += DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw += _interface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi += OpenConfigUi;
+			Plugin.Framework.Update += FrameworkOnUpdate;
+		}
+
+		private unsafe void FrameworkOnUpdate(Framework framework)
+		{
+			if (this._lastState == this.MobHuntStruct->ObtainedBillEnumFlags)
+			{
+				return;
+			}
+
+			this._lastState = this.MobHuntStruct->ObtainedBillEnumFlags;
+			PluginCommand(string.Empty, "reload");
 		}
 
 		private void ClientStateOnTerritoryChanged(object? sender, ushort e)
@@ -119,6 +136,7 @@ namespace HuntBuddy
 			}
 
 			this.MobHuntEntriesReady = false;
+			Plugin.Framework.Update -= FrameworkOnUpdate;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw -= this._interface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;

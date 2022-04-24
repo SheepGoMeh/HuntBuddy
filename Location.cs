@@ -466,8 +466,8 @@ namespace HuntBuddy
 		private static float ConvertRawPositionToMapCoordinate(int pos, float scale)
 		{
 			var num1 = scale / 100f;
-			var num2 = (float) (pos * (double) num1 / 1000.0);
-			return (float) (41.0 / num1 * ((num2 + 1024.0) / 2048.0) + 1.0);
+			var num2 = (float) (pos * (double) num1 / 1000.0f);
+			return (float) (40.96f / num1 * ((num2 + 1024.0f) / 2048.0f) + 1.0f);
 		}
 		
 		public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId)

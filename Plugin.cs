@@ -143,50 +143,18 @@ namespace HuntBuddy
 
 		public unsafe void ReloadData()
 		{
-			var inventoryContainer = InventoryManager.Instance()->GetInventoryContainer(InventoryType.KeyItems);
-
-			if (inventoryContainer->Loaded == 0)
-			{
-				PluginLog.Log("Container not loaded!");
-				return;
-			}
-
-			if (inventoryContainer->Size == 0)
-			{
-				PluginLog.Log("Container is empty!");
-				return;
-			}
-
-			var huntBills = new List<KeyValuePair<byte,uint>>();
-
-			for (var i = 0; i != inventoryContainer->Size; ++i)
-			{
-				var inventoryItemPtr = inventoryContainer->GetInventorySlot(i);
-
-				if (inventoryItemPtr == null || (*inventoryItemPtr).ItemID == 0)
-				{
-					continue;
-				}
-
-				var inventoryItem = *inventoryItemPtr;
-
-				foreach (var row in Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!)
-				{
-					if (inventoryItem.ItemID == row.EventItem.Row)
-					{
-						huntBills.Add(new KeyValuePair<byte, uint>(row.Type, row.RowId));
-						break;
-					}
-				}
-			}
-			
 			this.MobHuntEntries.Clear();
 			var mobHuntList = new List<MobHuntEntry>();
 			var mobHuntOrderSheet = Plugin.DataManager.Excel.GetSheet<MobHuntOrder>()!;
 			
-			foreach (var (mobHuntType, billNumber) in huntBills)
+			foreach (var billNumber in Enum.GetValues<BillEnum>())
 			{
-				var mobHuntOrderTypeRow = Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow(billNumber)!;
+				if (!this.MobHuntStruct->ObtainedBillEnumFlags.HasFlag((ObtainedBillEnum)(1 << (int)billNumber)))
+				{
+					continue;
+				}
+
+				var mobHuntOrderTypeRow = Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 					
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
 				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
@@ -214,8 +182,8 @@ namespace HuntBuddy
 							MapId = mobHuntOrderRow.Target.Value!.TerritoryType.Row,
 							TerritoryType = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Row,
 							MobHuntId = mobHuntOrderRow.Target.Value!.Name.Row,
-							MobHuntType = mobHuntType,
-							CurrentKillsOffset = 5 * billNumber + mobHuntOrderRow.SubRowId,
+							IsEliteMark = billNumber is BillEnum.ArrElite or BillEnum.HwElite or BillEnum.SbElite or BillEnum.ShbElite or BillEnum.EwElite,
+							CurrentKillsOffset = 5 * (uint)billNumber + mobHuntOrderRow.SubRowId,
 							NeededKills = mobHuntOrderRow.NeededKills,
 							Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
 						});
@@ -251,7 +219,6 @@ namespace HuntBuddy
 			this.ClientStateOnTerritoryChanged(null, 0);
 
 			this.MobHuntEntriesReady = true;
-			this._interface.DrawInterface = true;
 		}
 		
 		private static TexFile? GetHdIcon(uint id)

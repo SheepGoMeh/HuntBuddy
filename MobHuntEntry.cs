@@ -12,7 +12,7 @@ namespace HuntBuddy
 		public uint MapId { get; init; }
 		public uint TerritoryType { get; init; }
 		public uint MobHuntId { get; init; }
-		public byte MobHuntType { get; init; }
+		public bool IsEliteMark { get; init; }
 		public uint CurrentKillsOffset { get; init; }
 		public uint NeededKills { get; set; }
 		public TextureWrap Icon { get; init; } = null!;

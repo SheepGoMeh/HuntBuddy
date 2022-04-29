@@ -490,8 +490,10 @@ namespace HuntBuddy
 				.OrderBy(x => x.distance)
 				.FirstOrDefault()?.rowId;
 
-			var nearestAetheryte = Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(x =>
-				x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
+			var nearestAetheryte = territoryType == 399 // Support the unique case of aetheryte not being in the same map
+				? mapRow.TerritoryType?.Value?.Aetheryte.Value
+				: Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(x =>
+					x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
 
 			if (nearestAetheryte == null)
 			{

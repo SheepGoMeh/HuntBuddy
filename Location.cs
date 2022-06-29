@@ -10,9 +10,11 @@ namespace HuntBuddy
 	{
 		public class PositionInfo
 		{
-			public float X { get; set; }
-			public float Y { get; set; }
-			public Vector2 Coordinate => new (this.X, this.Y);
+			public float X { get; init; }
+
+			public float Y { get; init; }
+
+			public Vector2 Coordinate => new(this.X, this.Y);
 		}
 
 		// MobHuntId as key
@@ -346,7 +348,6 @@ namespace HuntBuddy
 			{ 08630, new PositionInfo { X = 29.0f, Y = 21.0f } }, // Tempest Swallow
 			{ 08631, new PositionInfo { X = 35.8f, Y = 07.2f } }, // Blue Swimmer
 
-
 			// Endwalker
 			// Labyrinthos
 			{ 10668, new PositionInfo { X = 28.8f, Y = 08.8f } }, // Troll
@@ -455,21 +456,22 @@ namespace HuntBuddy
 			var mapLinkPayload = new MapLinkPayload(territoryType, mapId, Database[mobHuntId].X, Database[mobHuntId].Y);
 			Plugin.GameGui.OpenMapWithMapLink(mapLinkPayload);
 		}
-		
+
 		private static Vector2 ConvertPixelPositionToMapCoordinate(int x, int y, float scale)
 		{
 			var num = scale / 100f;
-			return new Vector2(ConvertRawPositionToMapCoordinate((int)((x - 1024) * num * 1000f), scale),
+			return new Vector2(
+				ConvertRawPositionToMapCoordinate((int)((x - 1024) * num * 1000f), scale),
 				ConvertRawPositionToMapCoordinate((int)((y - 1024) * num * 1000f), scale));
 		}
-		
+
 		private static float ConvertRawPositionToMapCoordinate(int pos, float scale)
 		{
 			var num1 = scale / 100f;
-			var num2 = (float) (pos * (double) num1 / 1000.0f);
-			return (float) (40.96f / num1 * ((num2 + 1024.0f) / 2048.0f) + 1.0f);
+			var num2 = (float)(pos * (double)num1 / 1000.0f);
+			return (40.96f / num1 * ((num2 + 1024.0f) / 2048.0f)) + 1.0f;
 		}
-		
+
 		public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId)
 		{
 			var mapRow = Plugin.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
@@ -481,19 +483,23 @@ namespace HuntBuddy
 
 			var nearestAetheryteId = Plugin.DataManager.Excel.GetSheet<MapMarker>()
 				?.Where(x => x.DataType == 3 && x.RowId == mapRow.MapMarkerRange)
-				.Select(x => new
-				{
-					distance = Vector2.DistanceSquared(Database[mobHuntId].Coordinate,
-						ConvertPixelPositionToMapCoordinate(x.X, x.Y, mapRow.SizeFactor)),
-					rowId = x.DataKey
-				})
+				.Select(
+					x => new
+					{
+						distance = Vector2.DistanceSquared(
+							Database[mobHuntId].Coordinate,
+							ConvertPixelPositionToMapCoordinate(x.X, x.Y, mapRow.SizeFactor)),
+						rowId = x.DataKey
+					})
 				.OrderBy(x => x.distance)
 				.FirstOrDefault()?.rowId;
 
-			var nearestAetheryte = territoryType == 399 // Support the unique case of aetheryte not being in the same map
-				? mapRow.TerritoryType?.Value?.Aetheryte.Value
-				: Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(x =>
-					x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
+			var nearestAetheryte =
+				territoryType == 399 // Support the unique case of aetheryte not being in the same map
+					? mapRow.TerritoryType?.Value?.Aetheryte.Value
+					: Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(
+						x =>
+							x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
 
 			if (nearestAetheryte == null)
 			{

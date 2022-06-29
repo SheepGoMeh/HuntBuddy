@@ -9,7 +9,7 @@ namespace HuntBuddy.Attributes
 
 		public CommandAttribute(string command)
 		{
-			Command = command;
+			this.Command = command;
 		}
 	}
 }

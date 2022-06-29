@@ -7,13 +7,14 @@ namespace HuntBuddy.Ipc
 	public class TeleportConsumer
 	{
 		public bool Subscribed { get; private set; }
-		private ICallGateSubscriber<uint, byte, bool> _consumerTeleport = null!;
+
+		private ICallGateSubscriber<uint, byte, bool> consumerTeleport = null!;
 
 		private void Subscribe()
 		{
 			try
 			{
-				this._consumerTeleport = Plugin.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
+				this.consumerTeleport = Plugin.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
 
 				this.Subscribed = true;
 			}
@@ -30,7 +31,7 @@ namespace HuntBuddy.Ipc
 		{
 			try
 			{
-				return this._consumerTeleport.InvokeFunc(aetheryteId, 0);
+				return this.consumerTeleport.InvokeFunc(aetheryteId, 0);
 			}
 			catch
 			{

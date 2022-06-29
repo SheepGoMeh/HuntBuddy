@@ -9,22 +9,23 @@ namespace HuntBuddy
 {
 	public class PluginCommandManager<THost> : IDisposable
 	{
-		private readonly CommandManager _commandManager;
-		private readonly (string, CommandInfo)[] _pluginCommands;
-		private readonly THost _host;
+		private readonly CommandManager commandManager;
+		private readonly (string, CommandInfo)[] pluginCommands;
+		private readonly THost host;
 
 		public PluginCommandManager(THost host, CommandManager commandManager)
 		{
-			this._commandManager = commandManager;
-			this._host = host;
+			this.commandManager = commandManager;
+			this.host = host;
 
-			this._pluginCommands = host!.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public |
-			                                                BindingFlags.Static | BindingFlags.Instance)
+			this.pluginCommands = host!.GetType().GetMethods(
+					BindingFlags.NonPublic | BindingFlags.Public |
+					BindingFlags.Static | BindingFlags.Instance)
 				.Where(method => method.GetCustomAttribute<CommandAttribute>() != null)
-				.SelectMany(GetCommandInfoTuple)
+				.SelectMany(this.GetCommandInfoTuple)
 				.ToArray();
 
-			AddCommandHandlers();
+			this.AddCommandHandlers();
 		}
 
 		// http://codebetter.com/patricksmacchia/2008/11/19/an-easy-and-efficient-way-to-improve-net-code-performances/
@@ -33,25 +34,28 @@ namespace HuntBuddy
 		// It's usually sub-1 millisecond anyways, though. It probably doesn't matter at all.
 		private void AddCommandHandlers()
 		{
-			for (var i = 0; i < this._pluginCommands.Length; i++)
+			foreach (var t in this.pluginCommands)
 			{
-				var (command, commandInfo) = this._pluginCommands[i];
-				this._commandManager.AddHandler(command, commandInfo);
+				var (command, commandInfo) = t;
+				this.commandManager.AddHandler(command, commandInfo);
 			}
 		}
 
 		private void RemoveCommandHandlers()
 		{
-			for (var i = 0; i < this._pluginCommands.Length; i++)
+			foreach (var t in this.pluginCommands)
 			{
-				var (command, _) = this._pluginCommands[i];
-				this._commandManager.RemoveHandler(command);
+				var (command, _) = t;
+				this.commandManager.RemoveHandler(command);
 			}
 		}
 
 		private IEnumerable<(string, CommandInfo)> GetCommandInfoTuple(MethodInfo method)
 		{
-			var handlerDelegate = (CommandInfo.HandlerDelegate)Delegate.CreateDelegate(typeof(CommandInfo.HandlerDelegate), this._host, method);
+			var handlerDelegate = (CommandInfo.HandlerDelegate)Delegate.CreateDelegate(
+				typeof(CommandInfo.HandlerDelegate),
+				this.host,
+				method);
 
 			var command = handlerDelegate.Method.GetCustomAttribute<CommandAttribute>();
 			var aliases = handlerDelegate.Method.GetCustomAttribute<AliasesAttribute>();
@@ -66,13 +70,15 @@ namespace HuntBuddy
 
 			// Create list of tuples that will be filled with one tuple per alias, in addition to the base command tuple.
 			var commandInfoTuples = new List<(string, CommandInfo)> { (command!.Command, commandInfo) };
-			if (aliases != null)
+			if (aliases == null)
 			{
-				// ReSharper disable once LoopCanBeConvertedToQuery
-				for (var i = 0; i < aliases.Aliases.Length; i++)
-				{
-					commandInfoTuples.Add((aliases.Aliases[i], commandInfo));
-				}
+				return commandInfoTuples;
+			}
+
+			// ReSharper disable once LoopCanBeConvertedToQuery
+			foreach (var t in aliases.Aliases)
+			{
+				commandInfoTuples.Add((t, commandInfo));
 			}
 
 			return commandInfoTuples;
@@ -80,7 +86,7 @@ namespace HuntBuddy
 
 		public void Dispose()
 		{
-			RemoveCommandHandlers();
+			this.RemoveCommandHandlers();
 			GC.SuppressFinalize(this);
 		}
 	}

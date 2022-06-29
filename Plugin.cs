@@ -10,11 +10,9 @@ using Dalamud.Game.ClientState;
 using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
 using Dalamud.IoC;
-using Dalamud.Logging;
 using Dalamud.Plugin;
 using Dalamud.Utility;
 using Lumina.Excel.GeneratedSheets;
-using FFXIVClientStructs.FFXIV.Client.Game;
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using HuntBuddy.Structs;
@@ -43,15 +41,15 @@ namespace HuntBuddy
 		[PluginService]
 		[RequiredVersion("1.0")]
 		public static DataManager DataManager { get; set; } = null!;
-		
+
 		[PluginService]
 		[RequiredVersion("1.0")]
 		public static SigScanner SigScanner { get; set; } = null!;
-		
+
 		[PluginService]
 		[RequiredVersion("1.0")]
 		public static GameGui GameGui { get; set; } = null!;
-		
+
 		[PluginService]
 		[RequiredVersion("1.0")]
 		public static ClientState ClientState { get; set; } = null!;
@@ -60,9 +58,9 @@ namespace HuntBuddy
 		[RequiredVersion("1.0")]
 		public static Framework Framework { get; set; } = null!;
 
-		private readonly PluginCommandManager<Plugin> _commandManager;
-		private readonly Interface _interface;
-		private ObtainedBillEnum _lastState;
+		private readonly PluginCommandManager<Plugin> commandManager;
+		private readonly Interface pluginInterface;
+		private ObtainedBillEnum lastState;
 		public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
 		public readonly ConcurrentBag<MobHuntEntry> CurrentAreaMobHuntEntries;
 		public bool MobHuntEntriesReady = true;
@@ -72,8 +70,8 @@ namespace HuntBuddy
 
 		public Plugin()
 		{
-			this._commandManager = new PluginCommandManager<Plugin>(this, Commands);
-			this._interface = new Interface(this);
+			this.commandManager = new PluginCommandManager<Plugin>(this, Commands);
+			this.pluginInterface = new Interface(this);
 			this.MobHuntEntries = new Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>>();
 			this.CurrentAreaMobHuntEntries = new ConcurrentBag<MobHuntEntry>();
 			this.Configuration = (Configuration)(PluginInterface.GetPluginConfig() ?? new Configuration());
@@ -88,31 +86,32 @@ namespace HuntBuddy
 			}
 
 			Plugin.TeleportConsumer = new TeleportConsumer();
-			Plugin.ClientState.TerritoryChanged += ClientStateOnTerritoryChanged;
-			Plugin.PluginInterface.UiBuilder.Draw += DrawInterface;
-			Plugin.PluginInterface.UiBuilder.Draw += _interface.DrawLocalHunts;
-			Plugin.PluginInterface.UiBuilder.OpenConfigUi += OpenConfigUi;
-			Plugin.Framework.Update += FrameworkOnUpdate;
+			Plugin.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
+			Plugin.PluginInterface.UiBuilder.Draw += this.DrawInterface;
+			Plugin.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
+			Plugin.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
+			Plugin.Framework.Update += this.FrameworkOnUpdate;
 		}
 
 		private unsafe void FrameworkOnUpdate(Framework framework)
 		{
-			if (this._lastState == this.MobHuntStruct->ObtainedBillEnumFlags)
+			if (this.lastState == this.MobHuntStruct->ObtainedBillEnumFlags)
 			{
 				return;
 			}
 
-			this._lastState = this.MobHuntStruct->ObtainedBillEnumFlags;
-			PluginCommand(string.Empty, "reload");
+			this.lastState = this.MobHuntStruct->ObtainedBillEnumFlags;
+			this.PluginCommand(string.Empty, "reload");
 		}
 
 		private void ClientStateOnTerritoryChanged(object? sender, ushort e)
 		{
 			this.CurrentAreaMobHuntEntries.Clear();
 
-			foreach (var mobHuntEntry in this.MobHuntEntries.SelectMany(expansionEntry => expansionEntry.Value
-				         .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
-				         .SelectMany(entry => entry.Value)))
+			foreach (var mobHuntEntry in this.MobHuntEntries.SelectMany(
+				         expansionEntry => expansionEntry.Value
+					         .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
+					         .SelectMany(entry => entry.Value)))
 			{
 				this.CurrentAreaMobHuntEntries.Add(mobHuntEntry);
 			}
@@ -120,12 +119,12 @@ namespace HuntBuddy
 
 		private void OpenConfigUi()
 		{
-			this._interface.DrawInterface = !this._interface.DrawInterface;
+			this.pluginInterface.DrawInterface = !this.pluginInterface.DrawInterface;
 		}
 
 		private void DrawInterface()
 		{
-			this._interface.DrawInterface = this._interface.DrawInterface && this._interface.Draw();
+			this.pluginInterface.DrawInterface = this.pluginInterface.DrawInterface && this.pluginInterface.Draw();
 		}
 
 		private void Dispose(bool disposing)
@@ -136,12 +135,12 @@ namespace HuntBuddy
 			}
 
 			this.MobHuntEntriesReady = false;
-			Plugin.Framework.Update -= FrameworkOnUpdate;
+			Plugin.Framework.Update -= this.FrameworkOnUpdate;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
-			Plugin.PluginInterface.UiBuilder.Draw -= this._interface.DrawLocalHunts;
+			Plugin.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
 
-			this._commandManager.Dispose();
+			this.commandManager.Dispose();
 		}
 
 		[Command("/phb")]
@@ -164,7 +163,7 @@ namespace HuntBuddy
 			this.MobHuntEntries.Clear();
 			var mobHuntList = new List<MobHuntEntry>();
 			var mobHuntOrderSheet = Plugin.DataManager.Excel.GetSheet<MobHuntOrder>()!;
-			
+
 			foreach (var billNumber in Enum.GetValues<BillEnum>())
 			{
 				if (!this.MobHuntStruct->ObtainedBillEnumFlags.HasFlag((ObtainedBillEnum)(1 << (int)billNumber)))
@@ -172,8 +171,9 @@ namespace HuntBuddy
 					continue;
 				}
 
-				var mobHuntOrderTypeRow = Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
-					
+				var mobHuntOrderTypeRow =
+					Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
+
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
 				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
 
@@ -191,20 +191,26 @@ namespace HuntBuddy
 
 					if (mobHuntEntry == null)
 					{
-						mobHuntList.Add(new MobHuntEntry
-						{
-							Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(mobHuntOrderRow.Target.Value!.Name.Value!.Singular),
-							TerritoryName = mobHuntOrderRow.Target.Value!.TerritoryType.Value!.PlaceName.Value!.Name,
-							ExpansionName = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Value!.ExVersion.Value!.Name,
-							ExpansionId = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Value!.ExVersion.Row,
-							MapId = mobHuntOrderRow.Target.Value!.TerritoryType.Row,
-							TerritoryType = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Row,
-							MobHuntId = mobHuntOrderRow.Target.Value!.Name.Row,
-							IsEliteMark = billNumber is BillEnum.ArrElite or BillEnum.HwElite or BillEnum.SbElite or BillEnum.ShbElite or BillEnum.EwElite,
-							CurrentKillsOffset = 5 * (uint)billNumber + mobHuntOrderRow.SubRowId,
-							NeededKills = mobHuntOrderRow.NeededKills,
-							Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
-						});
+						mobHuntList.Add(
+							new MobHuntEntry
+							{
+								Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(
+									mobHuntOrderRow.Target.Value!.Name.Value!.Singular),
+								TerritoryName =
+									mobHuntOrderRow.Target.Value!.TerritoryType.Value!.PlaceName.Value!.Name,
+								ExpansionName = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Value!
+									.ExVersion.Value!.Name,
+								ExpansionId = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Value!
+									.ExVersion.Row,
+								MapId = mobHuntOrderRow.Target.Value!.TerritoryType.Row,
+								TerritoryType = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Row,
+								MobHuntId = mobHuntOrderRow.Target.Value!.Name.Row,
+								IsEliteMark = billNumber is BillEnum.ArrElite or BillEnum.HwElite or BillEnum.SbElite
+									or BillEnum.ShbElite or BillEnum.EwElite,
+								CurrentKillsOffset = (5 * (uint)billNumber) + mobHuntOrderRow.SubRowId,
+								NeededKills = mobHuntOrderRow.NeededKills,
+								Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
+							});
 					}
 					else
 					{
@@ -215,12 +221,12 @@ namespace HuntBuddy
 					}
 				}
 			}
-			
+
 			foreach (var entry in mobHuntList)
 			{
 				var key = entry.ExpansionName ?? "Unknown";
 				var subKey = new KeyValuePair<uint, string>(entry.TerritoryType, entry.TerritoryName ?? "Unknown");
-					
+
 				if (!this.MobHuntEntries.ContainsKey(key))
 				{
 					this.MobHuntEntries[key] = new Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>();
@@ -230,7 +236,7 @@ namespace HuntBuddy
 				{
 					this.MobHuntEntries[key][subKey] = new List<MobHuntEntry>();
 				}
-					
+
 				this.MobHuntEntries[key][subKey].Add(entry);
 			}
 
@@ -238,7 +244,7 @@ namespace HuntBuddy
 
 			this.MobHuntEntriesReady = true;
 		}
-		
+
 		private static TexFile? GetHdIcon(uint id)
 		{
 			var path = $"ui/icon/{id / 1000 * 1000:000000}/{id:000000}_hr1.tex";
@@ -247,7 +253,7 @@ namespace HuntBuddy
 
 		private static TextureWrap LoadIcon(uint id)
 		{
-			var icon     = Plugin.GetHdIcon(id) ?? Plugin.DataManager.GetIcon(id)!;
+			var icon = Plugin.GetHdIcon(id) ?? Plugin.DataManager.GetIcon(id)!;
 			var iconData = icon.GetRgbaImageData();
 
 			return Plugin.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);

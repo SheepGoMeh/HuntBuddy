@@ -9,7 +9,7 @@ namespace HuntBuddy.Attributes
 
 		public HelpMessageAttribute(string helpMessage)
 		{
-			HelpMessage = helpMessage;
+			this.HelpMessage = helpMessage;
 		}
 	}
 }

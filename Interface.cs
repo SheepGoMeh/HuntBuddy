@@ -1,42 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface;
-using Dalamud.Logging;
-using HuntBuddy.Structs;
 using ImGuiNET;
-using Lumina.Excel.GeneratedSheets;
 
 namespace HuntBuddy
 {
 	public class Interface
 	{
-		private readonly Plugin _plugin;
+		private readonly Plugin plugin;
 
 		public bool DrawInterface;
-		private bool _drawConfigurationInterface;
+		private bool drawConfigurationInterface;
 
 		public Interface(Plugin plugin)
 		{
-			this._plugin = plugin;
+			this.plugin = plugin;
 		}
 
 		public unsafe bool Draw()
 		{
 			var draw = true;
 
-			var fontGlobalScale = ImGui.GetIO().FontGlobalScale;
-
 			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Once);
 
-			if (!ImGui.Begin($"{this._plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
+			if (!ImGui.Begin($"{this.plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
 			{
 				return draw;
 			}
 
-			if (!this._plugin.MobHuntEntriesReady)
+			if (!this.plugin.MobHuntEntriesReady)
 			{
 				ImGui.Text("Reloading data ...");
 				ImGui.End();
@@ -46,8 +39,8 @@ namespace HuntBuddy
 			if (Interface.IconButton(FontAwesomeIcon.Redo, "Reload"))
 			{
 				ImGui.End();
-				this._plugin.MobHuntEntriesReady = false;
-				Task.Run(() => this._plugin.ReloadData());
+				this.plugin.MobHuntEntriesReady = false;
+				Task.Run(() => this.plugin.ReloadData());
 				return draw;
 			}
 
@@ -57,36 +50,41 @@ namespace HuntBuddy
 				ImGui.Text("Click this button to reload daily hunt data");
 				ImGui.EndTooltip();
 			}
-			
+
 			ImGui.SameLine();
 
 			if (Interface.IconButton(FontAwesomeIcon.Cog, "Config"))
 			{
-				this._drawConfigurationInterface = !this._drawConfigurationInterface;
+				this.drawConfigurationInterface = !this.drawConfigurationInterface;
 			}
 
-			foreach (var expansionEntry in this._plugin.MobHuntEntries.Where(expansionEntry =>
-				         ImGui.TreeNode(expansionEntry.Key)))
+			foreach (var expansionEntry in this.plugin.MobHuntEntries.Where(
+				         expansionEntry =>
+					         ImGui.TreeNode(expansionEntry.Key)))
 			{
-				foreach (var entry in expansionEntry.Value.Where(entry =>
-				         {
-					         var treeOpen = ImGui.TreeNodeEx(entry.Key.Value, ImGuiTreeNodeFlags.AllowItemOverlap);
-					         ImGui.SameLine();
-					         var killedCount = entry.Value.Count(x =>
-						         this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills);
-
-					         if (killedCount != entry.Value.Count)
+				foreach (var entry in expansionEntry.Value.Where(
+					         entry =>
 					         {
-						         ImGui.Text($"({killedCount}/{entry.Value.Count})");
-					         }
-					         else
-					         {
-						         ImGui.TextColored(new Vector4(0f, 1f, 0f, 1f),
-							         $"({killedCount}/{entry.Value.Count})");
-					         }
+						         var treeOpen = ImGui.TreeNodeEx(entry.Key.Value, ImGuiTreeNodeFlags.AllowItemOverlap);
+						         ImGui.SameLine();
+						         var killedCount = entry.Value.Count(
+							         x =>
+								         this.plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] ==
+								         x.NeededKills);
 
-					         return treeOpen;
-				         }))
+						         if (killedCount != entry.Value.Count)
+						         {
+							         ImGui.Text($"({killedCount}/{entry.Value.Count})");
+						         }
+						         else
+						         {
+							         ImGui.TextColored(
+								         new Vector4(0f, 1f, 0f, 1f),
+								         $"({killedCount}/{entry.Value.Count})");
+						         }
+
+						         return treeOpen;
+					         }))
 				{
 					ImGui.Indent();
 					foreach (var mobHuntEntry in entry.Value)
@@ -95,7 +93,9 @@ namespace HuntBuddy
 						{
 							if (Interface.IconButton(FontAwesomeIcon.MapMarked, $"##{mobHuntEntry.MobHuntId}"))
 							{
-								Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+								Location.OpenMapLink(
+									mobHuntEntry.TerritoryType,
+									mobHuntEntry.MapId,
 									mobHuntEntry.MobHuntId);
 							}
 
@@ -112,7 +112,9 @@ namespace HuntBuddy
 							{
 								if (Interface.IconButton(FontAwesomeIcon.StreetView, $"t##{mobHuntEntry.MobHuntId}"))
 								{
-									Location.TeleportToNearestAetheryte(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+									Location.TeleportToNearestAetheryte(
+										mobHuntEntry.TerritoryType,
+										mobHuntEntry.MapId,
 										mobHuntEntry.MobHuntId);
 								}
 
@@ -127,7 +129,7 @@ namespace HuntBuddy
 							}
 						}
 
-						var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+						var currentKills = this.plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
 						ImGui.Text(mobHuntEntry.Name);
 						if (ImGui.IsItemHovered())
 						{
@@ -145,7 +147,8 @@ namespace HuntBuddy
 						}
 						else
 						{
-							ImGui.TextColored(new Vector4(0f, 1f, 0f, 1f),
+							ImGui.TextColored(
+								new Vector4(0f, 1f, 0f, 1f),
 								$"({currentKills}/{mobHuntEntry.NeededKills})");
 						}
 					}
@@ -159,7 +162,7 @@ namespace HuntBuddy
 
 			ImGui.End();
 
-			if (this._drawConfigurationInterface)
+			if (this.drawConfigurationInterface)
 			{
 				this.DrawConfiguration();
 			}
@@ -169,22 +172,21 @@ namespace HuntBuddy
 
 		public unsafe void DrawLocalHunts()
 		{
-			if (!this._plugin.Configuration.ShowLocalHunts ||
-			    this._plugin.CurrentAreaMobHuntEntries.IsEmpty ||
-			    this._plugin.CurrentAreaMobHuntEntries.Count(x =>
-				    this._plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) ==
-			    this._plugin.CurrentAreaMobHuntEntries.Count)
+			if (!this.plugin.Configuration.ShowLocalHunts ||
+			    this.plugin.CurrentAreaMobHuntEntries.IsEmpty ||
+			    this.plugin.CurrentAreaMobHuntEntries.Count(
+				    x =>
+					    this.plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) ==
+			    this.plugin.CurrentAreaMobHuntEntries.Count)
 			{
 				return;
 			}
-
-			var fontGlobalScale = ImGui.GetIO().FontGlobalScale;
 
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
 			var windowFlags = ImGuiWindowFlags.NoNavInputs | ImGuiWindowFlags.NoDocking;
 
-			if (this._plugin.Configuration.HideLocalHuntBackground)
+			if (this.plugin.Configuration.HideLocalHuntBackground)
 			{
 				windowFlags |= ImGuiWindowFlags.NoBackground;
 			}
@@ -194,11 +196,11 @@ namespace HuntBuddy
 				return;
 			}
 
-			foreach (var mobHuntEntry in this._plugin.CurrentAreaMobHuntEntries)
+			foreach (var mobHuntEntry in this.plugin.CurrentAreaMobHuntEntries)
 			{
-				var currentKills = this._plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+				var currentKills = this.plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
 
-				if (this._plugin.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills)
+				if (this.plugin.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills)
 				{
 					continue;
 				}
@@ -207,7 +209,9 @@ namespace HuntBuddy
 				{
 					if (Interface.IconButton(FontAwesomeIcon.MapMarked, $"##{mobHuntEntry.MobHuntId}"))
 					{
-						Location.OpenMapLink(mobHuntEntry.TerritoryType, mobHuntEntry.MapId,
+						Location.OpenMapLink(
+							mobHuntEntry.TerritoryType,
+							mobHuntEntry.MapId,
 							mobHuntEntry.MobHuntId);
 					}
 
@@ -216,7 +220,7 @@ namespace HuntBuddy
 
 				ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
 
-				if (!this._plugin.Configuration.ShowLocalHuntIcons)
+				if (!this.plugin.Configuration.ShowLocalHuntIcons)
 				{
 					continue;
 				}
@@ -231,32 +235,35 @@ namespace HuntBuddy
 		{
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
-			if (!ImGui.Begin($"{this._plugin.Name} settings", ImGuiWindowFlags.NoDocking))
+			if (!ImGui.Begin($"{this.plugin.Name} settings", ImGuiWindowFlags.NoDocking))
 			{
 				return;
 			}
 
 			var save = false;
 
-			save |= ImGui.Checkbox("Show hunts in local area", ref this._plugin.Configuration.ShowLocalHunts);
-			save |= ImGui.Checkbox("Show icons of hunts in local area", ref this._plugin.Configuration.ShowLocalHuntIcons);
-			save |= ImGui.Checkbox("Hide background of local hunts window",
-				ref this._plugin.Configuration.HideLocalHuntBackground);
-			save |= ImGui.Checkbox("Hide completed targets in local hunts window",
-				ref this._plugin.Configuration.HideCompletedHunts);
-			save |= ImGui.SliderFloat("Hunt icon scale", ref this._plugin.Configuration.IconScale, 0.2f, 2f, "%.2f");
-			if (ImGui.ColorEdit4("Hunt icon background colour", ref this._plugin.Configuration.IconBackgroundColour))
+			save |= ImGui.Checkbox("Show hunts in local area", ref this.plugin.Configuration.ShowLocalHunts);
+			save |= ImGui.Checkbox(
+				"Show icons of hunts in local area",
+				ref this.plugin.Configuration.ShowLocalHuntIcons);
+			save |= ImGui.Checkbox(
+				"Hide background of local hunts window",
+				ref this.plugin.Configuration.HideLocalHuntBackground);
+			save |= ImGui.Checkbox(
+				"Hide completed targets in local hunts window",
+				ref this.plugin.Configuration.HideCompletedHunts);
+			save |= ImGui.SliderFloat("Hunt icon scale", ref this.plugin.Configuration.IconScale, 0.2f, 2f, "%.2f");
+			if (ImGui.ColorEdit4("Hunt icon background colour", ref this.plugin.Configuration.IconBackgroundColour))
 			{
-				this._plugin.Configuration.IconBackgroundColourU32 =
-					ImGui.ColorConvertFloat4ToU32(this._plugin.Configuration.IconBackgroundColour);
+				this.plugin.Configuration.IconBackgroundColourU32 =
+					ImGui.ColorConvertFloat4ToU32(this.plugin.Configuration.IconBackgroundColour);
 				save = true;
 			}
 
 			if (save)
 			{
-				this._plugin.Configuration.Save();
+				this.plugin.Configuration.Save();
 			}
-
 
 			ImGui.End();
 		}
@@ -282,20 +289,24 @@ namespace HuntBuddy
 		{
 			var cursorPos = ImGui.GetCursorScreenPos();
 			var imageSize = mobHuntEntry.ExpansionId < 3 ? new Vector2(192f, 128f) : new Vector2(210f);
-			imageSize *= ImGui.GetIO().FontGlobalScale * this._plugin.Configuration.IconScale;
+			imageSize *= ImGui.GetIO().FontGlobalScale * this.plugin.Configuration.IconScale;
 
 			ImGui.InvisibleButton("canvas", imageSize);
 
 			var drawList = ImGui.GetWindowDrawList();
 			if (mobHuntEntry.ExpansionId == 4 && !mobHuntEntry.IsEliteMark) // Endwalker uses circle for non elite mobs
 			{
-				drawList.AddCircleFilled(cursorPos + imageSize / 2f, imageSize.X / 2f,
-					this._plugin.Configuration.IconBackgroundColourU32);
+				drawList.AddCircleFilled(
+					cursorPos + (imageSize / 2f),
+					imageSize.X / 2f,
+					this.plugin.Configuration.IconBackgroundColourU32);
 			}
 			else
 			{
-				drawList.AddRectFilled(cursorPos, cursorPos + imageSize,
-					this._plugin.Configuration.IconBackgroundColourU32);
+				drawList.AddRectFilled(
+					cursorPos,
+					cursorPos + imageSize,
+					this.plugin.Configuration.IconBackgroundColourU32);
 			}
 
 			drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos, cursorPos + imageSize);

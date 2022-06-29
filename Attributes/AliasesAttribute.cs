@@ -9,7 +9,7 @@ namespace HuntBuddy.Attributes
 
 		public AliasesAttribute(params string[] aliases)
 		{
-			Aliases = aliases;
+			this.Aliases = aliases;
 		}
 	}
 }

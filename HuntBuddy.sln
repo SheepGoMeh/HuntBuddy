@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntBuddy", "HuntBuddy.csproj", "{69CDED6C-0BD1-47F3-905C-3F87B0D20789}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntBuddy", "HuntBuddy\HuntBuddy.csproj", "{69CDED6C-0BD1-47F3-905C-3F87B0D20789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs.Generators", "FFXIVClientStructs\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj", "{6D31AE7E-2E4C-4A8E-9278-491E899E28F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVClientStructs", "FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj", "{EC521931-1D8B-4B31-96A6-48095783DFCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +16,13 @@ Global
 		{69CDED6C-0BD1-47F3-905C-3F87B0D20789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69CDED6C-0BD1-47F3-905C-3F87B0D20789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69CDED6C-0BD1-47F3-905C-3F87B0D20789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D31AE7E-2E4C-4A8E-9278-491E899E28F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D31AE7E-2E4C-4A8E-9278-491E899E28F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D31AE7E-2E4C-4A8E-9278-491E899E28F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D31AE7E-2E4C-4A8E-9278-491E899E28F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC521931-1D8B-4B31-96A6-48095783DFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC521931-1D8B-4B31-96A6-48095783DFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC521931-1D8B-4B31-96A6-48095783DFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC521931-1D8B-4B31-96A6-48095783DFCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

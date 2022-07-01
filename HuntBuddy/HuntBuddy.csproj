@@ -8,6 +8,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>HuntBuddy</RootNamespace>
         <IsPackable>false</IsPackable>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
     <PropertyGroup>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
@@ -15,10 +16,6 @@
     <ItemGroup>
         <Reference Include="Dalamud">
             <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Dalamud.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="FFXIVClientStructs">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\FFXIVClientStructs.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="ImGui.NET">
@@ -44,5 +41,8 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="DalamudPackager" Version="2.1.7" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj" />
     </ItemGroup>
 </Project>

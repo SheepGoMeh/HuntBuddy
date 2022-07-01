@@ -91,12 +91,51 @@ namespace HuntBuddy
 					{
 						if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 						{
-							if (Interface.IconButton(FontAwesomeIcon.MapMarked, $"##{mobHuntEntry.MobHuntId}"))
+							if (Interface.IconButton(FontAwesomeIcon.MapMarkerAlt, $"pin##{mobHuntEntry.MobHuntId}"))
 							{
-								Location.OpenMapLink(
+								Location.CreateMapMarker(
 									mobHuntEntry.TerritoryType,
 									mobHuntEntry.MapId,
-									mobHuntEntry.MobHuntId);
+									mobHuntEntry.MobHuntId,
+									mobHuntEntry.Name,
+									Location.OpenType.None);
+							}
+
+							if (ImGui.IsItemHovered())
+							{
+								ImGui.BeginTooltip();
+								ImGui.Text("Place marker on the map");
+								ImGui.EndTooltip();
+							}
+
+							ImGui.SameLine();
+
+							if (Interface.IconButton(FontAwesomeIcon.Compass, $"openRadius##{mobHuntEntry.MobHuntId}"))
+							{
+								Location.CreateMapMarker(
+									mobHuntEntry.TerritoryType,
+									mobHuntEntry.MapId,
+									mobHuntEntry.MobHuntId,
+									mobHuntEntry.Name,
+									Location.OpenType.ShowOpen);
+							}
+
+							if (ImGui.IsItemHovered())
+							{
+								ImGui.BeginTooltip();
+								ImGui.Text("Show hunt location on the map");
+								ImGui.EndTooltip();
+							}
+
+							ImGui.SameLine();
+
+							if (Interface.IconButton(FontAwesomeIcon.MapMarkedAlt, $"open##{mobHuntEntry.MobHuntId}"))
+							{
+								Location.CreateMapMarker(
+									mobHuntEntry.TerritoryType,
+									mobHuntEntry.MapId,
+									mobHuntEntry.MobHuntId,
+									mobHuntEntry.Name);
 							}
 
 							if (ImGui.IsItemHovered())
@@ -207,12 +246,58 @@ namespace HuntBuddy
 
 				if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
 				{
-					if (Interface.IconButton(FontAwesomeIcon.MapMarked, $"##{mobHuntEntry.MobHuntId}"))
+					if (Interface.IconButton(FontAwesomeIcon.MapMarkerAlt, $"pin##{mobHuntEntry.MobHuntId}"))
 					{
-						Location.OpenMapLink(
+						Location.CreateMapMarker(
 							mobHuntEntry.TerritoryType,
 							mobHuntEntry.MapId,
-							mobHuntEntry.MobHuntId);
+							mobHuntEntry.MobHuntId,
+							mobHuntEntry.Name,
+							Location.OpenType.None);
+					}
+
+					if (ImGui.IsItemHovered())
+					{
+						ImGui.BeginTooltip();
+						ImGui.Text("Place marker on the map");
+						ImGui.EndTooltip();
+					}
+
+					ImGui.SameLine();
+
+					if (Interface.IconButton(FontAwesomeIcon.Compass, $"openRadius##{mobHuntEntry.MobHuntId}"))
+					{
+						Location.CreateMapMarker(
+							mobHuntEntry.TerritoryType,
+							mobHuntEntry.MapId,
+							mobHuntEntry.MobHuntId,
+							mobHuntEntry.Name,
+							Location.OpenType.ShowOpen);
+					}
+
+					if (ImGui.IsItemHovered())
+					{
+						ImGui.BeginTooltip();
+						ImGui.Text("Show hunt location on the map");
+						ImGui.EndTooltip();
+					}
+
+					ImGui.SameLine();
+
+					if (Interface.IconButton(FontAwesomeIcon.MapMarkedAlt, $"open##{mobHuntEntry.MobHuntId}"))
+					{
+						Location.CreateMapMarker(
+							mobHuntEntry.TerritoryType,
+							mobHuntEntry.MapId,
+							mobHuntEntry.MobHuntId,
+							mobHuntEntry.Name);
+					}
+
+					if (ImGui.IsItemHovered())
+					{
+						ImGui.BeginTooltip();
+						ImGui.Text("Show hunt location on the map");
+						ImGui.EndTooltip();
 					}
 
 					ImGui.SameLine();

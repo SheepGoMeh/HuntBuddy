@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using Lumina.Excel.GeneratedSheets;
+using MapType = FFXIVClientStructs.FFXIV.Client.UI.Agent.MapType;
 
 namespace HuntBuddy
 {
@@ -451,10 +454,54 @@ namespace HuntBuddy
 			{ 10435, new PositionInfo { X = 16.3f, Y = 14.1f } }, // Other One
 		};
 
-		public static void OpenMapLink(uint territoryType, uint mapId, uint mobHuntId)
+		public enum OpenType
 		{
-			var mapLinkPayload = new MapLinkPayload(territoryType, mapId, Database[mobHuntId].X, Database[mobHuntId].Y);
-			Plugin.GameGui.OpenMapWithMapLink(mapLinkPayload);
+			None, // Just place marker
+			ShowOpen, // Show special map with radius
+			MarkerOpen // Show normal map
+		}
+
+		public static unsafe void CreateMapMarker(uint territoryType, uint mapId, uint mobHuntId, string? mobHuntName, OpenType openType = OpenType.MarkerOpen)
+		{
+			var map = FFXIVClientStructs.FFXIV.Client.UI.Agent.AgentMap.Instance();
+			
+			if (map == null)
+			{
+				return;
+			}
+			
+			var pos = MapToWorldCoordinates(Database[mobHuntId].Coordinate, mapId);
+
+			map->IsFlagMarkerSet = 0;
+			map->SetFlagMapMarker(territoryType, mapId, pos.X, pos.Y, 60004);
+
+			switch (openType)
+			{
+				case OpenType.None:
+					break;
+				case OpenType.ShowOpen:
+					map->AgentInterface.Hide();
+					map->AddGatheringTempMarker(pos.X, pos.Y, 150, 60004, 4, mobHuntName);
+					map->OpenMap(mapId, territoryType, mobHuntName, MapType.GatheringLog);
+					break;
+				case OpenType.MarkerOpen:
+					map->AgentInterface.Hide();
+					map->OpenMap(mapId, territoryType);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(openType), openType, null);
+			}
+		}
+		
+		private static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId)
+		{
+			var scale = Plugin.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;
+			var num = scale / 100f;
+			var x = (float)(((pos.X - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
+			var y = (float)(((pos.Y - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
+			x = (int)(MathF.Round(x, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f / 1000f;
+			y = (int)(MathF.Round(y, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f / 1000f;
+			return ((int)x, (int)y);
 		}
 
 		private static Vector2 ConvertPixelPositionToMapCoordinate(int x, int y, float scale)

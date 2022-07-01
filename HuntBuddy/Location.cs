@@ -111,7 +111,7 @@ namespace HuntBuddy
 			{ 03617, new PositionInfo { X = 23.0f, Y = 25.0f } }, // Moss Dragon
 			{ 03613, new PositionInfo { X = 28.0f, Y = 32.0f } }, // Sankchinni
 			{ 03615, new PositionInfo { X = 32.0f, Y = 15.0f } }, // Tulihand
-			{ 03624, new PositionInfo { X = 37.0f, Y = 18.0f } }, // Vouivre
+			{ 03624, new PositionInfo { X = 38.0f, Y = 17.7f } }, // Vouivre
 			{ 03616, new PositionInfo { X = 26.0f, Y = 20.0f } }, // Wadjet
 
 			// The Dravanian Hinterlands
@@ -163,7 +163,7 @@ namespace HuntBuddy
 			{ 05685, new PositionInfo { X = 10.0f, Y = 27.0f } }, // Diakka
 			{ 05674, new PositionInfo { X = 22.0f, Y = 16.0f } }, // Foper
 			{ 05697, new PositionInfo { X = 25.0f, Y = 27.0f } }, // Gazelle
-			{ 05676, new PositionInfo { X = 10.0f, Y = 11.0f } }, // Gazelle Hawk
+			{ 05676, new PositionInfo { X = 11.6f, Y = 12.0f } }, // Gazelle Hawk
 			{ 05679, new PositionInfo { X = 25.0f, Y = 15.0f } }, // Gelid Bhoot
 			{ 05686, new PositionInfo { X = 10.0f, Y = 27.0f } }, // Goosefish
 			{ 05671, new PositionInfo { X = 11.0f, Y = 11.0f } }, // Leshy
@@ -292,7 +292,7 @@ namespace HuntBuddy
 			{ 08544, new PositionInfo { X = 11.4f, Y = 30.4f } }, // Masterless Talos
 			{ 08545, new PositionInfo { X = 19.1f, Y = 20.9f } }, // Evil Weapon
 			{ 08547, new PositionInfo { X = 30.4f, Y = 12.3f } }, // Gigantender
-			{ 08550, new PositionInfo { X = 30.1f, Y = 27.2f } }, // Ancient Lizard
+			{ 08550, new PositionInfo { X = 29.4f, Y = 25.4f } }, // Ancient Lizard
 			{ 08556, new PositionInfo { X = 29.4f, Y = 21.7f } }, // Sand Mole
 			{ 08557, new PositionInfo { X = 12.7f, Y = 19.0f } }, // Thistle Mole
 			{ 08558, new PositionInfo { X = 30.9f, Y = 27.3f } }, // Scissorjaws

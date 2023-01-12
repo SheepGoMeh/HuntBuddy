@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
-using FFXIVClientStructs.FFXIV.Client.UI;
 using Lumina.Excel.GeneratedSheets;
 using MapType = FFXIVClientStructs.FFXIV.Client.UI.Agent.MapType;
 
@@ -17,11 +15,11 @@ namespace HuntBuddy
 
 			public float Y { get; init; }
 
-			public Vector2 Coordinate => new(this.X, this.Y);
+			public Vector2 Coordinate => new (this.X, this.Y);
 		}
 
 		// MobHuntId as key
-		public static readonly Dictionary<uint, PositionInfo> Database = new()
+		public static readonly Dictionary<uint, PositionInfo> Database = new ()
 		{
 			// Heavensward
 			// Coerthas Western Highlands

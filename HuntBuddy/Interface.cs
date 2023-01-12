@@ -379,7 +379,7 @@ namespace HuntBuddy
 			ImGui.InvisibleButton("canvas", imageSize);
 
 			var drawList = ImGui.GetWindowDrawList();
-			if (mobHuntEntry.ExpansionId == 4 && !mobHuntEntry.IsEliteMark) // Endwalker uses circle for non elite mobs
+			if (mobHuntEntry is { ExpansionId: 4, IsEliteMark: false }) // Endwalker uses circle for non elite mobs
 			{
 				drawList.AddCircleFilled(
 					cursorPos + (imageSize / 2f),

@@ -82,7 +82,7 @@ namespace HuntBuddy
 			{
 				this.MobHuntStruct =
 					(MobHuntStruct*)SigScanner.GetStaticAddressFromSig(
-						"D1 48 8D 0D ?? ?? ?? ?? 48 83 C4 20 5F E9 ?? ?? ?? ??");
+						"48 8D 0D ?? ?? ?? ?? 8B D8 0F B6 52");
 			}
 
 			Plugin.TeleportConsumer = new TeleportConsumer();

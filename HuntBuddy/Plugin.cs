@@ -144,13 +144,18 @@ namespace HuntBuddy
 		}
 
 		[Command("/phb")]
-		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data")]
+		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window")]
 		public void PluginCommand(string command, string args)
 		{
 			if (args == "reload")
 			{
 				this.MobHuntEntriesReady = false;
 				Task.Run(this.ReloadData);
+			}
+			else if (args == "local")
+			{
+				this.Configuration.ShowLocalHunts = !this.Configuration.ShowLocalHunts;
+				this.Configuration.Save();
 			}
 			else
 			{

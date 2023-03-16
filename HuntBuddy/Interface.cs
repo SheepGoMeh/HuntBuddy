@@ -24,7 +24,14 @@ namespace HuntBuddy
 
 			ImGui.SetNextWindowSize(new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500), ImGuiCond.Once);
 
-			if (!ImGui.Begin($"{this.plugin.Name}", ref draw, ImGuiWindowFlags.NoDocking))
+			var windowFlags = ImGuiWindowFlags.NoDocking;
+
+			if (this.plugin.Configuration.LockWindowPositions)
+			{
+				windowFlags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+			}
+
+			if (!ImGui.Begin($"{this.plugin.Name}", ref draw, windowFlags))
 			{
 				return draw;
 			}
@@ -230,6 +237,11 @@ namespace HuntBuddy
 				windowFlags |= ImGuiWindowFlags.NoBackground;
 			}
 
+			if (this.plugin.Configuration.LockWindowPositions)
+			{
+				windowFlags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+			}
+
 			if (!ImGui.Begin("Hunts in current area", windowFlags))
 			{
 				return;
@@ -320,13 +332,21 @@ namespace HuntBuddy
 		{
 			ImGui.SetNextWindowSize(Vector2.Zero, ImGuiCond.Always);
 
-			if (!ImGui.Begin($"{this.plugin.Name} settings", ImGuiWindowFlags.NoDocking))
+			var windowFlags = ImGuiWindowFlags.NoDocking;
+
+			if (this.plugin.Configuration.LockWindowPositions)
+			{
+				windowFlags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+			}
+
+			if (!ImGui.Begin($"{this.plugin.Name} settings", windowFlags))
 			{
 				return;
 			}
 
 			var save = false;
 
+			save |= ImGui.Checkbox("Lock plugin window positions", ref this.plugin.Configuration.LockWindowPositions);
 			save |= ImGui.Checkbox("Show hunts in local area", ref this.plugin.Configuration.ShowLocalHunts);
 			save |= ImGui.Checkbox(
 				"Show icons of hunts in local area",

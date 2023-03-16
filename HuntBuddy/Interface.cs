@@ -117,38 +117,50 @@ namespace HuntBuddy
 
 							ImGui.SameLine();
 
-							if (Interface.IconButton(FontAwesomeIcon.Compass, $"openRadius##{mobHuntEntry.MobHuntId}"))
-							{
-								Location.CreateMapMarker(
-									mobHuntEntry.TerritoryType,
-									mobHuntEntry.MapId,
-									mobHuntEntry.MobHuntId,
-									mobHuntEntry.Name,
-									Location.OpenType.ShowOpen);
-							}
-
-							if (ImGui.IsItemHovered())
-							{
-								ImGui.BeginTooltip();
-								ImGui.Text("Show hunt area on the map");
-								ImGui.EndTooltip();
-							}
-
-							ImGui.SameLine();
-
 							if (Interface.IconButton(FontAwesomeIcon.MapMarkedAlt, $"open##{mobHuntEntry.MobHuntId}"))
 							{
-								Location.CreateMapMarker(
-									mobHuntEntry.TerritoryType,
-									mobHuntEntry.MapId,
-									mobHuntEntry.MobHuntId,
-									mobHuntEntry.Name);
+								var includeArea = this.plugin.Configuration.IncludeAreaOnMap;
+								if (ImGui.IsKeyDown(ImGuiKey.ModShift))
+								{
+									includeArea = !includeArea;
+								}
+								if (includeArea)
+								{
+									Location.CreateMapMarker(
+										mobHuntEntry.TerritoryType,
+										mobHuntEntry.MapId,
+										mobHuntEntry.MobHuntId,
+										mobHuntEntry.Name,
+										Location.OpenType.ShowOpen);
+								}
+								else
+								{
+									Location.CreateMapMarker(
+										mobHuntEntry.TerritoryType,
+										mobHuntEntry.MapId,
+										mobHuntEntry.MobHuntId,
+										mobHuntEntry.Name);
+								}
 							}
 
 							if (ImGui.IsItemHovered())
 							{
+								var color = ImGui.IsKeyDown(ImGuiKey.ModShift) ? new Vector4(0f, 0.7f, 0f, 1f) : new Vector4(0.7f, 0.7f, 0.7f, 1f);
 								ImGui.BeginTooltip();
-								ImGui.Text("Show hunt location on the map");
+								if (this.plugin.Configuration.IncludeAreaOnMap)
+								{
+									ImGui.Text("Show hunt area on the map");
+									ImGui.TextColored(
+										color,
+										"Hold [SHIFT] to show the location only");
+								}
+								else
+								{
+									ImGui.Text("Show hunt location on the map");
+									ImGui.TextColored(
+										color,
+										"Hold [SHIFT] to include the area");
+								}
 								ImGui.EndTooltip();
 							}
 
@@ -347,6 +359,7 @@ namespace HuntBuddy
 			var save = false;
 
 			save |= ImGui.Checkbox("Lock plugin window positions", ref this.plugin.Configuration.LockWindowPositions);
+			save |= ImGui.Checkbox("Include hunt area on map by default", ref this.plugin.Configuration.IncludeAreaOnMap);
 			save |= ImGui.Checkbox("Show hunts in local area", ref this.plugin.Configuration.ShowLocalHunts);
 			save |= ImGui.Checkbox(
 				"Show icons of hunts in local area",

@@ -8,6 +8,7 @@ namespace HuntBuddy
 	{
 		public int Version { get; set; }
 
+		public bool IncludeAreaOnMap;
 		public bool LockWindowPositions;
 		public bool ShowLocalHunts;
 		public bool ShowLocalHuntIcons;

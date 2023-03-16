@@ -135,6 +135,7 @@ namespace HuntBuddy
 			}
 
 			this.MobHuntEntriesReady = false;
+			Plugin.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
 			Plugin.Framework.Update -= this.FrameworkOnUpdate;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;

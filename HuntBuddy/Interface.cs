@@ -123,7 +123,7 @@ namespace HuntBuddy
 							if (ImGui.IsItemHovered())
 							{
 								ImGui.BeginTooltip();
-								ImGui.Text("Show hunt location on the map");
+								ImGui.Text("Show hunt area on the map");
 								ImGui.EndTooltip();
 							}
 
@@ -278,7 +278,7 @@ namespace HuntBuddy
 					if (ImGui.IsItemHovered())
 					{
 						ImGui.BeginTooltip();
-						ImGui.Text("Show hunt location on the map");
+						ImGui.Text("Show hunt area on the map");
 						ImGui.EndTooltip();
 					}
 

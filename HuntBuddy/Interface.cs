@@ -93,7 +93,7 @@ namespace HuntBuddy
 						         return treeOpen;
 					         }))
 				{
-					ImGui.Indent();
+					//ImGui.Indent();
 					foreach (var mobHuntEntry in entry.Value)
 					{
 						if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId))
@@ -199,7 +199,7 @@ namespace HuntBuddy
 						}
 					}
 
-					ImGui.Unindent();
+					//ImGui.Unindent();
 					ImGui.TreePop();
 				}
 

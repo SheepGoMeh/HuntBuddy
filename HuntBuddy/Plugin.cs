@@ -165,7 +165,8 @@ namespace HuntBuddy
 					{
 						var openType = Location.OpenType.None;
 						var playerLocation = Plugin.ClientState.LocalPlayer!.Position;
-						var playerVec2 = new Vector2(playerLocation.X, playerLocation.Z);
+						var map = Plugin.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.Map!.Value!;
+						var playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
 						var chosen = this.CurrentAreaMobHuntEntries
 							.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
 							.OrderBy(entry => Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))

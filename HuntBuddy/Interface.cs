@@ -124,23 +124,12 @@ namespace HuntBuddy
 								{
 									includeArea = !includeArea;
 								}
-								if (includeArea)
-								{
-									Location.CreateMapMarker(
-										mobHuntEntry.TerritoryType,
-										mobHuntEntry.MapId,
-										mobHuntEntry.MobHuntId,
-										mobHuntEntry.Name,
-										Location.OpenType.ShowOpen);
-								}
-								else
-								{
-									Location.CreateMapMarker(
-										mobHuntEntry.TerritoryType,
-										mobHuntEntry.MapId,
-										mobHuntEntry.MobHuntId,
-										mobHuntEntry.Name);
-								}
+								Location.CreateMapMarker(
+									mobHuntEntry.TerritoryType,
+									mobHuntEntry.MapId,
+									mobHuntEntry.MobHuntId,
+									mobHuntEntry.Name,
+									includeArea ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen);
 							}
 
 							if (ImGui.IsItemHovered())

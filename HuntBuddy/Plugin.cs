@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,6 +11,7 @@ using Dalamud.Game.ClientState;
 using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
 using Dalamud.IoC;
+using Dalamud.Logging;
 using Dalamud.Plugin;
 using Dalamud.Utility;
 using Lumina.Excel.GeneratedSheets;
@@ -61,6 +63,7 @@ namespace HuntBuddy
 		private readonly PluginCommandManager<Plugin> commandManager;
 		private readonly Interface pluginInterface;
 		private ObtainedBillEnum lastState;
+		// Dictionary<string ExpansionName, Dictionary<KeyValuePair<uint MobTerritoryType, string MobTerritoryName>, List<MobHuntEntry MobsInZone>>>
 		public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
 		public readonly ConcurrentBag<MobHuntEntry> CurrentAreaMobHuntEntries;
 		public bool MobHuntEntriesReady = true;
@@ -145,8 +148,8 @@ namespace HuntBuddy
 		}
 
 		[Command("/phb")]
-		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window")]
-		public void PluginCommand(string command, string args)
+		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find")]
+		public unsafe void PluginCommand(string command, string args)
 		{
 			switch (args.Trim().ToLower()) {
 				case "reload":
@@ -156,6 +159,57 @@ namespace HuntBuddy
 				case "local":
 					this.Configuration.ShowLocalHunts = !this.Configuration.ShowLocalHunts;
 					this.Configuration.Save();
+					break;
+				case "next":
+					if (this.MobHuntEntries.Count > 0)
+					{
+						var openType = Location.OpenType.None;
+						var playerLocation = Plugin.ClientState.LocalPlayer!.Position;
+						var playerVec2 = new Vector2(playerLocation.X, playerLocation.Z);
+						var chosen = this.CurrentAreaMobHuntEntries
+							.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
+							.OrderBy(entry => Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
+							.FirstOrDefault();
+						if (chosen == null)
+						{
+							PluginLog.Information("No marks in current zone, looking in current expansion");
+							openType = this.Configuration.IncludeAreaOnMap ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen;
+							var expansion = Plugin.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.ExVersion.Value!.Name;
+							PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+							var candidates = this.MobHuntEntries.ContainsKey(expansion)
+								? this.MobHuntEntries[expansion]
+									.Values
+									.SelectMany(l => l)
+									.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
+									.ToList()
+								: new List<MobHuntEntry>();
+							if (candidates.Count == 0)
+							{
+								PluginLog.Information("Nothing in current expansion, looking globally");
+								candidates =
+									this.MobHuntEntries.Values
+										.SelectMany(dict => dict.Values)
+										.SelectMany(l => l)
+										.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
+										.ToList();
+							}
+							if (candidates.Count > 1)
+							{
+								PluginLog.Information($"Found {candidates.Count} marks");
+								chosen = candidates[new Random().Next(candidates.Count)];
+							}
+						}
+						if (chosen != null)
+						{
+							PluginLog.Information($"Selected next hunt target: {chosen.Name}");
+							Location.CreateMapMarker(
+								chosen.TerritoryType,
+								chosen.MapId,
+								chosen.MobHuntId,
+								chosen.Name,
+								openType);
+						}
+					}
 					break;
 				default:
 					this.OpenConfigUi();

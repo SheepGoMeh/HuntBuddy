@@ -155,7 +155,7 @@ namespace HuntBuddy
 
 							ImGui.SameLine();
 
-							if (Plugin.TeleportConsumer?.Subscribed == true)
+							if (Plugin.TeleportConsumer?.IsAvailable == true)
 							{
 								if (Interface.IconButton(FontAwesomeIcon.StreetView, $"t##{mobHuntEntry.MobHuntId}"))
 								{

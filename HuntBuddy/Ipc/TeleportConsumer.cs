@@ -13,7 +13,7 @@ namespace HuntBuddy.Ipc
 		{
 			get
 			{
-				if (this.timeSinceLastCheck + 5 > DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+				if (this.timeSinceLastCheck + 5000 > Environment.TickCount64)
 				{
 					return this.isAvailable;
 				}
@@ -22,7 +22,7 @@ namespace HuntBuddy.Ipc
 				{
 					this.consumerMessageSetting.InvokeFunc();
 					this.isAvailable = true;
-					this.timeSinceLastCheck = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+					this.timeSinceLastCheck = Environment.TickCount64;
 				}
 				catch
 				{

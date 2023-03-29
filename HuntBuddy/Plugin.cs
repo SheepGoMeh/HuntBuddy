@@ -202,7 +202,7 @@ namespace HuntBuddy
 						}
 						if (chosen != null)
 						{
-							PluginLog.Information($"Selected next hunt target: {chosen.Name}");
+							Chat.Print($"Hunting {chosen.Name} in {chosen.TerritoryName}");
 							Location.CreateMapMarker(
 								chosen.TerritoryType,
 								chosen.MapId,

@@ -6,8 +6,34 @@ namespace HuntBuddy.Ipc
 {
 	public class TeleportConsumer
 	{
-		public bool Subscribed { get; private set; }
+		private bool isAvailable;
+		private long timeSinceLastCheck;
 
+		public bool IsAvailable
+		{
+			get
+			{
+				if (this.timeSinceLastCheck + 5000 > Environment.TickCount64)
+				{
+					return this.isAvailable;
+				}
+
+				try
+				{
+					this.consumerMessageSetting.InvokeFunc();
+					this.isAvailable = true;
+					this.timeSinceLastCheck = Environment.TickCount64;
+				}
+				catch
+				{
+					this.isAvailable = false;
+				}
+
+				return this.isAvailable;
+			}
+		}
+
+		private ICallGateSubscriber<bool> consumerMessageSetting = null!;
 		private ICallGateSubscriber<uint, byte, bool> consumerTeleport = null!;
 
 		private void Subscribe()
@@ -15,12 +41,10 @@ namespace HuntBuddy.Ipc
 			try
 			{
 				this.consumerTeleport = Plugin.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
-
-				this.Subscribed = true;
+				this.consumerMessageSetting = Plugin.PluginInterface.GetIpcSubscriber<bool>("Teleport.ChatMessage");
 			}
 			catch (Exception ex)
 			{
-				this.Subscribed = false;
 				PluginLog.LogDebug($"Failed to subscribe to Teleporter\nReason: {ex}");
 			}
 		}

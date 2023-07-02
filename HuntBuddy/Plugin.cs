@@ -151,70 +151,91 @@ namespace HuntBuddy
 		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find")]
 		public unsafe void PluginCommand(string command, string args)
 		{
-			switch (args.Trim().ToLower()) {
-				case "reload":
-					this.MobHuntEntriesReady = false;
-					Task.Run(this.ReloadData);
-					break;
-				case "local":
-					this.Configuration.ShowLocalHunts = !this.Configuration.ShowLocalHunts;
-					this.Configuration.Save();
-					break;
-				case "next":
-					if (this.MobHuntEntries.Count > 0)
-					{
-						var openType = Location.OpenType.None;
-						var playerLocation = Plugin.ClientState.LocalPlayer!.Position;
-						var map = Plugin.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.Map!.Value!;
-						var playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
-						var chosen = this.CurrentAreaMobHuntEntries
-							.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
-							.OrderBy(entry => Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
-							.FirstOrDefault();
-						if (chosen == null)
+			try
+			{
+				switch (args.Trim().ToLower()) {
+					case "reload":
+						this.MobHuntEntriesReady = false;
+						Task.Run(this.ReloadData);
+						break;
+					case "local":
+						this.Configuration.ShowLocalHunts = !this.Configuration.ShowLocalHunts;
+						this.Configuration.Save();
+						break;
+					case "next":
+						if (this.MobHuntEntries.Count > 0)
 						{
-							PluginLog.Information("No marks in current zone, looking in current expansion");
-							openType = this.Configuration.IncludeAreaOnMap ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen;
-							var expansion = Plugin.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.ExVersion.Value!.Name;
-							PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
-							var candidates = this.MobHuntEntries.ContainsKey(expansion)
-								? this.MobHuntEntries[expansion]
-									.Values
-									.SelectMany(l => l)
-									.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
-									.ToList()
-								: new List<MobHuntEntry>();
-							if (candidates.Count == 0)
+							var filterPredicate = (MobHuntEntry entry) => entry.IsEliteMark || this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills;
+							var openType = Location.OpenType.None;
+							var playerLocation = Plugin.ClientState.LocalPlayer!.Position;
+							var map = Plugin.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.Map!.Value!;
+							var playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
+							var chosen = this.CurrentAreaMobHuntEntries
+								.Where(filterPredicate)
+								.OrderBy(entry => entry.IsEliteMark ? float.MaxValue : Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
+								.FirstOrDefault();
+							if (chosen == null)
 							{
-								PluginLog.Information("Nothing in current expansion, looking globally");
-								candidates =
-									this.MobHuntEntries.Values
-										.SelectMany(dict => dict.Values)
+								PluginLog.Information("No marks in current zone, looking in current expansion");
+								openType = this.Configuration.IncludeAreaOnMap ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen;
+								var expansion = Plugin.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.ExVersion.Value!.Name;
+								PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+								var candidates = this.MobHuntEntries.ContainsKey(expansion)
+									? this.MobHuntEntries[expansion]
+										.Values
 										.SelectMany(l => l)
-										.Where(entry => this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills)
-										.ToList();
+										.Where(filterPredicate)
+										.ToList()
+									: new List<MobHuntEntry>();
+								if (candidates.Count == 0)
+								{
+									PluginLog.Information("Nothing available in current expansion, looking globally");
+									candidates =
+										this.MobHuntEntries.Values
+											.SelectMany(dict => dict.Values)
+											.SelectMany(l => l)
+											.Where(filterPredicate)
+											.ToList();
+								}
+								if (candidates.Count >= 1)
+								{
+									PluginLog.Information($"Found {candidates.Count}");
+									chosen = candidates[new Random().Next(candidates.Count)];
+								}
 							}
-							if (candidates.Count > 1)
+							if (chosen != null)
 							{
-								PluginLog.Information($"Found {candidates.Count} marks");
-								chosen = candidates[new Random().Next(candidates.Count)];
+								if (chosen.IsEliteMark)
+								{
+									Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+								}
+								else
+								{
+									var remaining = chosen.NeededKills - this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
+									Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
+									Location.CreateMapMarker(
+										chosen.TerritoryType,
+										chosen.MapId,
+										chosen.MobHuntId,
+										chosen.Name,
+										openType);
+								}
+							}
+							else
+							{
+								PluginLog.Information("Unable to find a hunt mark to target");
+								Chat.Print("Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
 							}
 						}
-						if (chosen != null)
-						{
-							Chat.Print($"Hunting {chosen.Name} in {chosen.TerritoryName}");
-							Location.CreateMapMarker(
-								chosen.TerritoryType,
-								chosen.MapId,
-								chosen.MobHuntId,
-								chosen.Name,
-								openType);
-						}
-					}
-					break;
-				default:
-					this.OpenConfigUi();
-					break;
+						break;
+					default:
+						this.OpenConfigUi();
+						break;
+				}
+			}
+			catch (Exception e)
+			{
+				PluginLog.Error("Error in command handler: " + e.ToString());
 			}
 		}
 

@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
-        <FileVersion>1.0.1.0</FileVersion>
+        <AssemblyVersion>1.0.2.0</AssemblyVersion>
+        <FileVersion>$(AssemblyVersion)</FileVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>HuntBuddy</RootNamespace>
         <IsPackable>false</IsPackable>
@@ -54,6 +54,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.10" />
+        <PackageReference Include="DalamudPackager" Version="2.1.11" />
     </ItemGroup>
 </Project>

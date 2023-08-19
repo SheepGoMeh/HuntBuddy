@@ -2,7 +2,10 @@
 using System.Numerics;
 using System.Threading.Tasks;
 using Dalamud.Interface;
+using Dalamud.Logging;
 using ImGuiNET;
+using Lumina;
+using Lumina.Excel.GeneratedSheets;
 
 namespace HuntBuddy
 {
@@ -318,6 +321,10 @@ namespace HuntBuddy
 				}
 
 				ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
+				if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId) && Location.Database[mobHuntEntry.MobHuntId][0].Fate != 0)
+				{
+					ImGui.Text($"FATE: {Plugin.DataManager.GetExcelSheet<Fate>()!.GetRow(Location.Database[mobHuntEntry.MobHuntId][0].Fate)!.Name}");
+				}
 
 				if (!this.plugin.Configuration.ShowLocalHuntIcons)
 				{

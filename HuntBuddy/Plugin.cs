@@ -172,7 +172,7 @@ namespace HuntBuddy
 							var playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
 							var chosen = this.CurrentAreaMobHuntEntries
 								.Where(filterPredicate)
-								.OrderBy(entry => entry.IsEliteMark ? float.MaxValue : Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
+								.OrderBy(entry => entry.IsEliteMark ? float.MaxValue : Vector2.Distance(Location.Database[entry.MobHuntId][0].Coordinate, playerVec2))
 								.FirstOrDefault();
 							if (chosen == null)
 							{

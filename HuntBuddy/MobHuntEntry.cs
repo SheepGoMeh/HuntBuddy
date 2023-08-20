@@ -19,6 +19,10 @@ namespace HuntBuddy
 
 		public uint MobHuntId { get; init; }
 
+		public uint MarkIndex { get; init; }
+
+		public uint MobIndex { get; init; }
+
 		public bool IsEliteMark { get; init; }
 
 		public uint CurrentKillsOffset { get; init; }

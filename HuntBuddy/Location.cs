@@ -550,267 +550,267 @@ namespace HuntBuddy
 
 			// Daily Targets
 			// Middle La Noscea
-			{ 00849, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 17.0f, Radius =  50, Fate = 220 } } },	// Menuis
-			{ 00851, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y =  9.0f, Radius =  50, Fate = 238 } } },	// Chupacabra
+			{ 00849, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 17.0f, Radius = 50, Fate = 220 } } },	// Menuis
+			{ 00851, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y =  9.0f, Radius = 50, Fate = 238 } } },	// Chupacabra
 			// Lower La Noscea
-			{ 01357, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 37.0f, Radius =  50, Fate = 245 } } },	// Mandragora Prince
-			{ 00857, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 33.0f, Radius =  50, Fate = 333 } } },	// Padfoot
-			{ 00852, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius =  50, Fate = 257 } } },	// Cuachac
-			{ 00856, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 13.0f, Radius =  50, Fate = 265 } } },	// 426th Order Pickman Bu Ga
+			{ 01357, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 37.0f, Radius = 50, Fate = 245 } } },	// Mandragora Prince
+			{ 00857, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 33.0f, Radius = 50, Fate = 333 } } },	// Padfoot
+			{ 00852, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 50, Fate = 257 } } },	// Cuachac
+			{ 00856, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 13.0f, Radius = 50, Fate = 265 } } },	// 426th Order Pickman Bu Ga
 			// Eastern La Noscea
-			{ 00411, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 21.0f, Radius =  50 } } },				// Grass Raptor
-			{ 01822, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius =  50 } } },				// 2nd Cohort Laquearius
-			{ 01823, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 20.0f, Radius =  50 } } },				// 2nd Cohort Eques
-			{ 01825, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 20.0f, Radius =  50 } } },				// 2nd Cohort Signifer
-			{ 01826, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 20.0f, Radius =  50 } } },				// 2nd Cohort Vanguard
-			{ 00639, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 25.0f, Radius =  50 } } },				// Colibri
-			{ 00361, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 26.0f, Radius =  50 } } },				// Bloodshore Bell
-			{ 00373, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 25.0f, Radius =  50 } } },				// Kobold Missionary
-			{ 00369, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 25.0f, Radius =  50 } } },				// Kobold Pitman
-			{ 00858, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 32.0f, Radius =  50, Fate = 280 } } },	// Kokoroon Quickfingers
-			{ 00351, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 32.0f, Radius =  50 } } },				// Qiqirn Gullroaster
-			{ 00341, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 35.0f, Radius =  50 } } },				// Apkallu
-			{ 00560, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 35.0f, Radius =  50 } } },				// Snipper
-			{ 01313, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 32.0f, Radius = 150 } } },				// Large Buffalo
-			{ 00353, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 33.0f, Radius =  50 } } },				// Goobbue
-			{ 01516, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 31.0f, Radius =  50, Fate = 563 } } },	// Jolly Green 
-			{ 00352, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 28.0f, Radius =  50 } } },				// Jungle Coeurl
-			{ 01515, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 28.0f, Radius =  50, Fate = 561 } } },	// Sekhmet
-			{ 00026, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 26.0f, Radius =  50 } } },				// Gigantoad
-			{ 01517, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 25.0f, Radius =  50, Fate = 564 } } },	// Metshaldjas
+			{ 00411, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 21.0f, Radius = 150 } } },			// Grass Raptor
+			{ 01822, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 150 } } },			// 2nd Cohort Laquearius
+			{ 01823, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 20.0f, Radius = 150 } } },			// 2nd Cohort Eques
+			{ 01825, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 20.0f, Radius = 150 } } },			// 2nd Cohort Signifer
+			{ 01826, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 20.0f, Radius = 150 } } },			// 2nd Cohort Vanguard
+			{ 00639, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 25.0f, Radius = 150 } } },			// Colibri
+			{ 00361, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 26.0f, Radius = 150 } } },			// Bloodshore Bell
+			{ 00373, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 25.0f, Radius = 150 } } },			// Kobold Missionary
+			{ 00369, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 25.0f, Radius = 150 } } },			// Kobold Pitman
+			{ 00858, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 32.0f, Radius = 50, Fate = 280 } } },	// Kokoroon Quickfingers
+			{ 00351, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 32.0f, Radius = 150 } } },			// Qiqirn Gullroaster
+			{ 00341, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 35.0f, Radius = 150 } } },			// Apkallu
+			{ 00560, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 35.0f, Radius = 150 } } },			// Snipper
+			{ 01313, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 32.0f, Radius = 150 } } },			// Large Buffalo
+			{ 00353, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 33.0f, Radius = 150 } } },			// Goobbue
+			{ 01516, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 31.0f, Radius = 50, Fate = 563 } } },	// Jolly Green 
+			{ 00352, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 28.0f, Radius = 150 } } },			// Jungle Coeurl
+			{ 01515, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 28.0f, Radius = 50, Fate = 561 } } },	// Sekhmet
+			{ 00026, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 26.0f, Radius = 150 } } },			// Gigantoad
+			{ 01517, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 25.0f, Radius = 50, Fate = 564 } } },	// Metshaldjas
 			// Western La Noscea
-			{ 00862, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 22.0f, Radius = 50, Fate = 309 } } },		// Tryptix Stumblemox
-			{ 00565, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 19.0f, Radius = 50 } } },					// Trenchtooth Sahagin
-			{ 00386, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 50 } } },					// Shelfscale Sahagin
-			{ 01518, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 18.0f, Radius = 50, Fate = 572 } } },		// Voll The Sharkskinned
-			{ 00384, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 19.0f, Radius = 50 } } },					// Shelfclaw Sahagin
-			{ 00389, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 22.0f, Radius = 50 } } },					// Shelfspine Sahagin
-			{ 00360, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 17.0f, Radius = 50 } } },					// Sea Wasp
-			{ 00343, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 16.0f, Radius = 50, Fate = 575 } } },		// Aermswys The Stained
-			{ 00559, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 17.0f, Radius = 50 } } },					// Shelfeye Reaver
-			{ 02356, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 14.0f, Radius = 50, Fate = 578 } } },		// Yarr The Wavefiend
-			{ 01828, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 13.0f, Radius = 50 } } },					// Sapsa Shelfclaw
-			{ 01830, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 13.0f, Radius = 50 } } },					// Sapsa Shelftooth
-			{ 01829, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 14.0f, Radius = 50 } } },					// Sapsa Shelfspine
-			{ 01529, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 34.0f, Radius = 50, Fate = 577 } } },		// Mantis King
-			{ 01852, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 35.0f, Radius = 50 } } },					// Preying Mantis
-			{ 01853, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 36.0f, Radius = 50 } } },					// Lammergeyer
-			{ 00861, new List<PositionInfo>() { new PositionInfo { X = 36.0f, Y = 28.0f, Radius = 50, Fate = 306 } } },		// Barometz
-			{ 00859, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 28.0f, Radius = 50, Fate = 290 } } },		// Gluttonous Gertrude
-			{ 00860, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 29.0f, Radius = 50, Fate = 295 } } },		// Old Six-Arms
+			{ 00862, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 22.0f, Radius = 50, Fate = 309 } } },	// Tryptix Stumblemox
+			{ 00565, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 19.0f, Radius = 150 } } },			// Trenchtooth Sahagin
+			{ 00386, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 150 } } },			// Shelfscale Sahagin
+			{ 01518, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 18.0f, Radius = 50, Fate = 572 } } },	// Voll The Sharkskinned
+			{ 00384, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 19.0f, Radius = 150 } } },			// Shelfclaw Sahagin
+			{ 00389, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 22.0f, Radius = 150 } } },			// Shelfspine Sahagin
+			{ 00360, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 17.0f, Radius = 150 } } },			// Sea Wasp
+			{ 00343, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 16.0f, Radius = 50, Fate = 575 } } },	// Aermswys The Stained
+			{ 00559, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 17.0f, Radius = 150 } } },			// Shelfeye Reaver
+			{ 02356, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 14.0f, Radius = 50, Fate = 578 } } },	// Yarr The Wavefiend
+			{ 01828, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 13.0f, Radius = 150 } } },			// Sapsa Shelfclaw
+			{ 01830, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 13.0f, Radius = 150 } } },			// Sapsa Shelftooth
+			{ 01829, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 14.0f, Radius = 150 } } },			// Sapsa Shelfspine
+			{ 01529, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 34.0f, Radius = 50, Fate = 577 } } },	// Mantis King
+			{ 01852, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 35.0f, Radius = 150 } } },			// Preying Mantis
+			{ 01853, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 36.0f, Radius = 150 } } },			// Lammergeyer
+			{ 00861, new List<PositionInfo>() { new PositionInfo { X = 36.0f, Y = 28.0f, Radius = 50, Fate = 306 } } },	// Barometz
+			{ 00859, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 28.0f, Radius = 50, Fate = 290 } } },	// Gluttonous Gertrude
+			{ 00860, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 29.0f, Radius = 50, Fate = 295 } } },	// Old Six-Arms
 			// Upper La Noscea
-			{ 00413, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 24.0f, Radius = 50 } } },					// Mamool Ja Executioner
-			{ 00414, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 25.0f, Radius = 50 } } },					// Mamool Ja Breeder
-			{ 01519, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 24.0f, Radius = 50, Fate = 322 } } },		// Oannes
-			{ 01521, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 24.0f, Radius = 50, Fate = 329 } } },		// Zoredonite
-			{ 01522, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 23.0f, Radius = 50, Fate = 331 } } },		// Scarface Bugaal Ja
-			{ 00643, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 22.0f, Radius = 50 } } },					// Uragnite
-			{ 00391, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 22.0f, Radius = 50 } } },					// Salamander
-			{ 00376, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 19.0f, Radius = 50 } } },					// Kobold Sidesman
-			{ 01520, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 24.0f, Radius = 50, Fate = 323 } } },		// Karkinos
-			{ 00886, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 21.0f, Radius = 50, Fate = 314 } } },		// Simurgh
+			{ 00413, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 24.0f, Radius = 150 } } },			// Mamool Ja Executioner
+			{ 00414, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 25.0f, Radius = 150 } } },			// Mamool Ja Breeder
+			{ 01519, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 24.0f, Radius = 50, Fate = 322 } } },	// Oannes
+			{ 01521, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 24.0f, Radius = 50, Fate = 329 } } },	// Zoredonite
+			{ 01522, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 23.0f, Radius = 50, Fate = 331 } } },	// Scarface Bugaal Ja
+			{ 00643, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 22.0f, Radius = 150 } } },			// Uragnite
+			{ 00391, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 22.0f, Radius = 150 } } },			// Salamander
+			{ 00376, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 19.0f, Radius = 150 } } },			// Kobold Sidesman
+			{ 01520, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 24.0f, Radius = 50, Fate = 323 } } },	// Karkinos
+			{ 00886, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 21.0f, Radius = 50, Fate = 314 } } },	// Simurgh
 			// Outer La Noscea
-			{ 00412, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 15.0f, Radius = 50 } } },					// Velociraptor
-			{ 00562, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 15.0f, Radius = 50 } } },					// Kobold Quarryman
-			{ 00270, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 14.0f, Radius = 50 } } },					// Grenade
-			{ 00377, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 15.0f, Radius = 50 } } },					// Kobold Roundsman
-			{ 00375, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 12.0f, Radius = 50 } } },					// Kobold Bedesman
-			{ 01524, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 11.0f, Radius = 50, Fate = 586 } } },		// 59th Order Pickman Be Ze
-			{ 00371, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 12.0f, Radius = 50 } } },					// Kobold Priest
-			{ 01832, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  9.0f, Radius = 50 } } },					// U'Ghamaro Roundsman
-			{ 02357, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  8.0f, Radius = 50, Fate = 599 } } },		// 5th Order Patriarch Ze Bu
-			{ 01834, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  7.0f, Radius = 50 } } },					// U'Ghamaro Bedesman
-			{ 02516, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  6.0f, Radius = 50, Fate = 700 } } },		// 59th Order Roundsman Ge Ga
-			{ 01835, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  6.0f, Radius = 50 } } },					// U'Ghamaro Priest
-			{ 01833, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y =  6.0f, Radius = 50 } } },					// U'Ghamaro Quarryman
-			{ 01670, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y =  6.0f, Radius = 50, Fate = 597 } } },		// 59th Order Bedesman Bi Go
-			{ 01836, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y =  9.0f, Radius = 50 } } },					// Synthetic Doblyn
-			{ 00407, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 12.5f, Radius = 50 } } },					// Ringtail
-			{ 00106, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 11.0f, Radius = 50 } } },					// Coeurl
-			{ 01527, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 15.0f, Radius = 50, Fate = 594 } } },		// Number 128
-			{ 01523, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 15.0f, Radius = 50, Fate = 581 } } },		// Ose
-			{ 01526, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 18.0f, Radius = 50, Fate = 591 } } },		// Peryton
-			{ 01525, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 50, Fate = 589 } } },		// Brounger
-			{ 00046, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 50 } } },					// Plasmoid
+			{ 00412, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 15.0f, Radius = 150 } } },			// Velociraptor
+			{ 00562, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 15.0f, Radius = 150 } } },			// Kobold Quarryman
+			{ 00270, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 14.0f, Radius = 150 } } },			// Grenade
+			{ 00377, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 15.0f, Radius = 150 } } },			// Kobold Roundsman
+			{ 00375, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 12.0f, Radius = 150 } } },			// Kobold Bedesman
+			{ 01524, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 11.0f, Radius = 50, Fate = 586 } } },	// 59th Order Pickman Be Ze
+			{ 00371, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 12.0f, Radius = 150 } } },			// Kobold Priest
+			{ 01832, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  9.0f, Radius = 150 } } },			// U'Ghamaro Roundsman
+			{ 02357, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  8.0f, Radius = 50, Fate = 599 } } },	// 5th Order Patriarch Ze Bu
+			{ 01834, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  7.0f, Radius = 150 } } },			// U'Ghamaro Bedesman
+			{ 02516, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  6.0f, Radius = 50, Fate = 700 } } },	// 59th Order Roundsman Ge Ga
+			{ 01835, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y =  6.0f, Radius = 150 } } },			// U'Ghamaro Priest
+			{ 01833, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y =  6.0f, Radius = 150 } } },			// U'Ghamaro Quarryman
+			{ 01670, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y =  6.0f, Radius = 50, Fate = 597 } } },	// 59th Order Bedesman Bi Go
+			{ 01836, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y =  9.0f, Radius = 150 } } },			// Synthetic Doblyn
+			{ 00407, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 12.5f, Radius = 150 } } },			// Ringtail
+			{ 00106, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 11.0f, Radius = 150 } } },			// Coeurl
+			{ 01527, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 15.0f, Radius = 50, Fate = 594 } } },	// Number 128
+			{ 01523, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 15.0f, Radius = 50, Fate = 581 } } },	// Ose
+			{ 01526, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 18.0f, Radius = 50, Fate = 591 } } },	// Peryton
+			{ 01525, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 50, Fate = 589 } } },	// Brounger
+			{ 00046, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 150 } } },			// Plasmoid
 
 			// Central Shroud
-			{ 00445, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 24.0f, Radius = 50, Fate = 123 } } },		// Stagnant Water Sprite
-			{ 00512, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 50, Fate = 128 } } },		// Alux
-			{ 00447, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 30.0f, Radius = 50, Fate = 137 } } },		// Matagaigai
-			{ 00448, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 25.0f, Radius = 50, Fate = 142 } } },		// Lou Carcolh
-			{ 01329, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 22.0f, Radius = 50, Fate = 209 } } },		// Jaded Jody
-			{ 00238, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 21.0f, Radius = 50 } } },					// Stroper
-			{ 00236, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 19.0f, Radius = 50 } } },					// Revenant
-			{ 01661, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 18.0f, Radius = 50, Fate = 604 } } },		// Spiteful
-			{ 00131, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 18.0f, Radius = 50 } } },					// Crater Golem
-			{ 00091, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 50 } } },					// Spriggan
-			{ 00130, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 18.0f, Radius = 50 } } },					// Lindwurm
-			{ 00446, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 22.0f, Radius = 50, Fate = 125 } } },		// Asipatra
-			{ 00055, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 22.0f, Radius = 50 } } },					// Deathgaze
-			{ 00207, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 23.0f, Radius = 50 } } },					// Floating Eye
-			{ 00051, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 21.0f, Radius = 50, Fate = 126 } } },		// Alpha Anole
+			{ 00445, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 24.0f, Radius = 50, Fate = 123 } } },	// Stagnant Water Sprite
+			{ 00512, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 50, Fate = 128 } } },	// Alux
+			{ 00447, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 30.0f, Radius = 50, Fate = 137 } } },	// Matagaigai
+			{ 00448, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 25.0f, Radius = 50, Fate = 142 } } },	// Lou Carcolh
+			{ 01329, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 22.0f, Radius = 50, Fate = 209 } } },	// Jaded Jody
+			{ 00238, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 21.0f, Radius = 150 } } },			// Stroper
+			{ 00236, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 19.0f, Radius = 150 } } },			// Revenant
+			{ 01661, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 18.0f, Radius = 50, Fate = 604 } } },	// Spiteful
+			{ 00131, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 18.0f, Radius = 150 } } },			// Crater Golem
+			{ 00091, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 150 } } },			// Spriggan
+			{ 00130, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 18.0f, Radius = 150 } } },			// Lindwurm
+			{ 00446, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 22.0f, Radius = 50, Fate = 125 } } },	// Asipatra
+			{ 00055, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 22.0f, Radius = 150 } } },			// Deathgaze
+			{ 00207, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 23.0f, Radius = 150 } } },			// Floating Eye
+			{ 00051, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 21.0f, Radius = 50, Fate = 126 } } }, // Alpha Anole
 			// East Shroud
-			{ 00513, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 27.0f, Radius = 50, Fate = 144 } } },		// Prince Of Pestilence
-			{ 00449, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 29.0f, Radius = 50, Fate = 150 } } },		// Jackanapes
-			{ 00222, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 24.0f, Radius = 50 } } },					// Molted Ziz
-			{ 02350, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 21.0f, Radius = 50, Fate = 691 } } },		// Proto Armor
-			{ 00058, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 20.0f, Radius = 50 } } },					// 3rd Cohort Laquearius
-			{ 00066, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 20.0f, Radius = 50 } } },					// Sylvan Snarl
-			{ 00164, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 17.0f, Radius = 50 } } },					// Dreamtoad
-			{ 00567, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 17.0f, Radius = 50 } } },					// Sylphlands Condor
-			{ 00068, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 16.0f, Radius = 50 } } },					// Sylpheed Sigh
-			{ 00069, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 16.0f, Radius = 50 } } },					// Sylpheed Snarl
-			{ 01665, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 13.0f, Radius = 50, Fate = 619 } } },		// Volxia Of The Blade
-			{ 00067, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 11.0f, Radius = 50 } } },					// Sylpheed Screech
-			{ 01664, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 14.0f, Radius = 50, Fate = 616 } } },		// Daxio Of The Dawn
-			{ 00053, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 50 } } },					// 3rd Cohort Hoplomachus
-			{ 00061, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 50 } } },					// 3rd Cohort Signifer
-			{ 00233, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 50 } } },					// Old-Growth Treant
-			{ 00065, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 21.0f, Radius = 50 } } },					// Sylvan Sigh
-			{ 01662, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 50, Fate = 609 } } },		// Capricious Cassie
-			{ 00237, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 50 } } },					// Morbol
-			{ 00064, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 50 } } },					// Sylvan Screech
-			{ 02367, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 18.0f, Radius = 50, Fate = 692 } } },		// Kafre
-			{ 00165, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 16.0f, Radius = 50 } } },					// Milkroot Cluster
-			{ 00162, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 14.0f, Radius = 50 } } },					// Milkroot Sapling
-			{ 00166, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 13.0f, Radius = 50 } } },					// Sylph Bonnet
-			{ 00163, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 10.0f, Radius = 50 } } },					// Sylphlands Sentinel
-			{ 01666, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 10.0f, Radius = 50, Fate = 622 } } },		// Pulxio Of The Short Gale
+			{ 00513, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 27.0f, Radius = 50, Fate = 144 } } },	// Prince Of Pestilence
+			{ 00449, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 29.0f, Radius = 50, Fate = 150 } } },	// Jackanapes
+			{ 00222, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 24.0f, Radius = 150 } } },			// Molted Ziz
+			{ 02350, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 21.0f, Radius = 50, Fate = 691 } } },	// Proto Armor
+			{ 00058, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 20.0f, Radius = 150 } } },			// 3rd Cohort Laquearius
+			{ 00066, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 20.0f, Radius = 150 } } },			// Sylvan Snarl
+			{ 00164, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 17.0f, Radius = 150 } } },			// Dreamtoad
+			{ 00567, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 17.0f, Radius = 150 } } },			// Sylphlands Condor
+			{ 00068, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 16.0f, Radius = 150 } } },			// Sylpheed Sigh
+			{ 00069, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 16.0f, Radius = 150 } } },			// Sylpheed Snarl
+			{ 01665, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 13.0f, Radius = 50, Fate = 619 } } },	// Volxia Of The Blade
+			{ 00067, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 11.0f, Radius = 150 } } },			// Sylpheed Screech
+			{ 01664, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 14.0f, Radius = 50, Fate = 616 } } },	// Daxio Of The Dawn
+			{ 00053, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 150 } } },			// 3rd Cohort Hoplomachus
+			{ 00061, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 150 } } },			// 3rd Cohort Signifer
+			{ 00233, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 150 } } },			// Old-Growth Treant
+			{ 00065, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 21.0f, Radius = 150 } } },			// Sylvan Sigh
+			{ 01662, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 50, Fate = 609 } } },	// Capricious Cassie
+			{ 00237, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 150 } } },			// Morbol
+			{ 00064, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 150 } } },			// Sylvan Screech
+			{ 02367, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 18.0f, Radius = 50, Fate = 692 } } },	// Kafre
+			{ 00165, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 16.0f, Radius = 150 } } },			// Milkroot Cluster
+			{ 00162, new List<PositionInfo>() { new PositionInfo { X = 23.7f, Y = 14.4f, Radius = 150 } } },			// Milkroot Sapling
+			{ 00166, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 13.0f, Radius = 150 } } },			// Sylph Bonnet
+			{ 00163, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 10.0f, Radius = 150 } } },			// Sylphlands Sentinel
+			{ 01666, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 10.0f, Radius = 50, Fate = 622 } } },	// Pulxio Of The Short Gale
 			// South Shroud
-			{ 00170, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 21.0f, Radius = 50 } } },					// Deepvoid Deathmouse
-			{ 00024, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 22.0f, Radius = 50 } } },					// Treant
-			{ 00045, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 24.0f, Radius = 50 } } },					// Will-O'-The-Wisp
-			{ 00514, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 22.0f, Radius = 50, Fate = 153 } } },		// Sirocco
-			{ 00566, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 25.0f, Radius = 50 } } },					// Midland Condor
-			{ 00034, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 29.0f, Radius = 50 } } },					// Adamantoise
-			{ 00235, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 30.0f, Radius = 50 } } },					// Bigmouth Orobon
-			{ 00451, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 33.0f, Radius = 50, Fate = 169 } } },		// Yabi Two-Tails
-			{ 00015, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 25.0f, Radius = 50 } } },					// Wild Hog
-			{ 00008, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 23.0f, Radius = 50 } } },					// Ked
-			{ 00112, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 25.0f, Radius = 50 } } },					// Lesser Kalong
-			{ 01667, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 25.0f, Radius = 50, Fate = 628 } } },		// Phaia
+			{ 00170, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 21.0f, Radius = 150 } } },			// Deepvoid Deathmouse
+			{ 00024, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 22.0f, Radius = 150 } } },			// Treant
+			{ 00045, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 24.0f, Radius = 150 } } },			// Will-O'-The-Wisp
+			{ 00514, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 22.0f, Radius = 50, Fate = 153 } } },	// Sirocco
+			{ 00566, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 25.0f, Radius = 150 } } },			// Midland Condor
+			{ 00034, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 29.0f, Radius = 150 } } },			// Adamantoise
+			{ 00235, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 30.0f, Radius = 150 } } },			// Bigmouth Orobon
+			{ 00451, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 33.0f, Radius = 50, Fate = 169 } } },	// Yabi Two-Tails
+			{ 00015, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 25.0f, Radius = 150 } } },			// Wild Hog
+			{ 00008, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 23.0f, Radius = 150 } } },			// Ked
+			{ 00112, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 25.0f, Radius = 150 } } },			// Lesser Kalong
+			{ 01667, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 25.0f, Radius = 50, Fate = 628 } } },	// Phaia
 			// North Shroud
-			{ 00025, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 25.0f, Radius = 50 } } },					// Dryad
-			{ 01669, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 25.0f, Radius = 50, Fate = 634 } } },		// Great Oak
-			{ 00516, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 28.0f, Radius = 50, Fate = 178 } } },		// Dschubba
-			{ 00452, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 185 } } },		// Curupira
-			{ 00029, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 21.0f, Radius = 50 } } },					// Dullahan
-			{ 01668, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 19.0f, Radius = 50, Fate = 632 } } },		// Daedalus
-			{ 00174, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 19.0f, Radius = 50 } } },					// Watchwolf
-			{ 00436, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 50 } } },					// Ixali Windtalon
-			{ 00103, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 19.0f, Radius = 50 } } },					// Ixali Boldwing
+			{ 00025, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 25.0f, Radius = 150 } } },			// Dryad
+			{ 01669, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 25.0f, Radius = 50, Fate = 634 } } },	// Great Oak
+			{ 00516, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 28.0f, Radius = 50, Fate = 178 } } },	// Dschubba
+			{ 00452, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 185 } } },	// Curupira
+			{ 00029, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 21.0f, Radius = 150 } } },			// Dullahan
+			{ 01668, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 19.0f, Radius = 50, Fate = 632 } } },	// Daedalus
+			{ 00174, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 19.0f, Radius = 150 } } },			// Watchwolf
+			{ 00436, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 150 } } },			// Ixali Windtalon
+			{ 00103, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 19.0f, Radius = 150 } } },			// Ixali Boldwing
 
 			// Western Thanalan
-			{ 00865, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 21.0f, Radius = 50, Fate = 347 } } },		// Doomed Gigantoad
-			{ 00866, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 50, Fate = 348 } } },		// Cactuar Jack
-			{ 00867, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 16.0f, Radius = 50, Fate = 353 } } },		// Bubbly Bernie
-			{ 00868, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 50, Fate = 357 } } },		// Crier Briareos
-			{ 00869, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y =  6.7f, Radius = 50, Fate = 366 } } },		// Daddy Longlegs
-			{ 01820, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y =  6.0f, Radius = 50 } } },					// 4th Cohort Vanguard
-			{ 01815, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y =  6.0f, Radius = 50 } } },					// 4th Cohort Hoplomachus
-			{ 01818, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y =  5.0f, Radius = 50 } } },					// 4th Cohort Secutor
+			{ 00865, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 21.0f, Radius = 50, Fate = 347 } } },	// Doomed Gigantoad
+			{ 00866, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 50, Fate = 348 } } },	// Cactuar Jack
+			{ 00867, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 16.0f, Radius = 50, Fate = 353 } } },	// Bubbly Bernie
+			{ 00868, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 50, Fate = 357 } } },	// Crier Briareos
+			{ 00869, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y =  6.7f, Radius = 50, Fate = 366 } } },	// Daddy Longlegs
+			{ 01820, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y =  6.0f, Radius = 150 } } },				// 4th Cohort Vanguard
+			{ 01815, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y =  6.0f, Radius = 150 } } },				// 4th Cohort Hoplomachus
+			{ 01818, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y =  5.0f, Radius = 150 } } },				// 4th Cohort Secutor
 			// Central Thanalan
-			{ 00871, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 20.0f, Radius = 50, Fate = 374 } } },		// Guguroon Wetnose
-			{ 00874, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 23.0f, Radius = 50, Fate = 389 } } },		// Spitfire
-			{ 00872, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.0f, Radius = 50, Fate = 376 } } },		// Babaroon Halfshell
-			{ 00875, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 14.0f, Radius = 50, Fate = 393 } } },		// Nest Commander
-			{ 00873, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 19.0f, Radius = 50, Fate = 385 } } },		// Vodyanoi
+			{ 00871, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 20.0f, Radius = 50, Fate = 374 } } },	// Guguroon Wetnose
+			{ 00874, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 23.0f, Radius = 50, Fate = 389 } } },	// Spitfire
+			{ 00872, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.0f, Radius = 50, Fate = 376 } } },	// Babaroon Halfshell
+			{ 00875, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 14.0f, Radius = 50, Fate = 393 } } },	// Nest Commander
+			{ 00873, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 19.0f, Radius = 50, Fate = 385 } } },	// Vodyanoi
 			// Eastern Thanalan
-			{ 00877, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 17.0f, Radius = 50, Fate = 401 } } },		// Undertaker
-			{ 00878, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 407 } } },		// Gossamer
-			{ 01503, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 24.0f, Radius = 50, Fate = 542 } } },		// Aeetes
-			{ 00271, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 25.0f, Radius = 50 } } },					// Golden Fleece
-			{ 00634, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 26.0f, Radius = 50 } } },					// Mirrorknight
-			{ 00275, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 26.0f, Radius = 50 } } },					// Quartz Doblyn
-			{ 01504, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 25.0f, Radius = 50, Fate = 543 } } },		// Bagoly
+			{ 00877, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 17.0f, Radius = 50, Fate = 401 } } },	// Undertaker
+			{ 00878, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 407 } } },	// Gossamer
+			{ 01503, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 24.0f, Radius = 50, Fate = 542 } } },	// Aeetes
+			{ 00271, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 25.0f, Radius = 150 } } },			// Golden Fleece
+			{ 00634, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 26.0f, Radius = 150 } } },			// Mirrorknight
+			{ 00275, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 26.0f, Radius = 150 } } },			// Quartz Doblyn
+			{ 01504, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 25.0f, Radius = 50, Fate = 543 } } },	// Bagoly
 			// Southern Thanalan
-			{ 00885, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 30.0f, Radius = 50, Fate = 455 } } },		// Ulhuadshi
-			{ 00290, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 31.0f, Radius = 50 } } },					// Sandworm
-			{ 00285, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 32.0f, Radius = 50 } } },					// Russet Yarzon
-			{ 00132, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 35.0f, Radius = 50 } } },					// Smoke Bomb
-			{ 00324, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 38.0f, Radius = 50 } } },					// Fallen Wizard
-			{ 00264, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 36.0f, Radius = 50 } } },					// Sundrake
-			{ 02155, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 35.0f, Radius = 50 } } },					// Amalj'aa Halberdier
-			{ 00260, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.0f, Radius = 50 } } },					// Amalj'aa Divinator
-			{ 00884, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.0f, Radius = 50, Fate = 436 } } },		// Blackbile Maladd Chah
-			{ 00252, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 34.0f, Radius = 50 } } },					// Amalj'aa Sniper
-			{ 01506, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 26.0f, Radius = 50, Fate = 430 } } },		// Cindersoot Pegujj Chah
-			{ 01838, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 22.0f, Radius = 50 } } },					// Zahar'ak Archer
-			{ 00249, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 23.0f, Radius = 50 } } },					// Amalj'aa Archer
-			{ 01505, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 20.0f, Radius = 50, Fate = 423 } } },		// Aspidochelone
-			{ 01699, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 19.0f, Radius = 50, Fate = 546 } } },		// Bibireze Greysteel
-			{ 00339, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 19.0f, Radius = 50 } } },					// Tempered Orator
-			{ 00245, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 20.0f, Radius = 50 } } },					// Amalj'aa Lancer
-			{ 00257, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 24.0f, Radius = 50, Fate = 427 } } },		// Diamondjaw Nezedd Gah
-			{ 00243, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 24.0f, Radius = 50 } } },					// Iron Tortoise
-			{ 00253, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 26.0f, Radius = 50 } } },					// Amalj'aa Pugilist
-			{ 02354, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 558 } } },		// Flamecrest Afajj Koh
-			{ 01840, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 18.0f, Radius = 50 } } },					// Zahar'ak Thaumaturge
-			{ 01841, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 19.0f, Radius = 50 } } },					// Zahar'ak Battle Drake
-			{ 01507, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 19.0f, Radius = 50, Fate = 554 } } },		// Whitespark Hepugg Roh
-			{ 01839, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 50 } } },					// Zahar'ak Pugilist
-			{ 00882, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 50, Fate = 456 } } },		// Gisfrid The Grinder
+			{ 00885, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 30.0f, Radius = 50, Fate = 455 } } },	// Ulhuadshi
+			{ 00290, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 31.0f, Radius = 150 } } },			// Sandworm
+			{ 00285, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 32.0f, Radius = 150 } } },			// Russet Yarzon
+			{ 00132, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 35.0f, Radius = 150 } } },			// Smoke Bomb
+			{ 00324, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 38.0f, Radius = 150 } } },			// Fallen Wizard
+			{ 00264, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 36.0f, Radius = 150 } } },			// Sundrake
+			{ 02155, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 35.0f, Radius = 150 } } },			// Amalj'aa Halberdier
+			{ 00260, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.0f, Radius = 150 } } },			// Amalj'aa Divinator
+			{ 00884, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.0f, Radius = 50, Fate = 436 } } },	// Blackbile Maladd Chah
+			{ 00252, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 34.0f, Radius = 150 } } },			// Amalj'aa Sniper
+			{ 01506, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 26.0f, Radius = 50, Fate = 430 } } },	// Cindersoot Pegujj Chah
+			{ 01838, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 22.0f, Radius = 150 } } },			// Zahar'ak Archer
+			{ 00249, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 23.0f, Radius = 150 } } },			// Amalj'aa Archer
+			{ 01505, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 20.0f, Radius = 50, Fate = 423 } } },	// Aspidochelone
+			{ 01699, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 19.0f, Radius = 50, Fate = 546 } } },	// Bibireze Greysteel
+			{ 00339, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 19.0f, Radius = 150 } } },			// Tempered Orator
+			{ 00245, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 20.0f, Radius = 150 } } },			// Amalj'aa Lancer
+			{ 00257, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 24.0f, Radius = 50, Fate = 427 } } },	// Diamondjaw Nezedd Gah
+			{ 00243, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 24.0f, Radius = 150 } } },			// Iron Tortoise
+			{ 00253, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 26.0f, Radius = 150 } } },			// Amalj'aa Pugilist
+			{ 02354, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 21.0f, Radius = 50, Fate = 558 } } },	// Flamecrest Afajj Koh
+			{ 01840, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 18.0f, Radius = 150 } } },			// Zahar'ak Thaumaturge
+			{ 01841, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 19.0f, Radius = 150 } } },			// Zahar'ak Battle Drake
+			{ 01507, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 19.0f, Radius = 50, Fate = 554 } } },	// Whitespark Hepugg Roh
+			{ 01839, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 150 } } },			// Zahar'ak Pugilist
+			{ 00882, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 50, Fate = 456 } } },	// Gisfrid The Grinder
 			// Northern Thanalan
-			{ 00242, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 50 } } },					// Ahriman
-			{ 00304, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 23.0f, Radius = 50 } } },					// Basilisk
-			{ 01511, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 23.0f, Radius = 50, Fate = 637 } } },		// Bomb Baron
-			{ 01508, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 50, Fate = 446 } } },		// Arimaspi
-			{ 01509, new List<PositionInfo>() { new PositionInfo { X = 18.8f, Y = 14.3f, Radius = 50, Fate = 450 } } },		// Vanguard Prototype
+			{ 00242, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 150 } } },			// Ahriman
+			{ 00304, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 23.0f, Radius = 150 } } },			// Basilisk
+			{ 01511, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 23.0f, Radius = 50, Fate = 637 } } },	// Bomb Baron
+			{ 01508, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 50, Fate = 446 } } },	// Arimaspi
+			{ 01509, new List<PositionInfo>() { new PositionInfo { X = 18.8f, Y = 14.3f, Radius = 50, Fate = 450 } } },	// Vanguard Prototype
 
 			// Coerthas Central Highlands
-			{ 00659, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 15.0f, Radius = 50 } } },					// Snow Wolf Pup
-			{ 00658, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 14.0f, Radius = 50 } } },					// Vodoriga
-			{ 00794, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 11.0f, Radius = 50 } } },					// Redhorn Ogre
-			{ 01182, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 15.0f, Radius = 50 } } },					// Taurus
-			{ 01842, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 17.0f, Radius = 50 } } },					// Natalan Windtalon
-			{ 01845, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 18.0f, Radius = 50 } } },					// Natalan Fogcaller
-			{ 02355, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 19.0f, Radius = 50, Fate = 508 } } },		// Kozol Nomotl The Turbulent
-			{ 01844, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 20.0f, Radius = 50 } } },					// Natalan Swiftbeak
-			{ 01846, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 20.0f, Radius = 50 } } },					// Natalan Watchwolf
-			{ 01439, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 23.0f, Radius = 50, Fate = 500 } } },		// Gozol Itzcan The Hatchet
-			{ 01843, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 24.0f, Radius = 50 } } },					// Natalan Boldwing
-			{ 00662, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 27.0f, Radius = 50 } } },					// Ixali Boundwing
-			{ 00660, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 27.0f, Radius = 50 } } },					// Ixali Wildtalon
-			{ 01427, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 23.0f, Radius = 50, Fate = 463 } } },		// Downy Dunstan
-			{ 00784, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 24.0f, Radius = 50 } } },					// Feral Croc
-			{ 01428, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 23.0f, Radius = 50, Fate = 464 } } },		// Gavial
-			{ 00114, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 50 } } },					// Ice Sprite
-			{ 01612, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 19.0f, Radius = 50 } } },					// Highland Goobbue
-			{ 00795, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 19.0f, Radius = 50 } } },					// Ornery Karakul
-			{ 01611, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 17.0f, Radius = 50 } } },					// Snowstorm Goobbue
-			{ 01434, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 17.0f, Radius = 50, Fate = 494 } } },		// Roc
-			{ 01430, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 20.0f, Radius = 50, Fate = 479 } } },		// Lutin
-			{ 01432, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 23.0f, Radius = 50, Fate = 484 } } },		// Rongeur
-			{ 01433, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 25.0f, Radius = 50, Fate = 490 } } },		// Klythios
-			{ 00785, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 25.0f, Radius = 50 } } },					// Giant Logger
-			{ 00786, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 26.0f, Radius = 50 } } },					// Giant Lugger
-			{ 00787, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 26.0f, Radius = 50 } } },					// Giant Reader
-			{ 00788, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 29.0f, Radius = 50 } } },					// Biast
-			{ 00653, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 31.0f, Radius = 50 } } },					// Snow Wolf
-			{ 00790, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 20.0f, Radius = 50 } } },					// Hippocerf
-			{ 01530, new List<PositionInfo>() { new PositionInfo { X =  5.0f, Y = 22.0f, Radius = 50, Fate = 493 } } },		// Sebek
-			{ 01850, new List<PositionInfo>() { new PositionInfo { X =  4.0f, Y = 22.0f, Radius = 50 } } },					// Baritine Croc
-			{ 01431, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 12.0f, Radius = 50, Fate = 480 } } },		// Seps
-			{ 00637, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 12.0f, Radius = 50 } } },					// Dragonfly
-			{ 01849, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y =  8.0f, Radius = 50 } } },					// Downy Aevis
-			{ 01429, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 13.0f, Radius = 50, Fate = 475 } } },		// Gargamelle
+			{ 00659, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 15.0f, Radius = 150 } } },			// Snow Wolf Pup
+			{ 00658, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 14.0f, Radius = 150 } } },			// Vodoriga
+			{ 00794, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 11.0f, Radius = 150 } } },			// Redhorn Ogre
+			{ 01182, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 15.0f, Radius = 150 } } },			// Taurus
+			{ 01842, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 17.0f, Radius = 150 } } },			// Natalan Windtalon
+			{ 01845, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 18.0f, Radius = 150 } } },			// Natalan Fogcaller
+			{ 02355, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 19.0f, Radius = 50, Fate = 508 } } }, // Kozol Nomotl The Turbulent
+			{ 01844, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 20.0f, Radius = 150 } } },			// Natalan Swiftbeak
+			{ 01846, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 20.0f, Radius = 150 } } },			// Natalan Watchwolf
+			{ 01439, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 23.0f, Radius = 50, Fate = 500 } } },	// Gozol Itzcan The Hatchet
+			{ 01843, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 24.0f, Radius = 150 } } },			// Natalan Boldwing
+			{ 00662, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 27.0f, Radius = 150 } } },			// Ixali Boundwing
+			{ 00660, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 27.0f, Radius = 150 } } },			// Ixali Wildtalon
+			{ 01427, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 23.0f, Radius = 50, Fate = 463 } } },	// Downy Dunstan
+			{ 00784, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 24.0f, Radius = 150 } } },			// Feral Croc
+			{ 01428, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 23.0f, Radius = 50, Fate = 464 } } },	// Gavial
+			{ 00114, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 150 } } },			// Ice Sprite
+			{ 01612, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 19.0f, Radius = 150 } } },			// Highland Goobbue
+			{ 00795, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 19.0f, Radius = 150 } } },			// Ornery Karakul
+			{ 01611, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 17.0f, Radius = 150 } } },			// Snowstorm Goobbue
+			{ 01434, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 17.0f, Radius = 50, Fate = 494 } } },	// Roc
+			{ 01430, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 20.0f, Radius = 50, Fate = 479 } } },	// Lutin
+			{ 01432, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 23.0f, Radius = 50, Fate = 484 } } },	// Rongeur
+			{ 01433, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 25.0f, Radius = 50, Fate = 490 } } },	// Klythios
+			{ 00785, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 25.0f, Radius = 150 } } },			// Giant Logger
+			{ 00786, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 26.0f, Radius = 150 } } },			// Giant Lugger
+			{ 00787, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 26.0f, Radius = 150 } } },			// Giant Reader
+			{ 00788, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 29.0f, Radius = 150 } } },			// Biast
+			{ 00653, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 31.0f, Radius = 150 } } },			// Snow Wolf
+			{ 00790, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 20.0f, Radius = 150 } } },			// Hippocerf
+			{ 01530, new List<PositionInfo>() { new PositionInfo { X =  5.0f, Y = 22.0f, Radius = 50, Fate = 493 } } },	// Sebek
+			{ 01850, new List<PositionInfo>() { new PositionInfo { X =  4.0f, Y = 22.0f, Radius = 150 } } },			// Baritine Croc
+			{ 01431, new List<PositionInfo>() { new PositionInfo { X =  8.0f, Y = 12.0f, Radius = 50, Fate = 480 } } },	// Seps
+			{ 00637, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 12.0f, Radius = 150 } } },			// Dragonfly
+			{ 01849, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y =  8.0f, Radius = 150 } } },			// Downy Aevis
+			{ 01429, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 13.0f, Radius = 50, Fate = 475 } } },	// Gargamelle
 
 			// Mor Dhona
-			{ 01444, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y =  6.0f, Radius = 50, Fate = 527 } } },		// Gwyllgi
-			{ 00793, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y =  5.0f, Radius = 50 } } },					// Hapalit
-			{ 01442, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y =  5.0f, Radius = 50, Fate = 521 } } },		// Porus
-			{ 01851, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 13.0f, Radius = 50 } } },					// Lake Cobra
-			{ 01443, new List<PositionInfo>() { new PositionInfo { X = 29.8f, Y = 14.4f, Radius = 50, Fate = 525 } } },		// Dione
-			{ 00649, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 16.0f, Radius = 50 } } },					// Gigas Bhikkhu
-			{ 00650, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 15.0f, Radius = 50 } } },					// Daring Harrier
-			{ 01441, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 14.0f, Radius = 50, Fate = 516 } } },		// Nburu
-			{ 00651, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 17.0f, Radius = 50 } } },					// Raging Harrier
-			{ 01811, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 50 } } },					// 5th Cohort Eques
-			{ 01809, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 50 } } },					// 5th Cohort Hoplomachus
-			{ 01813, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 14.0f, Radius = 50 } } },					// 5th Cohort Signifer
-			{ 00645, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 50 } } },					// Mudpuppy
-			{ 01610, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 50, Fate = 530 } } },		// Voluptuous Vivian
-			{ 00027, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y =  9.0f, Radius = 50 } } },					// Nix
+			{ 01444, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y =  6.0f, Radius = 50, Fate = 527 } } },	// Gwyllgi
+			{ 00793, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y =  5.0f, Radius = 150 } } },			// Hapalit
+			{ 01442, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y =  5.0f, Radius = 50, Fate = 521 } } },	// Porus
+			{ 01851, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 13.0f, Radius = 150 } } },			// Lake Cobra
+			{ 01443, new List<PositionInfo>() { new PositionInfo { X = 29.8f, Y = 14.4f, Radius = 50, Fate = 525 } } },	// Dione
+			{ 00649, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 16.0f, Radius = 150 } } },			// Gigas Bhikkhu
+			{ 00650, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 15.0f, Radius = 150 } } },			// Daring Harrier
+			{ 01441, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 14.0f, Radius = 50, Fate = 516 } } },	// Nburu
+			{ 00651, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 17.0f, Radius = 150 } } },			// Raging Harrier
+			{ 01811, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 150 } } },			// 5th Cohort Eques
+			{ 01809, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 150 } } },			// 5th Cohort Hoplomachus
+			{ 01813, new List<PositionInfo>() { new PositionInfo { X =  9.0f, Y = 14.0f, Radius = 150 } } },			// 5th Cohort Signifer
+			{ 00645, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 150 } } },			// Mudpuppy
+			{ 01610, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 50, Fate = 530 } } },	// Voluptuous Vivian
+			{ 00027, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y =  9.0f, Radius = 150 } } },			// Nix
 
 
 			// Heavensward
@@ -1392,8 +1392,8 @@ namespace HuntBuddy
 				new PositionInfo { X = 24.9f, Y = 25.4f, Radius = 50 },
             } },
             { 10635, new List<PositionInfo>() {							// Green Archon
-				new PositionInfo { X = 17.2f, Y = 8.9f, Radius = 50 },
-				new PositionInfo { X = 30.0f, Y = 8.1f, Radius = 50 },
+				new PositionInfo { X = 17.2f, Y =  8.9f, Radius = 50 },
+				new PositionInfo { X = 30.0f, Y =  8.1f, Radius = 50 },
 				new PositionInfo { X = 34.0f, Y = 13.6f, Radius = 50 },
 				new PositionInfo { X = 32.9f, Y = 25.8f, Radius = 50 },
             } },

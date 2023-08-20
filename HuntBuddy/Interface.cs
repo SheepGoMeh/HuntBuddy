@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Dalamud.Interface;
@@ -226,7 +227,7 @@ namespace HuntBuddy
 			    this.plugin.CurrentAreaMobHuntEntries.IsEmpty ||
 			    this.plugin.CurrentAreaMobHuntEntries.Count(
 				    x =>
-					    this.plugin.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) ==
+						this.plugin.MobHuntStruct->GetKillCount((byte)x.MarkIndex, (byte)x.MobIndex) == x.NeededKills) ==
 			    this.plugin.CurrentAreaMobHuntEntries.Count)
 			{
 				return;
@@ -253,7 +254,7 @@ namespace HuntBuddy
 
 			foreach (var mobHuntEntry in this.plugin.CurrentAreaMobHuntEntries)
 			{
-				var currentKills = this.plugin.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+				var currentKills = plugin.MobHuntStruct->GetKillCount((byte)mobHuntEntry.MarkIndex, (byte)mobHuntEntry.MobIndex);
 
 				if (this.plugin.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills)
 				{
@@ -321,9 +322,9 @@ namespace HuntBuddy
 				}
 
 				ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
-				if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId) && Location.Database[mobHuntEntry.MobHuntId][0].Fate != 0)
+				if (Location.Database.TryGetValue(mobHuntEntry.MobHuntId, out List<Location.PositionInfo>? value) && value[0].Fate != 0)
 				{
-					ImGui.Text($"FATE: {Plugin.DataManager.GetExcelSheet<Fate>()!.GetRow(Location.Database[mobHuntEntry.MobHuntId][0].Fate)!.Name}");
+					ImGui.Text($"FATE: {Plugin.DataManager.GetExcelSheet<Fate>()!.GetRow(value[0].Fate)!.Name}");
 				}
 
 				if (!this.plugin.Configuration.ShowLocalHuntIcons)

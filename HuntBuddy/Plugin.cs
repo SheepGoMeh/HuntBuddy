@@ -17,14 +17,14 @@ using Dalamud.Utility;
 using Lumina.Excel.GeneratedSheets;
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
-using HuntBuddy.Structs;
 using ImGuiNET;
 using ImGuiScene;
 using Lumina.Data.Files;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 namespace HuntBuddy
 {
-	public class Plugin : IDalamudPlugin
+    public class Plugin : IDalamudPlugin
 	{
 		public string Name => "Hunt Buddy";
 
@@ -67,7 +67,7 @@ namespace HuntBuddy
 		public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
 		public readonly ConcurrentBag<MobHuntEntry> CurrentAreaMobHuntEntries;
 		public bool MobHuntEntriesReady = true;
-		public readonly unsafe MobHuntStruct* MobHuntStruct;
+		public readonly unsafe MobHunt* MobHuntStruct;
 		public readonly Configuration Configuration;
 		public static TeleportConsumer? TeleportConsumer;
 
@@ -83,9 +83,7 @@ namespace HuntBuddy
 
 			unsafe
 			{
-				this.MobHuntStruct =
-					(MobHuntStruct*)SigScanner.GetStaticAddressFromSig(
-						"48 8D 0D ?? ?? ?? ?? 8B D8 0F B6 52");
+				this.MobHuntStruct = MobHunt.Instance();
 			}
 
 			Plugin.TeleportConsumer = new TeleportConsumer();
@@ -98,12 +96,12 @@ namespace HuntBuddy
 
 		private unsafe void FrameworkOnUpdate(Framework framework)
 		{
-			if (this.lastState == this.MobHuntStruct->ObtainedBillEnumFlags)
+			if ((int)this.lastState == this.MobHuntStruct->ObtainedFlags)
 			{
 				return;
 			}
 
-			this.lastState = this.MobHuntStruct->ObtainedBillEnumFlags;
+			this.lastState = (ObtainedBillEnum)this.MobHuntStruct->ObtainedFlags;
 			this.PluginCommand(string.Empty, "reload");
 		}
 
@@ -247,7 +245,7 @@ namespace HuntBuddy
 
 			foreach (var billNumber in Enum.GetValues<BillEnum>())
 			{
-				if (!this.MobHuntStruct->ObtainedBillEnumFlags.HasFlag((ObtainedBillEnum)(1 << (int)billNumber)))
+				if (!this.MobHuntStruct->IsMarkBillObtained((int)billNumber))
 				{
 					continue;
 				}
@@ -256,7 +254,7 @@ namespace HuntBuddy
 					Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
-				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
+				            (uint)(this.MobHuntStruct->ObtainedMarkId[mobHuntOrderTypeRow.RowId] - 1);
 
 				if (rowId > mobHuntOrderSheet.RowCount)
 				{
@@ -274,7 +272,7 @@ namespace HuntBuddy
 					{
 						mobHuntList.Add(
 							new MobHuntEntry
-							{
+                            {
 								Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(
 									mobHuntOrderRow.Target.Value!.Name.Value!.Singular),
 								TerritoryName =
@@ -288,9 +286,10 @@ namespace HuntBuddy
 								MobHuntId = mobHuntOrderRow.Target.Value!.Name.Row,
 								IsEliteMark = billNumber is BillEnum.ArrElite or BillEnum.HwElite or BillEnum.SbElite
 									or BillEnum.ShbElite or BillEnum.EwElite,
-								CurrentKillsOffset = (5 * (uint)billNumber) + mobHuntOrderRow.SubRowId,
 								NeededKills = mobHuntOrderRow.NeededKills,
-								Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
+								Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon),
+								MarkIndex = (uint)billNumber,
+								MobIndex = mobHuntOrderRow.SubRowId
 							});
 					}
 					else

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace HuntBuddy
 {
 	public class Interface
 	{
+		private ushort currentGroupIndex = 1;
 		private readonly Plugin plugin;
 
 		public bool DrawInterface;
@@ -294,7 +296,8 @@ namespace HuntBuddy
 							mobHuntEntry.MapId,
 							mobHuntEntry.MobHuntId,
 							mobHuntEntry.Name,
-							includeArea ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen);
+							includeArea ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen,
+							currentGroupIndex);
 					}
 
 					if (ImGui.IsItemHovered())
@@ -317,11 +320,34 @@ namespace HuntBuddy
 						}
 						ImGui.EndTooltip();
 					}
-
 					ImGui.SameLine();
+                    ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
+					if (Location.Database[(mobHuntEntry.MobHuntId)].Count > 5)
+					{
+						if (currentGroupIndex > (Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1)
+						{
+							currentGroupIndex = 1;
+						}
+						if (Interface.IconButton(FontAwesomeIcon.ArrowLeft, $"left##{mobHuntEntry.MobHuntId}"))
+						{
+							if (currentGroupIndex > 1)
+							{
+								currentGroupIndex--;
+							}
+						}
+						ImGui.SameLine();
+						ImGui.Text($"{currentGroupIndex}/{(Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1}");
+						ImGui.SameLine();
+						if (Interface.IconButton(FontAwesomeIcon.ArrowRight, $"right##{mobHuntEntry.MobHuntId}"))
+						{
+							if (currentGroupIndex < (Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1)
+							{
+								currentGroupIndex++;
+							}
+						}
+					}
 				}
 
-				ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
 				if (Location.Database.TryGetValue(mobHuntEntry.MobHuntId, out List<Location.PositionInfo>? value) && value[0].Fate != 0)
 				{
 					ImGui.Text($"FATE: {Plugin.DataManager.GetExcelSheet<Fate>()!.GetRow(value[0].Fate)!.Name}");

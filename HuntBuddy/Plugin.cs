@@ -21,6 +21,8 @@ using ImGuiNET;
 using ImGuiScene;
 using Lumina.Data.Files;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace HuntBuddy
 {
@@ -92,6 +94,7 @@ namespace HuntBuddy
 			Plugin.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
 			Plugin.Framework.Update += this.FrameworkOnUpdate;
+			Plugin.Framework.Update += FrameworkAddonPoll;
 		}
 
 		private unsafe void FrameworkOnUpdate(Framework framework)
@@ -103,6 +106,26 @@ namespace HuntBuddy
 
 			this.lastState = (ObtainedBillEnum)this.MobHuntStruct->ObtainedFlags;
 			this.PluginCommand(string.Empty, "reload");
+        }
+
+		private unsafe void FrameworkAddonPoll(Framework framework)
+		{
+            var addonPtr = GameGui.GetAddonByName("Mobhunt", 1);
+            if (addonPtr == IntPtr.Zero)
+                return;
+
+            var isVisible = false;
+
+            AddonMobHunt* addon = (AddonMobHunt*)addonPtr;
+            AtkResNode* rootNode = addon->AtkUnitBase.RootNode;
+
+            if (rootNode != null)
+            {
+                isVisible = addon->AtkUnitBase.IsVisible;
+            }
+
+            if (!isVisible)
+                return;
 		}
 
 		private void ClientStateOnTerritoryChanged(object? sender, ushort e)
@@ -138,7 +161,8 @@ namespace HuntBuddy
 			this.MobHuntEntriesReady = false;
 			Plugin.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
 			Plugin.Framework.Update -= this.FrameworkOnUpdate;
-			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
+            Plugin.Framework.Update -= FrameworkAddonPoll;
+            Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
 

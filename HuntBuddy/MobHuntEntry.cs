@@ -1,5 +1,5 @@
 ﻿using System;
-using ImGuiScene;
+using Dalamud.Interface.Internal;
 
 namespace HuntBuddy
 {
@@ -25,7 +25,7 @@ namespace HuntBuddy
 
 		public uint NeededKills { get; set; }
 
-		public TextureWrap Icon { get; init; } = null!;
+		public IDalamudTextureWrap Icon { get; init; } = null!;
 
 		public void Dispose()
 		{

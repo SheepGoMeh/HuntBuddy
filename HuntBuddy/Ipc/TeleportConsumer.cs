@@ -45,7 +45,7 @@ namespace HuntBuddy.Ipc
 			}
 			catch (Exception ex)
 			{
-				PluginLog.LogDebug($"Failed to subscribe to Teleporter\nReason: {ex}");
+				Plugin.PluginLog.Debug($"Failed to subscribe to Teleporter\nReason: {ex}");
 			}
 		}
 

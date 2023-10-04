@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Dalamud.Game.Command;
+using Dalamud.Plugin.Services;
 using HuntBuddy.Attributes;
 
 namespace HuntBuddy
 {
 	public class PluginCommandManager<THost> : IDisposable
 	{
-		private readonly CommandManager commandManager;
+		private readonly ICommandManager commandManager;
 		private readonly (string, CommandInfo)[] pluginCommands;
 		private readonly THost host;
 
-		public PluginCommandManager(THost host, CommandManager commandManager)
+		public PluginCommandManager(THost host, ICommandManager commandManager)
 		{
 			this.commandManager = commandManager;
 			this.host = host;

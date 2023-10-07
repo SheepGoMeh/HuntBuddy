@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Lumina.Excel.GeneratedSheets;
+using static HuntBuddy.Location;
 using MapType = FFXIVClientStructs.FFXIV.Client.UI.Agent.MapType;
 
 namespace HuntBuddy
@@ -23,7 +24,7 @@ namespace HuntBuddy
 		}
 
 		// MobHuntId as key
-		public static readonly Dictionary<uint, List<PositionInfo>> Database = new ()
+		public static readonly Dictionary<uint, List<PositionInfo>> Database = new()
 		{
 			// ARR
 			// B Rank
@@ -130,7 +131,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 27.0f, Y = 33.0f, Radius = 50 },
 				new PositionInfo { X = 29.0f, Y = 36.0f, Radius = 50 },
 				new PositionInfo { X = 32.0f, Y = 36.0f, Radius = 50 },
-            } },
+			} },
 			// Upper La Noscea
 			{ 02932 , new List<PositionInfo>() {						// Myradrosh
                 new PositionInfo { X = 29.0f, Y = 21.0f, Radius = 50 },
@@ -150,7 +151,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 12.0f, Y = 23.0f, Radius = 50 },
 				new PositionInfo { X = 12.0f, Y = 21.0f, Radius = 50 },
 				new PositionInfo { X = 11.0f, Y = 22.0f, Radius = 50 },
-            } },
+			} },
 			// Outer La Noscea
 			{ 02933, new List<PositionInfo>() {							// Vuokho
                 new PositionInfo { X = 16.0f, Y = 18.0f, Radius = 50 },
@@ -176,7 +177,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 25.0f, Y = 8.0f,  Radius = 50 },
 				new PositionInfo { X = 27.0f, Y = 6.0f,  Radius = 50 },
 				new PositionInfo { X = 27.0f, Y = 7.0f,  Radius = 50 },
-            } },
+			} },
 			// Central Thanalan
 			{ 02924, new List<PositionInfo>() {							// Ovjang
 				new PositionInfo { X = 23.0f, Y = 35.0f, Radius = 50 },
@@ -202,7 +203,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 28.0f, Y = 18.0f, Radius = 50 },
 				new PositionInfo { X = 27.0f, Y = 22.0f, Radius = 50 },
 				new PositionInfo { X = 30.0f, Y = 21.0f, Radius = 50 },
-            } },
+			} },
 			// Western Thanalan
 			{ 02923, new List<PositionInfo>() {							// Sewer Syrup
 				new PositionInfo { X = 26.0f, Y = 26.0f, Radius = 50 },
@@ -227,7 +228,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 10.0f, Y = 7.0f,  Radius = 50 },
 				new PositionInfo { X = 11.0f, Y = 5.0f,  Radius = 50 },
 				new PositionInfo { X = 08.0f, Y = 5.0f,  Radius = 50 },
-            } },
+			} },
 			// Eastern Thanalan
 			{ 02925, new List<PositionInfo>() {							// Gatling
 				new PositionInfo { X = 13.0f, Y = 29.0f, Radius = 50 },
@@ -265,7 +266,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 27.0f, Y = 20.0f, Radius = 50 },
 				new PositionInfo { X = 27.0f, Y = 18.0f, Radius = 50 },
 				new PositionInfo { X = 29.0f, Y = 18.0f, Radius = 50 },
-            } },
+			} },
 			// Southern Thanalan
 			{ 02926, new List<PositionInfo>() {							// Albin the Ashen
 				new PositionInfo { X = 18.0f, Y = 30.0f, Radius = 50 },
@@ -310,7 +311,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 25.0f, Y = 11.0f, Radius = 50 },
 				new PositionInfo { X = 25.0f, Y = 9.0f,  Radius = 50 },
 				new PositionInfo { X = 23.0f, Y = 8.0f,  Radius = 50 },
-            } },
+			} },
 			// Northern Thanalan
 			{ 02927, new List<PositionInfo>() {							// Flame Sergeant Dalvag
 				new PositionInfo { X = 21.0f, Y = 28.0f, Radius = 50 },
@@ -331,7 +332,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 17.0f, Y = 15.0f, Radius = 50 },
 				new PositionInfo { X = 16.0f, Y = 16.0f, Radius = 50 },
 				new PositionInfo { X = 16.0f, Y = 14.0f, Radius = 50 },
-            } },
+			} },
 			// Central Shroud
 			{ 02919, new List<PositionInfo>() {							// White Joker
 				new PositionInfo { X = 22.0f, Y = 30.0f, Radius = 50 },
@@ -357,7 +358,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 10.0f, Y = 17.0f, Radius = 50 },
 				new PositionInfo { X = 10.0f, Y = 22.0f, Radius = 50 },
 				new PositionInfo { X = 12.0f, Y = 23.0f, Radius = 50 },
-            } },
+			} },
 			// South Shroud
 			{ 02921, new List<PositionInfo>() {							// Monarch Ogrefly
 				new PositionInfo { X = 17.0f, Y = 32.0f, Radius = 50 },
@@ -389,7 +390,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 17.0f, Y = 22.0f, Radius = 50 },
 				new PositionInfo { X = 19.0f, Y = 22.0f, Radius = 50 },
 				new PositionInfo { X = 17.0f, Y = 24.0f, Radius = 50 },
-            } },
+			} },
 			// Eastern Shroud
 			{ 02920, new List<PositionInfo>() {							// Stinging Sophie
 				new PositionInfo { X = 25.0f, Y = 17.0f, Radius = 50 },
@@ -427,7 +428,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 24.0f, Y = 31.0f, Radius = 50 },
 				new PositionInfo { X = 22.0f, Y = 28.0f, Radius = 50 },
 				new PositionInfo { X = 22.0f, Y = 29.0f, Radius = 50 },
-            } },
+			} },
 			// North Shroud
 			{ 02922, new List<PositionInfo>() {							// Phecda
 				new PositionInfo { X = 21.0f, Y = 30.0f, Radius = 50 },
@@ -450,7 +451,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 23.0f, Y = 20.0f, Radius = 50 },
 				new PositionInfo { X = 22.0f, Y = 21.0f, Radius = 50 },
 				new PositionInfo { X = 19.0f, Y = 20.0f, Radius = 50 },
-            } },
+			} },
 			// Coerthas Central Highlands
 			{ 02934, new List<PositionInfo>() {							// Naul
 				new PositionInfo { X = 24.0f, Y = 20.0f, Radius = 50 },
@@ -513,7 +514,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 23.0f, Y = 8.0f,  Radius = 50 },
 				new PositionInfo { X = 29.0f, Y = 8.0f,  Radius = 50 },
 				new PositionInfo { X = 32.0f, Y = 7.0f,  Radius = 50 },
-            } },
+			} },
 			// Mor Dhona
 			{ 02935, new List<PositionInfo>() {							// Leech King
 				new PositionInfo { X = 19.0f, Y = 08.0f, Radius = 50 },
@@ -546,7 +547,7 @@ namespace HuntBuddy
 				new PositionInfo { X = 30.0f, Y = 15.0f, Radius = 50 },
 				new PositionInfo { X = 29.0f, Y = 15.0f, Radius = 50 },
 				new PositionInfo { X = 28.0f, Y = 14.0f, Radius = 50 },
-            } },
+			} },
 
 			// Daily Targets
 			// Middle La Noscea
@@ -662,8 +663,11 @@ namespace HuntBuddy
 			{ 00069, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 16.0f, Radius = 150 } } },			// Sylpheed Snarl
 			{ 01665, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 13.0f, Radius = 50, Fate = 619 } } },	// Volxia Of The Blade
 			{ 00067, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 11.0f, Radius = 150 } } },			// Sylpheed Screech
-			{ 01664, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 14.0f, Radius = 50, Fate = 616 } } },	// Daxio Of The Dawn
-			{ 00053, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 150 } } },			// 3rd Cohort Hoplomachus
+			{ 01664, new List<PositionInfo>() { new PositionInfo { X = 32.4f, Y = 14.4f, Radius = 50, Fate = 616 } } },	// Daxio Of The Dawn
+			{ 00053, new List<PositionInfo>() {
+				new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 50 },
+				new PositionInfo { X = 29.1f, Y = 20.9f, Radius = 50 }
+			} },																										// 3rd Cohort Hoplomachus
 			{ 00061, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 20.0f, Radius = 150 } } },			// 3rd Cohort Signifer
 			{ 00233, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 20.0f, Radius = 150 } } },			// Old-Growth Treant
 			{ 00065, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 21.0f, Radius = 150 } } },			// Sylvan Sigh
@@ -1492,7 +1496,7 @@ namespace HuntBuddy
 			MarkerOpen // Show normal map
 		}
 
-		public static unsafe void CreateMapMarker(uint territoryType, uint mapId, uint mobHuntId, string? mobHuntName, OpenType openType = OpenType.MarkerOpen)
+		public static unsafe void CreateMapMarker(uint territoryType, uint mapId, uint mobHuntId, string? mobHuntName, OpenType openType = OpenType.MarkerOpen, ushort index = 1)
 		{
 			var map = FFXIVClientStructs.FFXIV.Client.UI.Agent.AgentMap.Instance();
 			
@@ -1512,11 +1516,19 @@ namespace HuntBuddy
 					break;
 				case OpenType.ShowOpen:
 					map->AgentInterface.Hide();
-                    foreach (var positionInfo in Database[mobHuntId])
-                    {
-                        var pos = MapToWorldCoordinates(positionInfo.Coordinate, mapId);
-						map->AddGatheringTempMarker(pos.X, pos.Y, positionInfo.Radius, 60004, 4, mobHuntName);
-					}
+					for (var i = (index * 5) - 5; i < (index*5); i++)
+					{
+						try
+						{
+							var positionInfo = Database[mobHuntId][i];
+							var pos = MapToWorldCoordinates(positionInfo.Coordinate, mapId);
+							map->AddGatheringTempMarker(pos.X, pos.Y, positionInfo.Radius, 60004, 4, mobHuntName);
+						}
+						catch (ArgumentOutOfRangeException)
+						{
+							break; ;
+						}
+                    }
 					map->OpenMap(mapId, territoryType, mobHuntName, MapType.GatheringLog);
 					break;
 				case OpenType.MarkerOpen:

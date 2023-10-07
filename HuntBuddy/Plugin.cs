@@ -5,22 +5,18 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Dalamud.Data;
 using Dalamud.Game;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.Command;
-using Dalamud.Game.Gui;
+using Dalamud.Interface.Internal;
 using Dalamud.IoC;
 using Dalamud.Logging;
 using Dalamud.Plugin;
+using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 using Lumina.Excel.GeneratedSheets;
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using ImGuiNET;
-using ImGuiScene;
-using Lumina.Data.Files;
-using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using Lumina.Extensions;
 
 namespace HuntBuddy
 {
@@ -28,37 +24,23 @@ namespace HuntBuddy
 	{
 		public string Name => "Hunt Buddy";
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static DalamudPluginInterface PluginInterface { get; set; } = null!;
+		[PluginService] public static DalamudPluginInterface PluginInterface { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static CommandManager Commands { get; set; } = null!;
+		[PluginService] public static ICommandManager Commands { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static ChatGui Chat { get; set; } = null!;
+		[PluginService] public static IChatGui Chat { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static DataManager DataManager { get; set; } = null!;
+		[PluginService] public static IDataManager DataManager { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static SigScanner SigScanner { get; set; } = null!;
+		[PluginService] public static ISigScanner SigScanner { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static GameGui GameGui { get; set; } = null!;
+		[PluginService] public static IGameGui GameGui { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static ClientState ClientState { get; set; } = null!;
+		[PluginService] public static IClientState ClientState { get; set; } = null!;
 
-		[PluginService]
-		[RequiredVersion("1.0")]
-		public static Framework Framework { get; set; } = null!;
+		[PluginService] public static IFramework Framework { get; set; } = null!;
+
+		[PluginService] public static IPluginLog PluginLog { get; set; } = null!;
 
 		private readonly PluginCommandManager<Plugin> commandManager;
 		private readonly Interface pluginInterface;
@@ -92,9 +74,10 @@ namespace HuntBuddy
 			Plugin.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
 			Plugin.Framework.Update += this.FrameworkOnUpdate;
+			Plugin.Framework.Update += FrameworkAddonPoll;
 		}
 
-		private unsafe void FrameworkOnUpdate(Framework framework)
+		private unsafe void FrameworkOnUpdate(IFramework framework)
 		{
 			if ((int)this.lastState == this.MobHuntStruct->ObtainedFlags)
 			{
@@ -103,9 +86,29 @@ namespace HuntBuddy
 
 			this.lastState = (ObtainedBillEnum)this.MobHuntStruct->ObtainedFlags;
 			this.PluginCommand(string.Empty, "reload");
+        }
+
+		private unsafe void FrameworkAddonPoll(Framework framework)
+		{
+            var addonPtr = GameGui.GetAddonByName("Mobhunt", 1);
+            if (addonPtr == IntPtr.Zero)
+                return;
+
+            var isVisible = false;
+
+            AddonMobHunt* addon = (AddonMobHunt*)addonPtr;
+            AtkResNode* rootNode = addon->AtkUnitBase.RootNode;
+
+            if (rootNode != null)
+            {
+                isVisible = addon->AtkUnitBase.IsVisible;
+            }
+
+            if (!isVisible)
+                return;
 		}
 
-		private void ClientStateOnTerritoryChanged(object? sender, ushort e)
+		private void ClientStateOnTerritoryChanged(ushort e)
 		{
 			this.CurrentAreaMobHuntEntries.Clear();
 
@@ -138,7 +141,8 @@ namespace HuntBuddy
 			this.MobHuntEntriesReady = false;
 			Plugin.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
 			Plugin.Framework.Update -= this.FrameworkOnUpdate;
-			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
+            Plugin.Framework.Update -= FrameworkAddonPoll;
+            Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
 			Plugin.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
 			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
 
@@ -320,20 +324,14 @@ namespace HuntBuddy
 				this.MobHuntEntries[key][subKey].Add(entry);
 			}
 
-			this.ClientStateOnTerritoryChanged(null, 0);
+			this.ClientStateOnTerritoryChanged(0);
 
 			this.MobHuntEntriesReady = true;
 		}
 
-		private static TexFile? GetHdIcon(uint id)
+		private static IDalamudTextureWrap LoadIcon(uint id)
 		{
-			var path = $"ui/icon/{id / 1000 * 1000:000000}/{id:000000}_hr1.tex";
-			return Plugin.DataManager.GetFile<TexFile>(path);
-		}
-
-		private static TextureWrap LoadIcon(uint id)
-		{
-			var icon = Plugin.GetHdIcon(id) ?? Plugin.DataManager.GetIcon(id)!;
+			var icon = Plugin.DataManager.GameData.GetHqIcon(id) ?? Plugin.DataManager.GameData.GetIcon(id)!;
 			var iconData = icon.GetRgbaImageData();
 
 			return Plugin.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);

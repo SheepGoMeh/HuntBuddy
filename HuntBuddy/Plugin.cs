@@ -215,6 +215,16 @@ namespace HuntBuddy
 							}
 						}
 						break;
+					case "ls":
+					case "list":
+						if (this.MobHuntEntries.Count < 1) {
+							Chat.Print("No hunt marks found. If this doesn't sound right, please use `/phb reload` and try again.");
+							break;
+						}
+						foreach (string expac in this.MobHuntEntries.Keys) {
+							Chat.Print($"{expac}: {string.Join(", ", this.MobHuntEntries[expac].Values.SelectMany(e => e).OrderBy(s => s.Name))}");
+						}
+						break;
 					default:
 						this.OpenConfigUi();
 						break;

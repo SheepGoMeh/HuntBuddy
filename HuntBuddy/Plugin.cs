@@ -170,6 +170,7 @@ namespace HuntBuddy
 										.Where(filterPredicate)
 										.ToList()
 									: new List<MobHuntEntry>();
+								// if we didn't find any candidates, we try a different method to fill it
 								if (candidates.Count == 0)
 								{
 									PluginLog.Information("Nothing available in current expansion, looking globally");
@@ -180,6 +181,9 @@ namespace HuntBuddy
 											.Where(filterPredicate)
 											.ToList();
 								}
+								// regardless of HOW we got our candidates, assuming we did in fact get them, we pick one
+								// note that this can't be merged into the above block because the above MAY run, and if so MUST run first,
+								// but this block must ALWAYS run, regardless
 								if (candidates.Count >= 1)
 								{
 									PluginLog.Information($"Found {candidates.Count}");

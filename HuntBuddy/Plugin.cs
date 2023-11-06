@@ -131,7 +131,7 @@ namespace HuntBuddy
 		}
 
 		[Command("/phb")]
-		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find")]
+		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find\nlist - list all hunt targets by expansion")]
 		public unsafe void PluginCommand(string command, string args)
 		{
 			try

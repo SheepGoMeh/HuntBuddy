@@ -95,9 +95,9 @@ namespace HuntBuddy
 			this.CurrentAreaMobHuntEntries.Clear();
 
 			foreach (var mobHuntEntry in this.MobHuntEntries.SelectMany(
-				         expansionEntry => expansionEntry.Value
-					         .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
-					         .SelectMany(entry => entry.Value)))
+						 expansionEntry => expansionEntry.Value
+							 .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
+							 .SelectMany(entry => entry.Value)))
 			{
 				this.CurrentAreaMobHuntEntries.Add(mobHuntEntry);
 			}
@@ -131,7 +131,7 @@ namespace HuntBuddy
 		}
 
 		[Command("/phb")]
-		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find")]
+		[HelpMessage("Toggles UI\nArguments:\nreload - Reloads data\nlocal - Toggles the local hunt marks window\nnext - Flags the next hunt target to find\nlist - lists all hunt targets by expansion")]
 		public unsafe void PluginCommand(string command, string args)
 		{
 			try
@@ -144,6 +144,9 @@ namespace HuntBuddy
 					case "local":
 						this.Configuration.ShowLocalHunts = !this.Configuration.ShowLocalHunts;
 						this.Configuration.Save();
+						break;
+					case "list":
+						Task.Run(this.ListTargets);
 						break;
 					case "next":
 						if (this.MobHuntEntries.Count > 0)
@@ -222,6 +225,39 @@ namespace HuntBuddy
 			}
 		}
 
+
+		public unsafe void ListTargets()
+		{
+			if (this.MobHuntEntries.Count > 0)
+			{
+
+				foreach (String expansion in this.MobHuntEntries.Keys)
+				{
+					var targets = expansion + ": ";
+					var entries = this.MobHuntEntries[expansion]
+												.Values
+												.SelectMany(l => l)
+												.ToList();
+					for (int i = 0; i < entries.Count; i++)
+					{
+						targets += entries[i].Name;
+
+						if (i != entries.Count - 1)
+						{
+							targets += ", ";
+						}
+
+					}
+					Chat.Print(targets);
+				}
+
+			}
+			else
+			{
+				Chat.Print("Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
+			}
+
+		}
 		public unsafe void ReloadData()
 		{
 			this.MobHuntEntries.Clear();
@@ -239,7 +275,7 @@ namespace HuntBuddy
 					Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
-				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
+							(uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
 
 				if (rowId > mobHuntOrderSheet.RowCount)
 				{

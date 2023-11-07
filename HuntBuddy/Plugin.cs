@@ -222,7 +222,7 @@ namespace HuntBuddy
 							break;
 						}
 						foreach (string expac in this.MobHuntEntries.Keys) {
-							Chat.Print($"{expac}: {string.Join(", ", this.MobHuntEntries[expac].Values.SelectMany(e => e).OrderBy(s => s.Name))}");
+							Chat.Print($"{expac}: {string.Join(", ", this.MobHuntEntries[expac].Values.SelectMany(e => e).OrderBy(s => s.Name).Select(m => m.Name))}");
 						}
 						break;
 					default:

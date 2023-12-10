@@ -32,9 +32,13 @@ namespace HuntBuddy
 		public readonly unsafe MobHuntStruct* MobHuntStruct;
 		public readonly Configuration Configuration;
 		public static TeleportConsumer? TeleportConsumer;
+		
+		public static Plugin Instance { get; internal set; } = null!;
 
 		public Plugin(DalamudPluginInterface pluginInterface)
 		{
+			Instance = this;
+
 			pluginInterface.Create<Service>();
 
 			this.commandManager = new PluginCommandManager<Plugin>(this, Service.Commands);

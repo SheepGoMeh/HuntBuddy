@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Dalamud.Interface.Internal;
+using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
@@ -13,6 +14,7 @@ using Lumina.Excel.GeneratedSheets;
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using HuntBuddy.Structs;
+using HuntBuddy.Windows;
 using ImGuiNET;
 using Lumina.Extensions;
 
@@ -23,7 +25,6 @@ namespace HuntBuddy
 		public string Name => "Hunt Buddy";
 
 		private readonly PluginCommandManager<Plugin> commandManager;
-		private readonly Interface pluginInterface;
 		private ObtainedBillEnum lastState;
 		// Dictionary<string ExpansionName, Dictionary<KeyValuePair<uint MobTerritoryType, string MobTerritoryName>, List<MobHuntEntry MobsInZone>>>
 		public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
@@ -33,6 +34,11 @@ namespace HuntBuddy
 		public readonly Configuration Configuration;
 		public static TeleportConsumer? TeleportConsumer;
 		
+		private WindowSystem WindowSystem { get; }
+		
+		private MainWindow MainWindow { get; }
+		private ConfigurationWindow ConfigurationWindow { get; }
+
 		public static Plugin Instance { get; internal set; } = null!;
 
 		public Plugin(DalamudPluginInterface pluginInterface)
@@ -42,7 +48,6 @@ namespace HuntBuddy
 			pluginInterface.Create<Service>();
 
 			this.commandManager = new PluginCommandManager<Plugin>(this, Service.Commands);
-			this.pluginInterface = new Interface(this);
 			this.MobHuntEntries = new Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>>();
 			this.CurrentAreaMobHuntEntries = new ConcurrentBag<MobHuntEntry>();
 			this.Configuration = (Configuration)(Service.PluginInterface.GetPluginConfig() ?? new Configuration());
@@ -55,11 +60,18 @@ namespace HuntBuddy
 					(MobHuntStruct*)Service.SigScanner.GetStaticAddressFromSig(
 						"48 8D 0D ?? ?? ?? ?? 8B D8 0F B6 52");
 			}
+			
+			this.MainWindow = new MainWindow();
+			this.ConfigurationWindow = new ConfigurationWindow();
+			
+			this.WindowSystem = new WindowSystem("HuntBuddy");
+			this.WindowSystem.AddWindow(this.MainWindow);
+			this.WindowSystem.AddWindow(new LocalHuntsWindow());
+			this.WindowSystem.AddWindow(this.ConfigurationWindow);
 
 			Plugin.TeleportConsumer = new TeleportConsumer();
 			Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
-			Service.PluginInterface.UiBuilder.Draw += this.DrawInterface;
-			Service.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
+			Service.PluginInterface.UiBuilder.Draw += this.WindowSystem.Draw;
 			Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
 			Service.Framework.Update += this.FrameworkOnUpdate;
 		}
@@ -88,14 +100,14 @@ namespace HuntBuddy
 			}
 		}
 
-		private void OpenConfigUi()
-		{
-			this.pluginInterface.DrawInterface = !this.pluginInterface.DrawInterface;
-		}
-
 		private void DrawInterface()
 		{
-			this.pluginInterface.DrawInterface = this.pluginInterface.DrawInterface && this.pluginInterface.Draw();
+			this.MainWindow.Toggle();
+		}
+
+		public void OpenConfigUi()
+		{
+			this.ConfigurationWindow.Toggle();
 		}
 
 		private void Dispose(bool disposing)
@@ -108,9 +120,10 @@ namespace HuntBuddy
 			this.MobHuntEntriesReady = false;
 			Service.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
 			Service.Framework.Update -= this.FrameworkOnUpdate;
-			Service.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
-			Service.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
+			Service.PluginInterface.UiBuilder.Draw -= this.WindowSystem.Draw;
 			Service.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
+			
+			this.WindowSystem.RemoveAllWindows();
 
 			this.commandManager.Dispose();
 		}
@@ -211,7 +224,7 @@ namespace HuntBuddy
 						}
 						break;
 					default:
-						this.OpenConfigUi();
+						this.DrawInterface();
 						break;
 				}
 			}

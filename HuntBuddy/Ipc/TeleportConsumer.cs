@@ -1,5 +1,4 @@
 ﻿using System;
-using Dalamud.Logging;
 using Dalamud.Plugin.Ipc;
 
 namespace HuntBuddy.Ipc
@@ -40,12 +39,12 @@ namespace HuntBuddy.Ipc
 		{
 			try
 			{
-				this.consumerTeleport = Plugin.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
-				this.consumerMessageSetting = Plugin.PluginInterface.GetIpcSubscriber<bool>("Teleport.ChatMessage");
+				this.consumerTeleport = Service.PluginInterface.GetIpcSubscriber<uint, byte, bool>("Teleport");
+				this.consumerMessageSetting = Service.PluginInterface.GetIpcSubscriber<bool>("Teleport.ChatMessage");
 			}
 			catch (Exception ex)
 			{
-				Plugin.PluginLog.Debug($"Failed to subscribe to Teleporter\nReason: {ex}");
+				Service.PluginLog.Debug($"Failed to subscribe to Teleporter\nReason: {ex}");
 			}
 		}
 
@@ -59,7 +58,7 @@ namespace HuntBuddy.Ipc
 			}
 			catch
 			{
-				Plugin.Chat.PrintError("Teleporter plugin is not responding");
+				Service.Chat.PrintError("Teleporter plugin is not responding");
 				return false;
 			}
 		}

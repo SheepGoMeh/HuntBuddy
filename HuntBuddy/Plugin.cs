@@ -5,10 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Dalamud.Game;
 using Dalamud.Interface.Internal;
-using Dalamud.IoC;
-using Dalamud.Logging;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
@@ -25,24 +22,6 @@ namespace HuntBuddy
 	{
 		public string Name => "Hunt Buddy";
 
-		[PluginService] public static DalamudPluginInterface PluginInterface { get; set; } = null!;
-
-		[PluginService] public static ICommandManager Commands { get; set; } = null!;
-
-		[PluginService] public static IChatGui Chat { get; set; } = null!;
-
-		[PluginService] public static IDataManager DataManager { get; set; } = null!;
-
-		[PluginService] public static ISigScanner SigScanner { get; set; } = null!;
-
-		[PluginService] public static IGameGui GameGui { get; set; } = null!;
-
-		[PluginService] public static IClientState ClientState { get; set; } = null!;
-
-		[PluginService] public static IFramework Framework { get; set; } = null!;
-
-		[PluginService] public static IPluginLog PluginLog { get; set; } = null!;
-
 		private readonly PluginCommandManager<Plugin> commandManager;
 		private readonly Interface pluginInterface;
 		private ObtainedBillEnum lastState;
@@ -54,29 +33,31 @@ namespace HuntBuddy
 		public readonly Configuration Configuration;
 		public static TeleportConsumer? TeleportConsumer;
 
-		public Plugin()
+		public Plugin(DalamudPluginInterface pluginInterface)
 		{
-			this.commandManager = new PluginCommandManager<Plugin>(this, Commands);
+			pluginInterface.Create<Service>();
+
+			this.commandManager = new PluginCommandManager<Plugin>(this, Service.Commands);
 			this.pluginInterface = new Interface(this);
 			this.MobHuntEntries = new Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>>();
 			this.CurrentAreaMobHuntEntries = new ConcurrentBag<MobHuntEntry>();
-			this.Configuration = (Configuration)(PluginInterface.GetPluginConfig() ?? new Configuration());
+			this.Configuration = (Configuration)(Service.PluginInterface.GetPluginConfig() ?? new Configuration());
 			this.Configuration.IconBackgroundColourU32 =
 				ImGui.ColorConvertFloat4ToU32(this.Configuration.IconBackgroundColour);
 
 			unsafe
 			{
 				this.MobHuntStruct =
-					(MobHuntStruct*)SigScanner.GetStaticAddressFromSig(
+					(MobHuntStruct*)Service.SigScanner.GetStaticAddressFromSig(
 						"48 8D 0D ?? ?? ?? ?? 8B D8 0F B6 52");
 			}
 
 			Plugin.TeleportConsumer = new TeleportConsumer();
-			Plugin.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
-			Plugin.PluginInterface.UiBuilder.Draw += this.DrawInterface;
-			Plugin.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
-			Plugin.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
-			Plugin.Framework.Update += this.FrameworkOnUpdate;
+			Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
+			Service.PluginInterface.UiBuilder.Draw += this.DrawInterface;
+			Service.PluginInterface.UiBuilder.Draw += this.pluginInterface.DrawLocalHunts;
+			Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
+			Service.Framework.Update += this.FrameworkOnUpdate;
 		}
 
 		private unsafe void FrameworkOnUpdate(IFramework framework)
@@ -96,7 +77,7 @@ namespace HuntBuddy
 
 			foreach (var mobHuntEntry in this.MobHuntEntries.SelectMany(
 				         expansionEntry => expansionEntry.Value
-					         .Where(entry => entry.Key.Key == Plugin.ClientState.TerritoryType)
+					         .Where(entry => entry.Key.Key == Service.ClientState.TerritoryType)
 					         .SelectMany(entry => entry.Value)))
 			{
 				this.CurrentAreaMobHuntEntries.Add(mobHuntEntry);
@@ -121,11 +102,11 @@ namespace HuntBuddy
 			}
 
 			this.MobHuntEntriesReady = false;
-			Plugin.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
-			Plugin.Framework.Update -= this.FrameworkOnUpdate;
-			Plugin.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
-			Plugin.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
-			Plugin.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
+			Service.ClientState.TerritoryChanged -= this.ClientStateOnTerritoryChanged;
+			Service.Framework.Update -= this.FrameworkOnUpdate;
+			Service.PluginInterface.UiBuilder.Draw -= this.DrawInterface;
+			Service.PluginInterface.UiBuilder.Draw -= this.pluginInterface.DrawLocalHunts;
+			Service.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
 
 			this.commandManager.Dispose();
 		}
@@ -150,8 +131,8 @@ namespace HuntBuddy
 						{
 							var filterPredicate = (MobHuntEntry entry) => entry.IsEliteMark || this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills;
 							var openType = Location.OpenType.None;
-							var playerLocation = Plugin.ClientState.LocalPlayer!.Position;
-							var map = Plugin.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.Map!.Value!;
+							var playerLocation = Service.ClientState.LocalPlayer!.Position;
+							var map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.Map!.Value!;
 							var playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
 							var chosen = this.CurrentAreaMobHuntEntries
 								.Where(filterPredicate)
@@ -159,10 +140,10 @@ namespace HuntBuddy
 								.FirstOrDefault();
 							if (chosen == null)
 							{
-								PluginLog.Information("No marks in current zone, looking in current expansion");
+								Service.PluginLog.Information("No marks in current zone, looking in current expansion");
 								openType = this.Configuration.IncludeAreaOnMap ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen;
-								var expansion = Plugin.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Plugin.ClientState.TerritoryType)!.ExVersion.Value!.Name;
-								PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+								var expansion = Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.ExVersion.Value!.Name;
+								Service.PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
 								var candidates = this.MobHuntEntries.ContainsKey(expansion)
 									? this.MobHuntEntries[expansion]
 										.Values
@@ -173,7 +154,7 @@ namespace HuntBuddy
 								// if we didn't find any candidates, we try a different method to fill it
 								if (candidates.Count == 0)
 								{
-									PluginLog.Information("Nothing available in current expansion, looking globally");
+									Service.PluginLog.Information("Nothing available in current expansion, looking globally");
 									candidates =
 										this.MobHuntEntries.Values
 											.SelectMany(dict => dict.Values)
@@ -186,7 +167,7 @@ namespace HuntBuddy
 								// but this block must ALWAYS run, regardless
 								if (candidates.Count >= 1)
 								{
-									PluginLog.Information($"Found {candidates.Count}");
+									Service.PluginLog.Information($"Found {candidates.Count}");
 									chosen = candidates[new Random().Next(candidates.Count)];
 								}
 							}
@@ -194,12 +175,12 @@ namespace HuntBuddy
 							{
 								if (chosen.IsEliteMark)
 								{
-									Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+									Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
 								}
 								else
 								{
 									var remaining = chosen.NeededKills - this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
-									Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
+									Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
 									Location.CreateMapMarker(
 										chosen.TerritoryType,
 										chosen.MapId,
@@ -210,19 +191,19 @@ namespace HuntBuddy
 							}
 							else
 							{
-								PluginLog.Information("Unable to find a hunt mark to target");
-								Chat.Print("Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
+								Service.PluginLog.Information("Unable to find a hunt mark to target");
+								Service.Chat.Print("Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
 							}
 						}
 						break;
 					case "ls":
 					case "list":
 						if (this.MobHuntEntries.Count < 1) {
-							Chat.Print("No hunt marks found. If this doesn't sound right, please use `/phb reload` and try again.");
+							Service.Chat.Print("No hunt marks found. If this doesn't sound right, please use `/phb reload` and try again.");
 							break;
 						}
 						foreach (string expac in this.MobHuntEntries.Keys) {
-							Chat.Print($"{expac}: {string.Join(", ", this.MobHuntEntries[expac].Values.SelectMany(e => e).OrderBy(s => s.Name).Select(m => m.Name))}");
+							Service.Chat.Print($"{expac}: {string.Join(", ", this.MobHuntEntries[expac].Values.SelectMany(e => e).OrderBy(s => s.Name).Select(m => m.Name))}");
 						}
 						break;
 					default:
@@ -232,7 +213,7 @@ namespace HuntBuddy
 			}
 			catch (Exception e)
 			{
-				PluginLog.Error("Error in command handler: " + e.ToString());
+				Service.PluginLog.Error("Error in command handler: " + e.ToString());
 			}
 		}
 
@@ -240,7 +221,7 @@ namespace HuntBuddy
 		{
 			this.MobHuntEntries.Clear();
 			var mobHuntList = new List<MobHuntEntry>();
-			var mobHuntOrderSheet = Plugin.DataManager.Excel.GetSheet<MobHuntOrder>()!;
+			var mobHuntOrderSheet = Service.DataManager.Excel.GetSheet<MobHuntOrder>()!;
 
 			foreach (var billNumber in Enum.GetValues<BillEnum>())
 			{
@@ -250,7 +231,7 @@ namespace HuntBuddy
 				}
 
 				var mobHuntOrderTypeRow =
-					Plugin.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
+					Service.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 
 				var rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
 				            (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
@@ -325,10 +306,10 @@ namespace HuntBuddy
 
 		private static IDalamudTextureWrap LoadIcon(uint id)
 		{
-			var icon = Plugin.DataManager.GameData.GetHqIcon(id) ?? Plugin.DataManager.GameData.GetIcon(id)!;
+			var icon = Service.DataManager.GameData.GetHqIcon(id) ?? Service.DataManager.GameData.GetIcon(id)!;
 			var iconData = icon.GetRgbaImageData();
 
-			return Plugin.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);
+			return Service.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);
 		}
 
 		public void Dispose()

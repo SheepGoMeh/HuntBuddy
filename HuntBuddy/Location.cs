@@ -493,7 +493,7 @@ namespace HuntBuddy
 		
 		private static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId)
 		{
-			var scale = Plugin.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;
+			var scale = Service.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;
 			var num = scale / 100f;
 			var x = (float)(((pos.X - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
 			var y = (float)(((pos.Y - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
@@ -519,14 +519,14 @@ namespace HuntBuddy
 
 		public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId)
 		{
-			var mapRow = Plugin.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
+			var mapRow = Service.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
 
 			if (mapRow == null)
 			{
 				return;
 			}
 
-			var nearestAetheryteId = Plugin.DataManager.Excel.GetSheet<MapMarker>()
+			var nearestAetheryteId = Service.DataManager.Excel.GetSheet<MapMarker>()
 				?.Where(x => x.DataType == 3 && x.RowId == mapRow.MapMarkerRange)
 				.Select(
 					x => new
@@ -542,7 +542,7 @@ namespace HuntBuddy
 			var nearestAetheryte =
 				territoryType == 399 // Support the unique case of aetheryte not being in the same map
 					? mapRow.TerritoryType?.Value?.Aetheryte.Value
-					: Plugin.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(
+					: Service.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(
 						x =>
 							x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
 

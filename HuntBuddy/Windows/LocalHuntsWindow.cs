@@ -20,6 +20,11 @@ public class LocalHuntsWindow : Window
         this.Size = Vector2.Zero;
         this.SizeCondition = ImGuiCond.Always;
 
+        this.IsOpen = true;
+    }
+
+    public override void PreOpenCheck()
+    {
         if (Plugin.Instance.Configuration.HideLocalHuntBackground)
         {
             this.Flags |= ImGuiWindowFlags.NoBackground;
@@ -29,8 +34,6 @@ public class LocalHuntsWindow : Window
         {
             this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
         }
-
-        this.IsOpen = true;
     }
 
     public override unsafe bool DrawConditions() =>

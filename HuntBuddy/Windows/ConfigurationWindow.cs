@@ -16,7 +16,10 @@ public class ConfigurationWindow : Window
     {
         this.Size = Vector2.Zero;
         this.SizeCondition = ImGuiCond.Always;
-        
+    }
+
+    public override void PreOpenCheck()
+    {
         if (Plugin.Instance.Configuration.LockWindowPositions)
         {
             this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;

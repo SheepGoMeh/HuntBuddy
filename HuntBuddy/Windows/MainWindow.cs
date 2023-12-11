@@ -20,7 +20,10 @@ public class MainWindow : Window
     {
         this.Size = new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500);
         this.SizeCondition = ImGuiCond.Once;
+    }
 
+    public override void PreOpenCheck()
+    {
         if (Plugin.Instance.Configuration.LockWindowPositions)
         {
             this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;

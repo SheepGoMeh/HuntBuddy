@@ -13,7 +13,7 @@ namespace HuntBuddy.Windows;
 public class LocalHuntsWindow : Window
 {
     public LocalHuntsWindow() : base(
-        $"{Plugin.Instance.Name}",
+        "Hunts in current area",
         ImGuiWindowFlags.NoNavInputs | ImGuiWindowFlags.NoDocking,
         true)
     {

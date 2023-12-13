@@ -21,6 +21,8 @@ public class LocalHuntsWindow : Window
         this.SizeCondition = ImGuiCond.Always;
 
         this.IsOpen = true;
+        this.ShowCloseButton = false;
+        this.RespectCloseHotkey = false;
     }
 
     public override void PreOpenCheck()

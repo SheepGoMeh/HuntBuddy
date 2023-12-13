@@ -22,7 +22,14 @@ public class ConfigurationWindow : Window
     {
         if (Plugin.Instance.Configuration.LockWindowPositions)
         {
-            this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            if (!this.Flags.HasFlag(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove))
+            {
+                this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            }
+        }
+        else
+        {
+            this.Flags &= ~(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
         }
     }
 

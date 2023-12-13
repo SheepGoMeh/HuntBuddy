@@ -211,7 +211,5 @@ public class MainWindow : Window
 
             ImGui.TreePop();
         }
-
-        ImGui.End();
     }
 }

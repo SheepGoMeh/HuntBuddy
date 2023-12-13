@@ -42,13 +42,11 @@ public class MainWindow : Window
         if (!Plugin.Instance.MobHuntEntriesReady)
         {
             ImGui.Text("Reloading data ...");
-            ImGui.End();
             return;
         }
 
         if (InterfaceUtil.IconButton(FontAwesomeIcon.Redo, "Reload"))
         {
-            ImGui.End();
             Plugin.Instance.MobHuntEntriesReady = false;
             Task.Run(Plugin.Instance.ReloadData);
             return;

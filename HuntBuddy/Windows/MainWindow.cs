@@ -26,7 +26,14 @@ public class MainWindow : Window
     {
         if (Plugin.Instance.Configuration.LockWindowPositions)
         {
-            this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            if (!this.Flags.HasFlag(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove))
+            {
+                this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            }
+        }
+        else
+        {
+            this.Flags &= ~(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
         }
     }
 
@@ -35,13 +42,11 @@ public class MainWindow : Window
         if (!Plugin.Instance.MobHuntEntriesReady)
         {
             ImGui.Text("Reloading data ...");
-            ImGui.End();
             return;
         }
 
         if (InterfaceUtil.IconButton(FontAwesomeIcon.Redo, "Reload"))
         {
-            ImGui.End();
             Plugin.Instance.MobHuntEntriesReady = false;
             Task.Run(Plugin.Instance.ReloadData);
             return;
@@ -204,7 +209,5 @@ public class MainWindow : Window
 
             ImGui.TreePop();
         }
-
-        ImGui.End();
     }
 }

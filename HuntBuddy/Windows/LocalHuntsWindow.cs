@@ -21,18 +21,34 @@ public class LocalHuntsWindow : Window
         this.SizeCondition = ImGuiCond.Always;
 
         this.IsOpen = true;
+        this.ShowCloseButton = false;
+        this.RespectCloseHotkey = false;
     }
 
     public override void PreOpenCheck()
     {
         if (Plugin.Instance.Configuration.HideLocalHuntBackground)
         {
-            this.Flags |= ImGuiWindowFlags.NoBackground;
+            if (!this.Flags.HasFlag(ImGuiWindowFlags.NoBackground))
+            {
+                this.Flags |= ImGuiWindowFlags.NoBackground;
+            }
+        }
+        else
+        {
+            this.Flags &= ~ImGuiWindowFlags.NoBackground;
         }
 
         if (Plugin.Instance.Configuration.LockWindowPositions)
         {
-            this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            if (!this.Flags.HasFlag(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove))
+            {
+                this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+            }
+        }
+        else
+        {
+            this.Flags &= ~(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
         }
     }
 

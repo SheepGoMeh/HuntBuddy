@@ -5,6 +5,7 @@ using Dalamud.Plugin.Ipc;
 namespace HuntBuddy.Ipc;
 
 public class TeleportConsumer: ConsumerBase {
+	public override string RequiredPlugin { get; } = "TeleporterPlugin";
 	protected override bool Validate() {
 		this.consumerMessageSetting.InvokeFunc();
 		return true;

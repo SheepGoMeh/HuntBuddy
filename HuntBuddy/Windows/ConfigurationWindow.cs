@@ -32,6 +32,15 @@ public class ConfigurationWindow: Window {
 	public override void Draw() {
 		bool save = false;
 
+		ImGui.BeginDisabled(Plugin.EspConsumer?.IsAvailable == false);
+		save |= ImGui.Checkbox("Enable XivEsp plugin integration?", ref Plugin.Instance.Configuration.EnableXivEspIntegration);
+		ImGui.Indent();
+		save |= ImGui.Checkbox("Set XivEsp search when using '/phb next' command?", ref Plugin.Instance.Configuration.AutoSetEspSearchOnNextHuntCommand);
+		ImGui.Unindent();
+		ImGui.EndDisabled();
+
+		ImGui.Spacing();
+
 		save |= ImGui.Checkbox("Lock plugin window positions", ref Plugin.Instance.Configuration.LockWindowPositions);
 		save |= ImGui.Checkbox("Include hunt area on map by default",
 			ref Plugin.Instance.Configuration.IncludeAreaOnMap);

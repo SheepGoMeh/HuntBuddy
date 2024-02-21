@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Numerics;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 
 using Dalamud.Interface.Internal;
@@ -11,8 +11,6 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
-
-using Lumina.Excel.GeneratedSheets;
 
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
@@ -23,6 +21,7 @@ using ImGuiNET;
 
 using Lumina.Data.Files;
 using Lumina.Excel;
+using Lumina.Excel.GeneratedSheets;
 using Lumina.Extensions;
 using Lumina.Text;
 
@@ -41,7 +40,8 @@ public class Plugin: IDalamudPlugin {
 	public bool MobHuntEntriesReady = true;
 	public readonly unsafe MobHuntStruct* MobHuntStruct;
 	public readonly Configuration Configuration;
-	public static TeleportConsumer? TeleportConsumer;
+	public static TeleportConsumer? TeleportConsumer { get; private set; }
+	public static EspConsumer? EspConsumer { get; private set; }
 
 	private WindowSystem WindowSystem {
 		get;
@@ -66,8 +66,8 @@ public class Plugin: IDalamudPlugin {
 		pluginInterface.Create<Service>();
 
 		this.commandManager = new PluginCommandManager<Plugin>(this, Service.Commands);
-		this.MobHuntEntries = new Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>>();
-		this.CurrentAreaMobHuntEntries = new ConcurrentBag<MobHuntEntry>();
+		this.MobHuntEntries = [];
+		this.CurrentAreaMobHuntEntries = [];
 		this.Configuration = (Configuration)(Service.PluginInterface.GetPluginConfig() ?? new Configuration());
 		this.Configuration.IconBackgroundColourU32 =
 			ImGui.ColorConvertFloat4ToU32(this.Configuration.IconBackgroundColour);
@@ -87,6 +87,7 @@ public class Plugin: IDalamudPlugin {
 		this.WindowSystem.AddWindow(this.ConfigurationWindow);
 
 		Plugin.TeleportConsumer = new TeleportConsumer();
+		Plugin.EspConsumer = new EspConsumer();
 		Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
 		Service.PluginInterface.UiBuilder.Draw += this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
@@ -106,9 +107,9 @@ public class Plugin: IDalamudPlugin {
 		this.CurrentAreaMobHuntEntries.Clear();
 
 		foreach (MobHuntEntry mobHuntEntry in this.MobHuntEntries.SelectMany(
-			         expansionEntry => expansionEntry.Value
-				         .Where(entry => entry.Key.Key == Service.ClientState.TerritoryType)
-				         .SelectMany(entry => entry.Value))) {
+					 expansionEntry => expansionEntry.Value
+						 .Where(entry => entry.Key.Key == Service.ClientState.TerritoryType)
+						 .SelectMany(entry => entry.Value))) {
 			this.CurrentAreaMobHuntEntries.Add(mobHuntEntry);
 		}
 	}
@@ -149,7 +150,7 @@ public class Plugin: IDalamudPlugin {
 					break;
 				case "next":
 					if (this.MobHuntEntries.Count > 0) {
-						Func<MobHuntEntry, bool> filterPredicate = (MobHuntEntry entry) => entry.IsEliteMark ||
+						bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark ||
 							this.MobHuntStruct->CurrentKills[
 								entry.CurrentKillsOffset] <
 							entry.NeededKills;
@@ -181,7 +182,7 @@ public class Plugin: IDalamudPlugin {
 									.SelectMany(l => l)
 									.Where(filterPredicate)
 									.ToList()
-								: new List<MobHuntEntry>();
+								: [];
 							// if we didn't find any candidates, we try a different method to fill it
 							if (candidates.Count == 0) {
 								Service.PluginLog.Information(
@@ -209,7 +210,7 @@ public class Plugin: IDalamudPlugin {
 							}
 							else {
 								long remaining = chosen.NeededKills -
-								                 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
+												 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
 								Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
 								Location.CreateMapMarker(
 									chosen.TerritoryType,
@@ -218,6 +219,8 @@ public class Plugin: IDalamudPlugin {
 									chosen.Name,
 									openType);
 							}
+							if (this.Configuration.EnableXivEspIntegration && this.Configuration.AutoSetEspSearchOnNextHuntCommand && Plugin.EspConsumer?.IsAvailable == true)
+								Plugin.EspConsumer.SearchFor(chosen.Name!);
 						}
 						else {
 							Service.PluginLog.Information("Unable to find a hunt mark to target");
@@ -253,7 +256,7 @@ public class Plugin: IDalamudPlugin {
 
 	public unsafe void ReloadData() {
 		this.MobHuntEntries.Clear();
-		List<MobHuntEntry> mobHuntList = new List<MobHuntEntry>();
+		List<MobHuntEntry> mobHuntList = [];
 		ExcelSheet<MobHuntOrder>? mobHuntOrderSheet = Service.DataManager.Excel.GetSheet<MobHuntOrder>()!;
 
 		foreach (BillEnum billNumber in Enum.GetValues<BillEnum>()) {
@@ -265,7 +268,7 @@ public class Plugin: IDalamudPlugin {
 				Service.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 
 			uint rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
-			             (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
+						 (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
 
 			if (rowId > mobHuntOrderSheet.RowCount) {
 				continue;
@@ -309,14 +312,14 @@ public class Plugin: IDalamudPlugin {
 		foreach (MobHuntEntry entry in mobHuntList) {
 			string key = entry.ExpansionName ?? "Unknown";
 			KeyValuePair<uint, string> subKey =
-				new KeyValuePair<uint, string>(entry.TerritoryType, entry.TerritoryName ?? "Unknown");
+				new(entry.TerritoryType, entry.TerritoryName ?? "Unknown");
 
 			if (!this.MobHuntEntries.ContainsKey(key)) {
-				this.MobHuntEntries[key] = new Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>();
+				this.MobHuntEntries[key] = [];
 			}
 
 			if (!this.MobHuntEntries[key].ContainsKey(subKey)) {
-				this.MobHuntEntries[key][subKey] = new List<MobHuntEntry>();
+				this.MobHuntEntries[key][subKey] = [];
 			}
 
 			this.MobHuntEntries[key][subKey].Add(entry);

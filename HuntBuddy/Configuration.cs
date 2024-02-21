@@ -11,6 +11,8 @@ public class Configuration: IPluginConfiguration {
 		set;
 	}
 
+	public bool EnableXivEspIntegration;
+	public bool AutoSetEspSearchOnNextHuntCommand;
 	public bool IncludeAreaOnMap;
 	public bool LockWindowPositions;
 	public bool ShowLocalHunts;

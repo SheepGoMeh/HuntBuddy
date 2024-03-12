@@ -14,7 +14,7 @@ namespace HuntBuddy.Windows;
 /// Local hunts window.
 /// </summary>
 public class LocalHuntsWindow: Window {
-	public LocalHuntsWindow(): base(
+	public LocalHuntsWindow() : base(
 		"Hunts in current area",
 		ImGuiWindowFlags.NoNavInputs | ImGuiWindowFlags.NoDocking,
 		true) {
@@ -46,12 +46,10 @@ public class LocalHuntsWindow: Window {
 		}
 	}
 
-	public override unsafe bool DrawConditions() =>
-		Plugin.Instance.Configuration.ShowLocalHunts &&
-		!Plugin.Instance.CurrentAreaMobHuntEntries.IsEmpty &&
-		Plugin.Instance.CurrentAreaMobHuntEntries.Count(
-			x => Plugin.Instance.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) !=
-		Plugin.Instance.CurrentAreaMobHuntEntries.Count;
+	public override unsafe bool DrawConditions() => Plugin.Instance.Configuration.ShowLocalHunts
+		&& !Plugin.Instance.CurrentAreaMobHuntEntries.IsEmpty
+		&& Plugin.Instance.CurrentAreaMobHuntEntries
+			.Count(x => Plugin.Instance.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) != Plugin.Instance.CurrentAreaMobHuntEntries.Count;
 
 	public override unsafe void Draw() {
 		foreach (MobHuntEntry? mobHuntEntry in Plugin.Instance.CurrentAreaMobHuntEntries) {
@@ -112,6 +110,20 @@ public class LocalHuntsWindow: Window {
 					}
 
 					ImGui.EndTooltip();
+				}
+
+				if (Plugin.Instance.Configuration.EnableXivEspIntegration && Plugin.EspConsumer?.IsAvailable == true) {
+
+					ImGui.SameLine();
+					if (InterfaceUtil.IconButton(FontAwesomeIcon.Search, $"esp##{mobHuntEntry.MobHuntId}")) {
+						Plugin.EspConsumer.SearchFor(mobHuntEntry.Name!);
+					}
+
+					if (ImGui.IsItemHovered()) {
+						ImGui.BeginTooltip();
+						ImGui.Text("Set XivEsp search to this target");
+						ImGui.EndTooltip();
+					}
 				}
 
 				ImGui.SameLine();

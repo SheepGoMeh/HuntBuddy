@@ -4,27 +4,11 @@ using Dalamud.Plugin.Ipc;
 
 namespace HuntBuddy.Ipc;
 
-public class TeleportConsumer {
-	private bool isAvailable;
-	private long timeSinceLastCheck;
-
-	public bool IsAvailable {
-		get {
-			if (this.timeSinceLastCheck + 5000 > Environment.TickCount64) {
-				return this.isAvailable;
-			}
-
-			try {
-				this.consumerMessageSetting.InvokeFunc();
-				this.isAvailable = true;
-				this.timeSinceLastCheck = Environment.TickCount64;
-			}
-			catch {
-				this.isAvailable = false;
-			}
-
-			return this.isAvailable;
-		}
+public class TeleportConsumer: ConsumerBase {
+	public override string RequiredPlugin { get; } = "TeleporterPlugin";
+	protected override bool Validate() {
+		this.consumerMessageSetting.InvokeFunc();
+		return true;
 	}
 
 	private ICallGateSubscriber<bool> consumerMessageSetting = null!;

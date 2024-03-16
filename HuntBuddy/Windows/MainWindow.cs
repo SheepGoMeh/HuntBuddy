@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 
 using Dalamud.Interface;
+using Dalamud.Interface.Utility;
 using Dalamud.Interface.Windowing;
 
 using HuntBuddy.Utils;
@@ -26,9 +27,7 @@ public class MainWindow: Window {
 
 	public override void PreOpenCheck() {
 		if (Plugin.Instance.Configuration.LockWindowPositions) {
-			if (!this.Flags.HasFlag(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
-				this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
-			}
+			this.Flags |= ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
 		}
 		else {
 			this.Flags &= ~(ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
@@ -39,6 +38,22 @@ public class MainWindow: Window {
 		if (!Plugin.Instance.MobHuntEntriesReady) {
 			ImGui.Text("Reloading data ...");
 			return;
+		}
+
+		ImGui.BeginGroup();
+		ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(0.8f, 0.2f, 0.2f, 1));
+		InterfaceUtil.DrawCenteredText("B-RANK AND ARR HUNT MARK");
+		InterfaceUtil.DrawCenteredText("LOCATIONS ARE NOT SUPPORTED");
+		ImGui.PopStyleColor();
+		ImGui.EndGroup();
+		if (ImGui.IsItemHovered()) {
+			InterfaceUtil.DrawWrappedTooltip(ImGuiHelpers.GlobalScale * 400,
+				"B-rank marks have a varying number of potential spawn locations, and will only ever exist in one of them at a time."
+				+ $" {Plugin.Instance.Name} has no way to know which location a given mob is in, and as such cannot direct you to it."
+				+ " You can look up spawn maps online to find the possible spots for your target.\n"
+				+ "\n"
+				+ "Several ARR hunt marks are FATE mobs, which means they aren't always available."
+				+ $" Since {Plugin.Instance.Name} has no way to know if the FATE is up or not, ARR marks are not part of the plugin.");
 		}
 
 		if (InterfaceUtil.IconButton(FontAwesomeIcon.Redo, "Reload")) {

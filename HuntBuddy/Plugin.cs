@@ -207,6 +207,10 @@ public class Plugin: IDalamudPlugin {
 						if (chosen != null) {
 							if (chosen.IsEliteMark) {
 								Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+								if (!this.Configuration.SuppressEliteMarkLocationWarning) {
+									Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
+										+ "\n(You can suppress this warning in the plugin settings)");
+								}
 							}
 							else {
 								long remaining = chosen.NeededKills -

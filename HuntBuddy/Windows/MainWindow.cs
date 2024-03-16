@@ -21,7 +21,7 @@ public class MainWindow: Window {
 		ImGuiWindowFlags.NoDocking,
 		true) {
 		this.Size = new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500);
-		this.SizeCondition = ImGuiCond.Once;
+		this.SizeCondition = ImGuiCond.FirstUseEver;
 	}
 
 	public override void PreOpenCheck() {

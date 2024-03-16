@@ -19,6 +19,7 @@ public class Configuration: IPluginConfiguration {
 	public bool ShowLocalHuntIcons;
 	public bool HideLocalHuntBackground;
 	public bool HideCompletedHunts;
+	public bool SuppressEliteMarkLocationWarning;
 	public float IconScale = 1f;
 	public Vector4 IconBackgroundColour = new(0.76f, 0.75f, 0.76f, 0.8f);
 

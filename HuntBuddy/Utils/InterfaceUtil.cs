@@ -67,4 +67,29 @@ public static class InterfaceUtil {
 	/// <param name="icon">Desired <see cref="FontAwesomeIcon"/> to be rendered.</param>
 	/// <returns>True if pressed.</returns>
 	public static bool IconButton(FontAwesomeIcon icon) => IconButton(icon, null);
+
+	/// <summary>
+	/// Draws horizontally-centered text in an ImGui window.
+	/// </summary>
+	/// <param name="text">The text to draw. Should be a single line.</param>
+	// I hate centering text in ImGui
+	public static void DrawCenteredText(string text) {
+		float width = ImGui.CalcTextSize(text).X;
+		float space = ImGui.GetContentRegionAvail().X;
+		ImGui.SetCursorPosX((space / 2) - (width / 2));
+		ImGui.Text(text);
+	}
+
+	/// <summary>
+	/// Draw a tooltip with simple text content, using the specified text wrapping position.
+	/// </summary>
+	/// <param name="maxWidth">The textwrap position for the tooltip text.</param>
+	/// <param name="text">The text of the tooltip.</param>
+	public static void DrawWrappedTooltip(float maxWidth, string text) {
+		ImGui.BeginTooltip();
+		ImGui.PushTextWrapPos(maxWidth);
+		ImGui.Text(text);
+		ImGui.PopTextWrapPos();
+		ImGui.EndTooltip();
+	}
 }

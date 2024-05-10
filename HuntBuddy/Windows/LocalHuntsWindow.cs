@@ -61,12 +61,7 @@ public class LocalHuntsWindow: Window {
 
 			if (Location.Database.ContainsKey(mobHuntEntry.MobHuntId)) {
 				if (InterfaceUtil.IconButton(FontAwesomeIcon.MapMarkerAlt, $"pin##{mobHuntEntry.MobHuntId}")) {
-					Location.CreateMapMarker(
-						mobHuntEntry.TerritoryType,
-						mobHuntEntry.MapId,
-						mobHuntEntry.MobHuntId,
-						mobHuntEntry.Name,
-						Location.OpenType.None);
+					Location.CreateMapMarker(mobHuntEntry, Location.OpenType.None);
 				}
 
 				if (ImGui.IsItemHovered()) {
@@ -83,12 +78,7 @@ public class LocalHuntsWindow: Window {
 						includeArea = !includeArea;
 					}
 
-					Location.CreateMapMarker(
-						mobHuntEntry.TerritoryType,
-						mobHuntEntry.MapId,
-						mobHuntEntry.MobHuntId,
-						mobHuntEntry.Name,
-						includeArea ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen);
+					Location.CreateMapMarker(mobHuntEntry, includeArea ? Location.OpenType.ShowOpen : Location.OpenType.MarkerOpen);
 				}
 
 				if (ImGui.IsItemHovered()) {

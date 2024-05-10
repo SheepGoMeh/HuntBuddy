@@ -494,6 +494,8 @@ public static class Location {
 				throw new ArgumentOutOfRangeException(nameof(openType), openType, null);
 		}
 	}
+	public static unsafe void CreateMapMarker(MobHuntEntry mob, OpenType openType) => CreateMapMarker(mob.TerritoryType, mob.MapId, mob.MobHuntId, mob.Name, openType);
+	public static unsafe void CreateMapMarker(MobHuntEntry mob) => CreateMapMarker(mob.TerritoryType, mob.MapId, mob.MobHuntId, mob.Name);
 
 	private static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId) {
 		ushort scale = Service.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;

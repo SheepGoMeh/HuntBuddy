@@ -322,30 +322,6 @@ namespace HuntBuddy
 					}
 					ImGui.SameLine();
                     ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
-					if (Location.Database[(mobHuntEntry.MobHuntId)].Count > 5)
-					{
-						if (currentGroupIndex > (Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1)
-						{
-							currentGroupIndex = 1;
-						}
-						if (Interface.IconButton(FontAwesomeIcon.ArrowLeft, $"left##{mobHuntEntry.MobHuntId}"))
-						{
-							if (currentGroupIndex > 1)
-							{
-								currentGroupIndex--;
-							}
-						}
-						ImGui.SameLine();
-						ImGui.Text($"{currentGroupIndex}/{(Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1}");
-						ImGui.SameLine();
-						if (Interface.IconButton(FontAwesomeIcon.ArrowRight, $"right##{mobHuntEntry.MobHuntId}"))
-						{
-							if (currentGroupIndex < (Location.Database[(mobHuntEntry.MobHuntId)].Count / 5) + 1)
-							{
-								currentGroupIndex++;
-							}
-						}
-					}
 				}
 
 				if (Location.Database.TryGetValue(mobHuntEntry.MobHuntId, out List<Location.PositionInfo>? value) && value[0].Fate != 0)

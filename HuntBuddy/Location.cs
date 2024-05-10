@@ -935,7 +935,8 @@ namespace HuntBuddy
 				new PositionInfo { X = 37.0f, Y = 15.0f, Radius = 50 },
             } },
 
-			// The Dravanian Hinterlands			{ 04354, new List<PositionInfo>() {							// Pterygotus
+			// The Dravanian Hinterlands
+			{ 04354, new List<PositionInfo>() {							// Pterygotus
 				new PositionInfo { X = 13.0f, Y = 16.0f, Radius = 50 },
 				new PositionInfo { X =  5.0f, Y = 22.0f, Radius = 50 },
 				new PositionInfo { X = 10.0f, Y = 20.0f, Radius = 50 },
@@ -1083,9 +1084,48 @@ namespace HuntBuddy
 			{ 03616, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 20.0f, Radius = 150 } } }, // Wadjet
 
 			// The Dravanian Hinterlands
-			{ 03612, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 37.0f, Radius = 150 } } }, // Bifericeras			{ 03609, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 36.0f, Radius = 150 } } }, // Cockatrice			{ 03603, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 150 } } }, // Crawler			{ 03594, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 21.0f, Radius = 150 } } }, // Damselfly			{ 03598, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Brandisher			{ 03601, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Glider			{ 03600, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Sharpshooter			{ 03599, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Tinkerer			{ 03605, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 21.0f, Radius = 150 } } }, // Great Morbol			{ 03597, new List<PositionInfo>() { new PositionInfo { X = 37.0f, Y = 24.0f, Radius = 150 } } }, // Narbrooi			{ 03610, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 33.0f, Radius = 150 } } }, // Okeanis			{ 03608, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 33.0f, Radius = 150 } } }, // Opken			{ 03604, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 27.0f, Radius = 150 } } }, // Orn Kite			{ 03607, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 34.0f, Radius = 150 } } }, // Poroggo			{ 03595, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 27.0f, Radius = 150 } } }, // Ratel			{ 03611, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 32.0f, Radius = 150 } } }, // Sun Leech			{ 03593, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 16.0f, Radius = 150 } } }, // Tarantula Hawk			{ 03596, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 19.0f, Radius = 150 } } }, // Wildebeest
+			{ 03612, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 37.0f, Radius = 150 } } }, // Bifericeras
+			{ 03609, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 36.0f, Radius = 150 } } }, // Cockatrice
+			{ 03603, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 16.0f, Radius = 150 } } }, // Crawler
+			{ 03594, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 21.0f, Radius = 150 } } }, // Damselfly
+			{ 03598, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Brandisher
+			{ 03601, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Glider
+			{ 03600, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Sharpshooter
+			{ 03599, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 22.0f, Radius = 150 } } }, // Goblin Tinkerer
+			{ 03605, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 21.0f, Radius = 150 } } }, // Great Morbol
+			{ 03597, new List<PositionInfo>() { new PositionInfo { X = 37.0f, Y = 24.0f, Radius = 150 } } }, // Narbrooi
+			{ 03610, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 33.0f, Radius = 150 } } }, // Okeanis
+			{ 03608, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 33.0f, Radius = 150 } } }, // Opken
+			{ 03604, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 27.0f, Radius = 150 } } }, // Orn Kite
+			{ 03607, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 34.0f, Radius = 150 } } }, // Poroggo
+			{ 03595, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 27.0f, Radius = 150 } } }, // Ratel
+			{ 03611, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 32.0f, Radius = 150 } } }, // Sun Leech
+			{ 03593, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 16.0f, Radius = 150 } } }, // Tarantula Hawk
+			{ 03596, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 19.0f, Radius = 150 } } }, // Wildebeest
+
 			// Azys Lla
-			{ 03545, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 24.0f, Radius = 150 } } }, // 6th Legion Vanguard			{ 03552, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 33.0f, Radius = 150 } } }, // Adamantite Claw			{ 03540, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 06.0f, Radius = 150 } } }, // Allagan Chimera			{ 03534, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 13.0f, Radius = 150 } } }, // Clockwork Engineer			{ 03536, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 08.0f, Radius = 150 } } }, // Clockwork Harvestman			{ 03535, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 13.0f, Radius = 150 } } }, // Clockwork Paladin			{ 03542, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 09.0f, Radius = 150 } } }, // Corpse Flower			{ 03541, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 12.0f, Radius = 150 } } }, // Empuse			{ 03537, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 17.0f, Radius = 150 } } }, // Enforcement Droid			{ 03539, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 11.0f, Radius = 150 } } }, // Lamia Cybrid			{ 03538, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 13.0f, Radius = 150 } } }, // Lamia Thelytoke			{ 03580, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 33.0f, Radius = 150 } } }, // Lesser Hydra			{ 03559, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Meracydian Amphiptere			{ 03557, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 32.0f, Radius = 150 } } }, // Meracydian Brobinyak			{ 03560, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 27.0f, Radius = 150 } } }, // Meracydian Dragon			{ 03558, new List<PositionInfo>() { new PositionInfo { X = 06.0f, Y = 35.0f, Radius = 150 } } }, // Meracydian Dragonet			{ 03554, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 29.0f, Radius = 150 } } }, // Meracydian Falak			{ 03556, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 35.0f, Radius = 150 } } }, // Meracydian Vouivre			{ 03533, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 15.0f, Radius = 150 } } }, // Owlbear			{ 03543, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 08.0f, Radius = 150 } } }, // Proto-naga			{ 03544, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 13.0f, Radius = 150 } } }, // Reptoid			{ 03532, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 12.0f, Radius = 150 } } }, // Snapper-rook
+			{ 03545, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 24.0f, Radius = 150 } } }, // 6th Legion Vanguard
+			{ 03552, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 33.0f, Radius = 150 } } }, // Adamantite Claw
+			{ 03540, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 06.0f, Radius = 150 } } }, // Allagan Chimera
+			{ 03534, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 13.0f, Radius = 150 } } }, // Clockwork Engineer
+			{ 03536, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 08.0f, Radius = 150 } } }, // Clockwork Harvestman
+			{ 03535, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 13.0f, Radius = 150 } } }, // Clockwork Paladin
+			{ 03542, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 09.0f, Radius = 150 } } }, // Corpse Flower
+			{ 03541, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 12.0f, Radius = 150 } } }, // Empuse
+			{ 03537, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 17.0f, Radius = 150 } } }, // Enforcement Droid
+			{ 03539, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 11.0f, Radius = 150 } } }, // Lamia Cybrid
+			{ 03538, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 13.0f, Radius = 150 } } }, // Lamia Thelytoke
+			{ 03580, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 33.0f, Radius = 150 } } }, // Lesser Hydra
+			{ 03559, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Meracydian Amphiptere
+			{ 03557, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 32.0f, Radius = 150 } } }, // Meracydian Brobinyak
+			{ 03560, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 27.0f, Radius = 150 } } }, // Meracydian Dragon
+			{ 03558, new List<PositionInfo>() { new PositionInfo { X = 06.0f, Y = 35.0f, Radius = 150 } } }, // Meracydian Dragonet
+			{ 03554, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 29.0f, Radius = 150 } } }, // Meracydian Falak
+			{ 03556, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 35.0f, Radius = 150 } } }, // Meracydian Vouivre
+			{ 03533, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 15.0f, Radius = 150 } } }, // Owlbear
+			{ 03543, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 08.0f, Radius = 150 } } }, // Proto-naga
+			{ 03544, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 13.0f, Radius = 150 } } }, // Reptoid
+			{ 03532, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 12.0f, Radius = 150 } } }, // Snapper-rook
 
 
 			// Stormblood
@@ -1227,17 +1267,102 @@ namespace HuntBuddy
 
 			// Daily Targets
 			// The Fringes
-			{ 05685, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 27.0f, Radius = 150 } } }, // Diakka			{ 05674, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 16.0f, Radius = 150 } } }, // Foper			{ 05697, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 27.0f, Radius = 150 } } }, // Gazelle			{ 05676, new List<PositionInfo>() { new PositionInfo { X = 11.6f, Y = 12.0f, Radius = 150 } } }, // Gazelle Hawk			{ 05679, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 15.0f, Radius = 150 } } }, // Gelid Bhoot			{ 05686, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 27.0f, Radius = 150 } } }, // Goosefish			{ 05671, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 11.0f, Radius = 150 } } }, // Leshy			{ 05687, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 17.0f, Radius = 150 } } }, // Mossling			{ 05683, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 17.0f, Radius = 150 } } }, // Mountain Grizzly			{ 05691, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Brahmin			{ 05689, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Kshatriya			{ 05690, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Shudra			{ 05688, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Sacred Marid			{ 05675, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 12.0f, Radius = 150 } } }, // Sapria			{ 05677, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 11.0f, Radius = 150 } } }, // Spinner			{ 05693, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 24.0f, Radius = 150 } } }, // Teleoceras			{ 05678, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 15.0f, Radius = 150 } } }, // Velodyna Pugil			{ 05680, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 10.0f, Radius = 150 } } }, // Velodyna Sarcosuchus
+			{ 05685, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 27.0f, Radius = 150 } } }, // Diakka
+			{ 05674, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 16.0f, Radius = 150 } } }, // Foper
+			{ 05697, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 27.0f, Radius = 150 } } }, // Gazelle
+			{ 05676, new List<PositionInfo>() { new PositionInfo { X = 11.6f, Y = 12.0f, Radius = 150 } } }, // Gazelle Hawk
+			{ 05679, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 15.0f, Radius = 150 } } }, // Gelid Bhoot
+			{ 05686, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 27.0f, Radius = 150 } } }, // Goosefish
+			{ 05671, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 11.0f, Radius = 150 } } }, // Leshy
+			{ 05687, new List<PositionInfo>() { new PositionInfo { X = 11.0f, Y = 17.0f, Radius = 150 } } }, // Mossling
+			{ 05683, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 17.0f, Radius = 150 } } }, // Mountain Grizzly
+			{ 05691, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Brahmin
+			{ 05689, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Kshatriya
+			{ 05690, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Qalyana Shudra
+			{ 05688, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 25.0f, Radius = 150 } } }, // Sacred Marid
+			{ 05675, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 12.0f, Radius = 150 } } }, // Sapria
+			{ 05677, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 11.0f, Radius = 150 } } }, // Spinner
+			{ 05693, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 24.0f, Radius = 150 } } }, // Teleoceras
+			{ 05678, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 15.0f, Radius = 150 } } }, // Velodyna Pugil
+			{ 05680, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 10.0f, Radius = 150 } } }, // Velodyna Sarcosuchus
+
 			// The Peaks
-			{ 05705, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 11.0f, Radius = 150 } } }, // Crag Claw			{ 05701, new List<PositionInfo>() { new PositionInfo { X = 18.7f, Y = 12.9f, Radius = 150 } } }, // Bloodglider			{ 05702, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 08.0f, Radius = 150 } } }, // Fluturini			{ 05703, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 08.0f, Radius = 150 } } }, // Gyr Abanian Hornbill			{ 05713, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 33.0f, Radius = 150 } } }, // Highland Eruca			{ 05712, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 29.0f, Radius = 150 } } }, // Jhammel			{ 05714, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 27.0f, Radius = 150 } } }, // Kongamato			{ 05707, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 09.0f, Radius = 150 } } }, // Marble Urolith			{ 05715, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 26.0f, Radius = 150 } } }, // Pantera			{ 05708, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 14.0f, Radius = 150 } } }, // Scarab Beetle			{ 05711, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 24.0f, Radius = 150 } } }, // True Griffin
+			{ 05705, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 11.0f, Radius = 150 } } }, // Crag Claw
+			{ 05701, new List<PositionInfo>() { new PositionInfo { X = 18.7f, Y = 12.9f, Radius = 150 } } }, // Bloodglider
+			{ 05702, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 08.0f, Radius = 150 } } }, // Fluturini
+			{ 05703, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 08.0f, Radius = 150 } } }, // Gyr Abanian Hornbill
+			{ 05713, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 33.0f, Radius = 150 } } }, // Highland Eruca
+			{ 05712, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 29.0f, Radius = 150 } } }, // Jhammel
+			{ 05714, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 27.0f, Radius = 150 } } }, // Kongamato
+			{ 05707, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 09.0f, Radius = 150 } } }, // Marble Urolith
+			{ 05715, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 26.0f, Radius = 150 } } }, // Pantera
+			{ 05708, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 14.0f, Radius = 150 } } }, // Scarab Beetle
+			{ 05711, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 24.0f, Radius = 150 } } }, // True Griffin
+
 			// The Ruby Sea
-			{ 05737, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 35.0f, Radius = 150 } } }, // Bombfish			{ 05736, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 05.0f, Radius = 150 } } }, // Coralshell			{ 05740, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 30.0f, Radius = 150 } } }, // Flying Shark			{ 05742, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 33.0f, Radius = 150 } } }, // Gasame			{ 05734, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 10.0f, Radius = 150 } } }, // Gyuki			{ 05751, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 150 } } }, // Naked Yumemi			{ 05743, new List<PositionInfo>() { new PositionInfo { X = 07.0f, Y = 30.0f, Radius = 150 } } }, // Red Bukan			{ 05745, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 28.0f, Radius = 150 } } }, // Red Honkan			{ 05744, new List<PositionInfo>() { new PositionInfo { X = 09.5f, Y = 25.2f, Radius = 150 } } }, // Red Hyoe			{ 05738, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 11.0f, Radius = 150 } } }, // Sea Serpent			{ 05739, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 06.0f, Radius = 150 } } }, // Shiranui			{ 05746, new List<PositionInfo>() { new PositionInfo { X = 07.0f, Y = 27.0f, Radius = 150 } } }, // Striped Ray			{ 05733, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 37.0f, Radius = 150 } } }, // Tatsunoko			{ 05735, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 21.0f, Radius = 150 } } }, // Unkiu			{ 05750, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 150 } } }, // Yumemi
+			{ 05737, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 35.0f, Radius = 150 } } }, // Bombfish
+			{ 05736, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 05.0f, Radius = 150 } } }, // Coralshell
+			{ 05740, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 30.0f, Radius = 150 } } }, // Flying Shark
+			{ 05742, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 33.0f, Radius = 150 } } }, // Gasame
+			{ 05734, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 10.0f, Radius = 150 } } }, // Gyuki
+			{ 05751, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 150 } } }, // Naked Yumemi
+			{ 05743, new List<PositionInfo>() { new PositionInfo { X = 07.0f, Y = 30.0f, Radius = 150 } } }, // Red Bukan
+			{ 05745, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 28.0f, Radius = 150 } } }, // Red Honkan
+			{ 05744, new List<PositionInfo>() { new PositionInfo { X = 09.5f, Y = 25.2f, Radius = 150 } } }, // Red Hyoe
+			{ 05738, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 11.0f, Radius = 150 } } }, // Sea Serpent
+			{ 05739, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 06.0f, Radius = 150 } } }, // Shiranui
+			{ 05746, new List<PositionInfo>() { new PositionInfo { X = 07.0f, Y = 27.0f, Radius = 150 } } }, // Striped Ray
+			{ 05733, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 37.0f, Radius = 150 } } }, // Tatsunoko
+			{ 05735, new List<PositionInfo>() { new PositionInfo { X = 35.0f, Y = 21.0f, Radius = 150 } } }, // Unkiu
+			{ 05750, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 25.0f, Radius = 150 } } }, // Yumemi
+
 			// Yanxia
-			{ 05761, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Bi Fang			{ 05769, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 08.0f, Radius = 150 } } }, // Ebisu Catfish			{ 05752, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 34.0f, Radius = 150 } } }, // Lupin Bladehand			{ 05754, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 32.0f, Radius = 150 } } }, // Lupin Bowhand			{ 05753, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 28.0f, Radius = 150 } } }, // Lupin Spearhand			{ 05768, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 11.0f, Radius = 150 } } }, // Magatsu Kiyofusa			{ 05763, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 17.0f, Radius = 150 } } }, // Minobi			{ 05757, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 23.0f, Radius = 150 } } }, // Rhino Beetle			{ 05765, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 34.0f, Radius = 150 } } }, // Taoquan			{ 05755, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 32.0f, Radius = 150 } } }, // Tenaga			{ 05764, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 30.0f, Radius = 150 } } }, // Vanara			{ 05762, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 26.0f, Radius = 150 } } }, // Water Serpent
+			{ 05761, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Bi Fang
+			{ 05769, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 08.0f, Radius = 150 } } }, // Ebisu Catfish
+			{ 05752, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 34.0f, Radius = 150 } } }, // Lupin Bladehand
+			{ 05754, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 32.0f, Radius = 150 } } }, // Lupin Bowhand
+			{ 05753, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 28.0f, Radius = 150 } } }, // Lupin Spearhand
+			{ 05768, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 11.0f, Radius = 150 } } }, // Magatsu Kiyofusa
+			{ 05763, new List<PositionInfo>() { new PositionInfo { X = 33.0f, Y = 17.0f, Radius = 150 } } }, // Minobi
+			{ 05757, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 23.0f, Radius = 150 } } }, // Rhino Beetle
+			{ 05765, new List<PositionInfo>() { new PositionInfo { X = 30.0f, Y = 34.0f, Radius = 150 } } }, // Taoquan
+			{ 05755, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 32.0f, Radius = 150 } } }, // Tenaga
+			{ 05764, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 30.0f, Radius = 150 } } }, // Vanara
+			{ 05762, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 26.0f, Radius = 150 } } }, // Water Serpent
+
 			// The Azim Steppe
-			{ 05785, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.0f, Radius = 150 } } }, // Baras			{ 05788, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 26.0f, Radius = 150 } } }, // Chaochu			{ 05777, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 15.0f, Radius = 150 } } }, // Halgai			{ 05778, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 11.0f, Radius = 150 } } }, // Khun Chuluu			{ 05781, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 17.0f, Radius = 150 } } }, // Mammoth			{ 05783, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 29.0f, Radius = 150 } } }, // Manzasiri			{ 05775, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 13.0f, Radius = 150 } } }, // Matamata			{ 05782, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 21.0f, Radius = 150 } } }, // Matanga			{ 05779, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 150 } } }, // Muu Shuwuu			{ 05780, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 18.0f, Radius = 150 } } }, // Purbol			{ 05776, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 29.0f, Radius = 150 } } }, // Steppe Dhole			{ 05773, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 32.0f, Radius = 150 } } }, // Steppe Dzo
+			{ 05785, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.0f, Radius = 150 } } }, // Baras
+			{ 05788, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 26.0f, Radius = 150 } } }, // Chaochu
+			{ 05777, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 15.0f, Radius = 150 } } }, // Halgai
+			{ 05778, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 11.0f, Radius = 150 } } }, // Khun Chuluu
+			{ 05781, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 17.0f, Radius = 150 } } }, // Mammoth
+			{ 05783, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 29.0f, Radius = 150 } } }, // Manzasiri
+			{ 05775, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 13.0f, Radius = 150 } } }, // Matamata
+			{ 05782, new List<PositionInfo>() { new PositionInfo { X = 09.0f, Y = 21.0f, Radius = 150 } } }, // Matanga
+			{ 05779, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 150 } } }, // Muu Shuwuu
+			{ 05780, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 18.0f, Radius = 150 } } }, // Purbol
+			{ 05776, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 29.0f, Radius = 150 } } }, // Steppe Dhole
+			{ 05773, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 32.0f, Radius = 150 } } }, // Steppe Dzo
+
 			// The Lochs
-			{ 05723, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 32.0f, Radius = 150 } } }, // Abaddon			{ 05725, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 11.0f, Radius = 150 } } }, // Abalathian Minotaur			{ 05720, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 150 } } }, // Chelone			{ 05727, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 15.0f, Radius = 150 } } }, // Creeping Edila			{ 05729, new List<PositionInfo>() { new PositionInfo { X = 05.7f, Y = 26.7f, Radius = 150 } } }, // Dark Clay Beast			{ 05732, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 150 } } }, // Guard Bhoot			{ 05716, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 17.0f, Radius = 150 } } }, // Kaluk			{ 05724, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 12.0f, Radius = 150 } } }, // Loch Leech			{ 05730, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 16.0f, Radius = 150 } } }, // Loch Nanka			{ 05717, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 150 } } }, // Phoebad			{ 05721, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 21.0f, Radius = 150 } } }, // Soblyn			{ 05722, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 150 } } }, // Salt Dhruva			{ 05728, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 08.0f, Radius = 150 } } }, // Specter			{ 05726, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 29.0f, Radius = 150 } } }, // Vepar			{ 05719, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 25.0f, Radius = 150 } } }, // Yabby						// Shadowbringers
+			{ 05723, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 32.0f, Radius = 150 } } }, // Abaddon
+			{ 05725, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 11.0f, Radius = 150 } } }, // Abalathian Minotaur
+			{ 05720, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 18.0f, Radius = 150 } } }, // Chelone
+			{ 05727, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 15.0f, Radius = 150 } } }, // Creeping Edila
+			{ 05729, new List<PositionInfo>() { new PositionInfo { X = 05.7f, Y = 26.7f, Radius = 150 } } }, // Dark Clay Beast
+			{ 05732, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 10.0f, Radius = 150 } } }, // Guard Bhoot
+			{ 05716, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 17.0f, Radius = 150 } } }, // Kaluk
+			{ 05724, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 12.0f, Radius = 150 } } }, // Loch Leech
+			{ 05730, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 16.0f, Radius = 150 } } }, // Loch Nanka
+			{ 05717, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 18.0f, Radius = 150 } } }, // Phoebad
+			{ 05721, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 21.0f, Radius = 150 } } }, // Soblyn
+			{ 05722, new List<PositionInfo>() { new PositionInfo { X = 22.0f, Y = 23.0f, Radius = 150 } } }, // Salt Dhruva
+			{ 05728, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 08.0f, Radius = 150 } } }, // Specter
+			{ 05726, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 29.0f, Radius = 150 } } }, // Vepar
+			{ 05719, new List<PositionInfo>() { new PositionInfo { X = 20.0f, Y = 25.0f, Radius = 150 } } }, // Yabby			
+
+
+			// Shadowbringers
 			// B Rank
 			// Lakeland
 			{ 08908, new List<PositionInfo>() {							// La Velue
@@ -1373,17 +1498,102 @@ namespace HuntBuddy
 
 			// Daily Targets
 			// Lakeland
-			{ 08498, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 09.0f, Radius = 150 } } }, // Chiliad Cama			{ 08502, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 23.2f, Radius = 150 } } }, // Violet Triffid			{ 08503, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 16.5f, Radius = 150 } } }, // Gnole			{ 08504, new List<PositionInfo>() { new PositionInfo { X = 24.4f, Y = 23.9f, Radius = 150 } } }, // Wetland Warg			{ 08505, new List<PositionInfo>() { new PositionInfo { X = 33.2f, Y = 10.0f, Radius = 150 } } }, // White Gremlin			{ 08507, new List<PositionInfo>() { new PositionInfo { X = 25.8f, Y = 23.3f, Radius = 150 } } }, // Hoptrap			{ 08508, new List<PositionInfo>() { new PositionInfo { X = 28.5f, Y = 36.7f, Radius = 150 } } }, // Wolverine			{ 08511, new List<PositionInfo>() { new PositionInfo { X = 11.3f, Y = 11.0f, Radius = 150 } } }, // Smilodon			{ 08514, new List<PositionInfo>() { new PositionInfo { X = 34.2f, Y = 17.0f, Radius = 150 } } }, // Ya-te-veo			{ 08515, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 17.6f, Radius = 150 } } }, // Proterosuchus			{ 08786, new List<PositionInfo>() { new PositionInfo { X = 20.5f, Y = 25.3f, Radius = 150 } } }, // Lake Viper
+			{ 08498, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 09.0f, Radius = 150 } } }, // Chiliad Cama
+			{ 08502, new List<PositionInfo>() { new PositionInfo { X = 28.0f, Y = 23.2f, Radius = 150 } } }, // Violet Triffid
+			{ 08503, new List<PositionInfo>() { new PositionInfo { X = 14.0f, Y = 16.5f, Radius = 150 } } }, // Gnole
+			{ 08504, new List<PositionInfo>() { new PositionInfo { X = 24.4f, Y = 23.9f, Radius = 150 } } }, // Wetland Warg
+			{ 08505, new List<PositionInfo>() { new PositionInfo { X = 33.2f, Y = 10.0f, Radius = 150 } } }, // White Gremlin
+			{ 08507, new List<PositionInfo>() { new PositionInfo { X = 25.8f, Y = 23.3f, Radius = 150 } } }, // Hoptrap
+			{ 08508, new List<PositionInfo>() { new PositionInfo { X = 28.5f, Y = 36.7f, Radius = 150 } } }, // Wolverine
+			{ 08511, new List<PositionInfo>() { new PositionInfo { X = 11.3f, Y = 11.0f, Radius = 150 } } }, // Smilodon
+			{ 08514, new List<PositionInfo>() { new PositionInfo { X = 34.2f, Y = 17.0f, Radius = 150 } } }, // Ya-te-veo
+			{ 08515, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 17.6f, Radius = 150 } } }, // Proterosuchus
+			{ 08786, new List<PositionInfo>() { new PositionInfo { X = 20.5f, Y = 25.3f, Radius = 150 } } }, // Lake Viper
+
 			// Kholusia
-			{ 08517, new List<PositionInfo>() { new PositionInfo { X = 31.9f, Y = 18.9f, Radius = 150 } } }, // Ironbeard			{ 08518, new List<PositionInfo>() { new PositionInfo { X = 36.4f, Y = 28.7f, Radius = 150 } } }, // Hobgoblin			{ 08520, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 18.0f, Radius = 150 } } }, // Defective Talos			{ 08522, new List<PositionInfo>() { new PositionInfo { X = 34.8f, Y = 10.5f, Radius = 150 } } }, // Sulfur Byrgen			{ 08523, new List<PositionInfo>() { new PositionInfo { X = 35.4f, Y = 29.2f, Radius = 150 } } }, // Maultasche			{ 08524, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 11.4f, Radius = 150 } } }, // Huldu			{ 08525, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 27.1f, Radius = 150 } } }, // Island Rail			{ 08527, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 11.0f, Radius = 150 } } }, // Cliffkite			{ 08528, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 13.8f, Radius = 150 } } }, // Cliffmole			{ 08529, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 18.0f, Radius = 150 } } }, // Scree Gnome			{ 08532, new List<PositionInfo>() { new PositionInfo { X = 17.8f, Y = 26.5f, Radius = 150 } } }, // Wood Eyes			{ 08533, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 23.5f, Radius = 150 } } }, // Island Wolf			{ 08534, new List<PositionInfo>() { new PositionInfo { X = 10.1f, Y = 29.6f, Radius = 150 } } }, // Kholusian Bison			{ 08536, new List<PositionInfo>() { new PositionInfo { X = 32.5f, Y = 26.2f, Radius = 150 } } }, // Whiptail			{ 08538, new List<PositionInfo>() { new PositionInfo { X = 22.5f, Y = 09.6f, Radius = 150 } } }, // Highland Hyssop			{ 08539, new List<PositionInfo>() { new PositionInfo { X = 19.9f, Y = 33.0f, Radius = 150 } } }, // Tragopan			{ 08540, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 15.0f, Radius = 150 } } }, // Saichania			{ 08541, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 08.7f, Radius = 150 } } }, // Gulgnu			{ 08542, new List<PositionInfo>() { new PositionInfo { X = 21.6f, Y = 32.0f, Radius = 150 } } }, // Germinant
+			{ 08517, new List<PositionInfo>() { new PositionInfo { X = 31.9f, Y = 18.9f, Radius = 150 } } }, // Ironbeard
+			{ 08518, new List<PositionInfo>() { new PositionInfo { X = 36.4f, Y = 28.7f, Radius = 150 } } }, // Hobgoblin
+			{ 08520, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 18.0f, Radius = 150 } } }, // Defective Talos
+			{ 08522, new List<PositionInfo>() { new PositionInfo { X = 34.8f, Y = 10.5f, Radius = 150 } } }, // Sulfur Byrgen
+			{ 08523, new List<PositionInfo>() { new PositionInfo { X = 35.4f, Y = 29.2f, Radius = 150 } } }, // Maultasche
+			{ 08524, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 11.4f, Radius = 150 } } }, // Huldu
+			{ 08525, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 27.1f, Radius = 150 } } }, // Island Rail
+			{ 08527, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 11.0f, Radius = 150 } } }, // Cliffkite
+			{ 08528, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 13.8f, Radius = 150 } } }, // Cliffmole
+			{ 08529, new List<PositionInfo>() { new PositionInfo { X = 08.0f, Y = 18.0f, Radius = 150 } } }, // Scree Gnome
+			{ 08532, new List<PositionInfo>() { new PositionInfo { X = 17.8f, Y = 26.5f, Radius = 150 } } }, // Wood Eyes
+			{ 08533, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 23.5f, Radius = 150 } } }, // Island Wolf
+			{ 08534, new List<PositionInfo>() { new PositionInfo { X = 10.1f, Y = 29.6f, Radius = 150 } } }, // Kholusian Bison
+			{ 08536, new List<PositionInfo>() { new PositionInfo { X = 32.5f, Y = 26.2f, Radius = 150 } } }, // Whiptail
+			{ 08538, new List<PositionInfo>() { new PositionInfo { X = 22.5f, Y = 09.6f, Radius = 150 } } }, // Highland Hyssop
+			{ 08539, new List<PositionInfo>() { new PositionInfo { X = 19.9f, Y = 33.0f, Radius = 150 } } }, // Tragopan
+			{ 08540, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 15.0f, Radius = 150 } } }, // Saichania
+			{ 08541, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 08.7f, Radius = 150 } } }, // Gulgnu
+			{ 08542, new List<PositionInfo>() { new PositionInfo { X = 21.6f, Y = 32.0f, Radius = 150 } } }, // Germinant
+
 			// Amh Araeng
-			{ 08544, new List<PositionInfo>() { new PositionInfo { X = 11.4f, Y = 30.4f, Radius = 150 } } }, // Masterless Talos			{ 08545, new List<PositionInfo>() { new PositionInfo { X = 19.1f, Y = 20.9f, Radius = 150 } } }, // Evil Weapon			{ 08547, new List<PositionInfo>() { new PositionInfo { X = 30.4f, Y = 12.3f, Radius = 150 } } }, // Gigantender			{ 08550, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 25.4f, Radius = 150 } } }, // Ancient Lizard			{ 08556, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 21.7f, Radius = 150 } } }, // Sand Mole			{ 08557, new List<PositionInfo>() { new PositionInfo { X = 12.7f, Y = 19.0f, Radius = 150 } } }, // Thistle Mole			{ 08558, new List<PositionInfo>() { new PositionInfo { X = 30.9f, Y = 27.3f, Radius = 150 } } }, // Scissorjaws			{ 08559, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 09.7f, Radius = 150 } } }, // Gnome			{ 08561, new List<PositionInfo>() { new PositionInfo { X = 13.9f, Y = 18.2f, Radius = 150 } } }, // Debitage			{ 08562, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 29.6f, Radius = 150 } } }, // Ghilman			{ 08563, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.3f, Radius = 150 } } }, // Flame Zonure			{ 08565, new List<PositionInfo>() { new PositionInfo { X = 15.2f, Y = 16.7f, Radius = 150 } } }, // Phorusrhacos			{ 08566, new List<PositionInfo>() { new PositionInfo { X = 21.7f, Y = 09.8f, Radius = 150 } } }, // Desert Coyote			{ 08567, new List<PositionInfo>() { new PositionInfo { X = 23.9f, Y = 31.8f, Radius = 150 } } }, // Molamander
+			{ 08544, new List<PositionInfo>() { new PositionInfo { X = 11.4f, Y = 30.4f, Radius = 150 } } }, // Masterless Talos
+			{ 08545, new List<PositionInfo>() { new PositionInfo { X = 19.1f, Y = 20.9f, Radius = 150 } } }, // Evil Weapon
+			{ 08547, new List<PositionInfo>() { new PositionInfo { X = 30.4f, Y = 12.3f, Radius = 150 } } }, // Gigantender
+			{ 08550, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 25.4f, Radius = 150 } } }, // Ancient Lizard
+			{ 08556, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 21.7f, Radius = 150 } } }, // Sand Mole
+			{ 08557, new List<PositionInfo>() { new PositionInfo { X = 12.7f, Y = 19.0f, Radius = 150 } } }, // Thistle Mole
+			{ 08558, new List<PositionInfo>() { new PositionInfo { X = 30.9f, Y = 27.3f, Radius = 150 } } }, // Scissorjaws
+			{ 08559, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 09.7f, Radius = 150 } } }, // Gnome
+			{ 08561, new List<PositionInfo>() { new PositionInfo { X = 13.9f, Y = 18.2f, Radius = 150 } } }, // Debitage
+			{ 08562, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 29.6f, Radius = 150 } } }, // Ghilman
+			{ 08563, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 34.3f, Radius = 150 } } }, // Flame Zonure
+			{ 08565, new List<PositionInfo>() { new PositionInfo { X = 15.2f, Y = 16.7f, Radius = 150 } } }, // Phorusrhacos
+			{ 08566, new List<PositionInfo>() { new PositionInfo { X = 21.7f, Y = 09.8f, Radius = 150 } } }, // Desert Coyote
+			{ 08567, new List<PositionInfo>() { new PositionInfo { X = 23.9f, Y = 31.8f, Radius = 150 } } }, // Molamander
+
 			// Il Mheg
-			{ 08155, new List<PositionInfo>() { new PositionInfo { X = 08.4f, Y = 30.0f, Radius = 150 } } }, // Flower Basket			{ 08569, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Echevore			{ 08574, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 14.3f, Radius = 150 } } }, // Garden Porxie			{ 08575, new List<PositionInfo>() { new PositionInfo { X = 19.9f, Y = 16.3f, Radius = 150 } } }, // Phooka			{ 08576, new List<PositionInfo>() { new PositionInfo { X = 11.1f, Y = 26.0f, Radius = 150 } } }, // Etainmoth			{ 08577, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 12.7f, Radius = 150 } } }, // Green Glider			{ 08578, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 08.8f, Radius = 150 } } }, // Moss Fungus			{ 08581, new List<PositionInfo>() { new PositionInfo { X = 07.8f, Y = 18.7f, Radius = 150 } } }, // Hawker			{ 08582, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 11.0f, Radius = 150 } } }, // Rainbow Lorikeet			{ 08583, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 11.4f, Radius = 150 } } }, // Tot Aevis			{ 08584, new List<PositionInfo>() { new PositionInfo { X = 30.4f, Y = 10.6f, Radius = 150 } } }, // Rabbit's Tail			{ 08585, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 32.0f, Radius = 150 } } }, // Rosebear			{ 08586, new List<PositionInfo>() { new PositionInfo { X = 31.6f, Y = 06.4f, Radius = 150 } } }, // Garden Crocota			{ 08587, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 05.8f, Radius = 150 } } }, // Werewood			{ 08590, new List<PositionInfo>() { new PositionInfo { X = 09.4f, Y = 15.0f, Radius = 150 } } }, // Killer Bee
+			{ 08155, new List<PositionInfo>() { new PositionInfo { X = 08.4f, Y = 30.0f, Radius = 150 } } }, // Flower Basket
+			{ 08569, new List<PositionInfo>() { new PositionInfo { X = 18.0f, Y = 31.0f, Radius = 150 } } }, // Echevore
+			{ 08574, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 14.3f, Radius = 150 } } }, // Garden Porxie
+			{ 08575, new List<PositionInfo>() { new PositionInfo { X = 19.9f, Y = 16.3f, Radius = 150 } } }, // Phooka
+			{ 08576, new List<PositionInfo>() { new PositionInfo { X = 11.1f, Y = 26.0f, Radius = 150 } } }, // Etainmoth
+			{ 08577, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 12.7f, Radius = 150 } } }, // Green Glider
+			{ 08578, new List<PositionInfo>() { new PositionInfo { X = 21.0f, Y = 08.8f, Radius = 150 } } }, // Moss Fungus
+			{ 08581, new List<PositionInfo>() { new PositionInfo { X = 07.8f, Y = 18.7f, Radius = 150 } } }, // Hawker
+			{ 08582, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 11.0f, Radius = 150 } } }, // Rainbow Lorikeet
+			{ 08583, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 11.4f, Radius = 150 } } }, // Tot Aevis
+			{ 08584, new List<PositionInfo>() { new PositionInfo { X = 30.4f, Y = 10.6f, Radius = 150 } } }, // Rabbit's Tail
+			{ 08585, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 32.0f, Radius = 150 } } }, // Rosebear
+			{ 08586, new List<PositionInfo>() { new PositionInfo { X = 31.6f, Y = 06.4f, Radius = 150 } } }, // Garden Crocota
+			{ 08587, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 05.8f, Radius = 150 } } }, // Werewood
+			{ 08590, new List<PositionInfo>() { new PositionInfo { X = 09.4f, Y = 15.0f, Radius = 150 } } }, // Killer Bee
+
 			// The Rak'tika Greatwood
-			{ 08596, new List<PositionInfo>() { new PositionInfo { X = 08.8f, Y = 35.6f, Radius = 150 } } }, // Tomatl			{ 08597, new List<PositionInfo>() { new PositionInfo { X = 27.3f, Y = 25.6f, Radius = 150 } } }, // Forest Echo			{ 08598, new List<PositionInfo>() { new PositionInfo { X = 25.1f, Y = 14.2f, Radius = 150 } } }, // Cracked Ronkan Doll			{ 08599, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 14.0f, Radius = 150 } } }, // Cracked Ronkan Thorn			{ 08600, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 32.0f, Radius = 150 } } }, // Vampire Vine			{ 08601, new List<PositionInfo>() { new PositionInfo { X = 23.4f, Y = 07.6f, Radius = 150 } } }, // Greatwood Rail			{ 08603, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 21.7f, Radius = 150 } } }, // Snapweed			{ 08604, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 34.0f, Radius = 150 } } }, // Atrociraptor			{ 08606, new List<PositionInfo>() { new PositionInfo { X = 27.7f, Y = 23.2f, Radius = 150 } } }, // Gizamaluk			{ 08609, new List<PositionInfo>() { new PositionInfo { X = 16.9f, Y = 33.3f, Radius = 150 } } }, // Helm Beetle			{ 08610, new List<PositionInfo>() { new PositionInfo { X = 34.1f, Y = 16.5f, Radius = 150 } } }, // Floor Mandrill			{ 08611, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.4f, Radius = 150 } } }, // Wild Swine			{ 08612, new List<PositionInfo>() { new PositionInfo { X = 24.9f, Y = 30.2f, Radius = 150 } } }, // Caracal			{ 08614, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 07.2f, Radius = 150 } } }, // Woodbat			{ 08616, new List<PositionInfo>() { new PositionInfo { X = 27.9f, Y = 21.2f, Radius = 150 } } }, // Tarichuk			{ 08789, new List<PositionInfo>() { new PositionInfo { X = 21.1f, Y = 13.2f, Radius = 150 } } }, // Cracked Ronkan Vessel
+			{ 08596, new List<PositionInfo>() { new PositionInfo { X = 08.8f, Y = 35.6f, Radius = 150 } } }, // Tomatl
+			{ 08597, new List<PositionInfo>() { new PositionInfo { X = 27.3f, Y = 25.6f, Radius = 150 } } }, // Forest Echo
+			{ 08598, new List<PositionInfo>() { new PositionInfo { X = 25.1f, Y = 14.2f, Radius = 150 } } }, // Cracked Ronkan Doll
+			{ 08599, new List<PositionInfo>() { new PositionInfo { X = 23.0f, Y = 14.0f, Radius = 150 } } }, // Cracked Ronkan Thorn
+			{ 08600, new List<PositionInfo>() { new PositionInfo { X = 16.0f, Y = 32.0f, Radius = 150 } } }, // Vampire Vine
+			{ 08601, new List<PositionInfo>() { new PositionInfo { X = 23.4f, Y = 07.6f, Radius = 150 } } }, // Greatwood Rail
+			{ 08603, new List<PositionInfo>() { new PositionInfo { X = 29.4f, Y = 21.7f, Radius = 150 } } }, // Snapweed
+			{ 08604, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 34.0f, Radius = 150 } } }, // Atrociraptor
+			{ 08606, new List<PositionInfo>() { new PositionInfo { X = 27.7f, Y = 23.2f, Radius = 150 } } }, // Gizamaluk
+			{ 08609, new List<PositionInfo>() { new PositionInfo { X = 16.9f, Y = 33.3f, Radius = 150 } } }, // Helm Beetle
+			{ 08610, new List<PositionInfo>() { new PositionInfo { X = 34.1f, Y = 16.5f, Radius = 150 } } }, // Floor Mandrill
+			{ 08611, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 19.4f, Radius = 150 } } }, // Wild Swine
+			{ 08612, new List<PositionInfo>() { new PositionInfo { X = 24.9f, Y = 30.2f, Radius = 150 } } }, // Caracal
+			{ 08614, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 07.2f, Radius = 150 } } }, // Woodbat
+			{ 08616, new List<PositionInfo>() { new PositionInfo { X = 27.9f, Y = 21.2f, Radius = 150 } } }, // Tarichuk
+			{ 08789, new List<PositionInfo>() { new PositionInfo { X = 21.1f, Y = 13.2f, Radius = 150 } } }, // Cracked Ronkan Vessel
+
 			// The Tempest
-			{ 08618, new List<PositionInfo>() { new PositionInfo { X = 28.6f, Y = 06.2f, Radius = 150 } } }, // Clinoid			{ 08619, new List<PositionInfo>() { new PositionInfo { X = 28.2f, Y = 18.3f, Radius = 150 } } }, // Dagon			{ 08621, new List<PositionInfo>() { new PositionInfo { X = 22.6f, Y = 31.7f, Radius = 150 } } }, // Cubus			{ 08622, new List<PositionInfo>() { new PositionInfo { X = 25.1f, Y = 18.6f, Radius = 150 } } }, // Sea Anemone			{ 08623, new List<PositionInfo>() { new PositionInfo { X = 32.1f, Y = 11.7f, Radius = 150 } } }, // Amphisbaena			{ 08625, new List<PositionInfo>() { new PositionInfo { X = 32.5f, Y = 21.5f, Radius = 150 } } }, // Morgawr			{ 08626, new List<PositionInfo>() { new PositionInfo { X = 36.6f, Y = 16.6f, Radius = 150 } } }, // Trilobite			{ 08629, new List<PositionInfo>() { new PositionInfo { X = 27.7f, Y = 08.7f, Radius = 150 } } }, // Sea Gelatin			{ 08630, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 21.0f, Radius = 150 } } }, // Tempest Swallow			{ 08631, new List<PositionInfo>() { new PositionInfo { X = 35.8f, Y = 07.2f, Radius = 150 } } }, // Blue Swimmer
+			{ 08618, new List<PositionInfo>() { new PositionInfo { X = 28.6f, Y = 06.2f, Radius = 150 } } }, // Clinoid
+			{ 08619, new List<PositionInfo>() { new PositionInfo { X = 28.2f, Y = 18.3f, Radius = 150 } } }, // Dagon
+			{ 08621, new List<PositionInfo>() { new PositionInfo { X = 22.6f, Y = 31.7f, Radius = 150 } } }, // Cubus
+			{ 08622, new List<PositionInfo>() { new PositionInfo { X = 25.1f, Y = 18.6f, Radius = 150 } } }, // Sea Anemone
+			{ 08623, new List<PositionInfo>() { new PositionInfo { X = 32.1f, Y = 11.7f, Radius = 150 } } }, // Amphisbaena
+			{ 08625, new List<PositionInfo>() { new PositionInfo { X = 32.5f, Y = 21.5f, Radius = 150 } } }, // Morgawr
+			{ 08626, new List<PositionInfo>() { new PositionInfo { X = 36.6f, Y = 16.6f, Radius = 150 } } }, // Trilobite
+			{ 08629, new List<PositionInfo>() { new PositionInfo { X = 27.7f, Y = 08.7f, Radius = 150 } } }, // Sea Gelatin
+			{ 08630, new List<PositionInfo>() { new PositionInfo { X = 29.0f, Y = 21.0f, Radius = 150 } } }, // Tempest Swallow
+			{ 08631, new List<PositionInfo>() { new PositionInfo { X = 35.8f, Y = 07.2f, Radius = 150 } } }, // Blue Swimmer
+
 			// Endwalker
 			// B Rank
 			// Labyrinthos
@@ -1477,17 +1687,106 @@ namespace HuntBuddy
 
 			// Daily Targets
 			// Labyrinthos
-			{ 10668, new List<PositionInfo>() { new PositionInfo { X = 28.8f, Y = 08.8f, Radius = 150 } } }, // Troll			{ 10669, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 25.5f, Radius = 150 } } }, // Genomos			{ 10670, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 06.5f, Radius = 150 } } }, // Caribou			{ 10672, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 08.8f, Radius = 150 } } }, // Limascabra			{ 10673, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 13.5f, Radius = 150 } } }, // Luncheon Toad			{ 10674, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 12.0f, Radius = 150 } } }, // Yakow			{ 10677, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 15.0f, Radius = 150 } } }, // Labyrinth Screamer			{ 10678, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 10.7f, Radius = 150 } } }, // Northern Snapweed			{ 10679, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 14.5f, Radius = 150 } } }, // Pephredo			{ 10683, new List<PositionInfo>() { new PositionInfo { X = 37.5f, Y = 19.5f, Radius = 150 } } }, // Mythrilcap
+			{ 10668, new List<PositionInfo>() { new PositionInfo { X = 28.8f, Y = 08.8f, Radius = 150 } } }, // Troll
+			{ 10669, new List<PositionInfo>() { new PositionInfo { X = 31.0f, Y = 25.5f, Radius = 150 } } }, // Genomos
+			{ 10670, new List<PositionInfo>() { new PositionInfo { X = 15.0f, Y = 06.5f, Radius = 150 } } }, // Caribou
+			{ 10672, new List<PositionInfo>() { new PositionInfo { X = 32.0f, Y = 08.8f, Radius = 150 } } }, // Limascabra
+			{ 10673, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 13.5f, Radius = 150 } } }, // Luncheon Toad
+			{ 10674, new List<PositionInfo>() { new PositionInfo { X = 17.0f, Y = 12.0f, Radius = 150 } } }, // Yakow
+			{ 10677, new List<PositionInfo>() { new PositionInfo { X = 34.0f, Y = 15.0f, Radius = 150 } } }, // Labyrinth Screamer
+			{ 10678, new List<PositionInfo>() { new PositionInfo { X = 24.0f, Y = 10.7f, Radius = 150 } } }, // Northern Snapweed
+			{ 10679, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 14.5f, Radius = 150 } } }, // Pephredo
+			{ 10683, new List<PositionInfo>() { new PositionInfo { X = 37.5f, Y = 19.5f, Radius = 150 } } }, // Mythrilcap
+
 			// Thavnair
-			{ 10697, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 23.9f, Radius = 150 } } }, // Pisaca			{ 10698, new List<PositionInfo>() { new PositionInfo { X = 13.8f, Y = 18.5f, Radius = 150 } } }, // Vajralangula			{ 10699, new List<PositionInfo>() { new PositionInfo { X = 19.2f, Y = 32.6f, Radius = 150 } } }, // Kacchapa			{ 10700, new List<PositionInfo>() { new PositionInfo { X = 18.4f, Y = 26.7f, Radius = 150 } } }, // Hamsa			{ 10701, new List<PositionInfo>() { new PositionInfo { X = 29.1f, Y = 12.2f, Radius = 150 } } }, // Asvattha			{ 10702, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 27.8f, Radius = 150 } } }, // Guhasaya			{ 10703, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 17.4f, Radius = 150 } } }, // Bhujamga			{ 10704, new List<PositionInfo>() { new PositionInfo { X = 17.6f, Y = 17.8f, Radius = 150 } } }, // Sotormurg			{ 10705, new List<PositionInfo>() { new PositionInfo { X = 22.7f, Y = 30.4f, Radius = 150 } } }, // Gaja			{ 10706, new List<PositionInfo>() { new PositionInfo { X = 19.1f, Y = 11.7f, Radius = 150 } } }, // Thavnairian Jhammel			{ 10707, new List<PositionInfo>() { new PositionInfo { X = 25.9f, Y = 19.0f, Radius = 150 } } }, // Ufiti			{ 10709, new List<PositionInfo>() { new PositionInfo { X = 09.2f, Y = 12.8f, Radius = 150 } } }, // Chamrosh			{ 10711, new List<PositionInfo>() { new PositionInfo { X = 16.1f, Y = 09.2f, Radius = 150 } } }, // Starmite			{ 10712, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 12.7f, Radius = 150 } } }, // Manjusaka			{ 10713, new List<PositionInfo>() { new PositionInfo { X = 23.3f, Y = 19.9f, Radius = 150 } } }, // Odqan			{ 10715, new List<PositionInfo>() { new PositionInfo { X = 13.4f, Y = 28.5f, Radius = 150 } } }, // Akyaali Crab			{ 10716, new List<PositionInfo>() { new PositionInfo { X = 08.2f, Y = 16.2f, Radius = 150 } } }, // Valras
+			{ 10697, new List<PositionInfo>() { new PositionInfo { X = 19.0f, Y = 23.9f, Radius = 150 } } }, // Pisaca
+			{ 10698, new List<PositionInfo>() { new PositionInfo { X = 13.8f, Y = 18.5f, Radius = 150 } } }, // Vajralangula
+			{ 10699, new List<PositionInfo>() { new PositionInfo { X = 19.2f, Y = 32.6f, Radius = 150 } } }, // Kacchapa
+			{ 10700, new List<PositionInfo>() { new PositionInfo { X = 18.4f, Y = 26.7f, Radius = 150 } } }, // Hamsa
+			{ 10701, new List<PositionInfo>() { new PositionInfo { X = 29.1f, Y = 12.2f, Radius = 150 } } }, // Asvattha
+			{ 10702, new List<PositionInfo>() { new PositionInfo { X = 27.1f, Y = 27.8f, Radius = 150 } } }, // Guhasaya
+			{ 10703, new List<PositionInfo>() { new PositionInfo { X = 27.0f, Y = 17.4f, Radius = 150 } } }, // Bhujamga
+			{ 10704, new List<PositionInfo>() { new PositionInfo { X = 17.6f, Y = 17.8f, Radius = 150 } } }, // Sotormurg
+			{ 10705, new List<PositionInfo>() { new PositionInfo { X = 22.7f, Y = 30.4f, Radius = 150 } } }, // Gaja
+			{ 10706, new List<PositionInfo>() { new PositionInfo { X = 19.1f, Y = 11.7f, Radius = 150 } } }, // Thavnairian Jhammel
+			{ 10707, new List<PositionInfo>() { new PositionInfo { X = 25.9f, Y = 19.0f, Radius = 150 } } }, // Ufiti
+			{ 10709, new List<PositionInfo>() { new PositionInfo { X = 09.2f, Y = 12.8f, Radius = 150 } } }, // Chamrosh
+			{ 10711, new List<PositionInfo>() { new PositionInfo { X = 16.1f, Y = 09.2f, Radius = 150 } } }, // Starmite
+			{ 10712, new List<PositionInfo>() { new PositionInfo { X = 14.3f, Y = 12.7f, Radius = 150 } } }, // Manjusaka
+			{ 10713, new List<PositionInfo>() { new PositionInfo { X = 23.3f, Y = 19.9f, Radius = 150 } } }, // Odqan
+			{ 10715, new List<PositionInfo>() { new PositionInfo { X = 13.4f, Y = 28.5f, Radius = 150 } } }, // Akyaali Crab
+			{ 10716, new List<PositionInfo>() { new PositionInfo { X = 08.2f, Y = 16.2f, Radius = 150 } } }, // Valras
+
 			// Garlemald
-			{ 10648, new List<PositionInfo>() { new PositionInfo { X = 18.8f, Y = 09.8f, Radius = 150 } } }, // Automated Satellite			{ 10649, new List<PositionInfo>() { new PositionInfo { X = 25.5f, Y = 17.5f, Radius = 150 } } }, // Automated Death Machine			{ 10650, new List<PositionInfo>() { new PositionInfo { X = 15.5f, Y = 19.5f, Radius = 150 } } }, // Automated Cavalry			{ 10651, new List<PositionInfo>() { new PositionInfo { X = 21.8f, Y = 17.4f, Radius = 150 } } }, // Automated Bit			{ 10652, new List<PositionInfo>() { new PositionInfo { X = 15.7f, Y = 09.8f, Radius = 150 } } }, // Automated Roader			{ 10653, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 13.7f, Radius = 150 } } }, // Automated Slasher			{ 10654, new List<PositionInfo>() { new PositionInfo { X = 24.3f, Y = 14.9f, Radius = 150 } } }, // Automated Colossus			{ 10655, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 11.7f, Radius = 150 } } }, // Automated Avenger			{ 10656, new List<PositionInfo>() { new PositionInfo { X = 29.6f, Y = 30.3f, Radius = 150 } } }, // Almasty			{ 10657, new List<PositionInfo>() { new PositionInfo { X = 14.6f, Y = 26.1f, Radius = 150 } } }, // Eblan Bear			{ 10658, new List<PositionInfo>() { new PositionInfo { X = 31.3f, Y = 17.4f, Radius = 150 } } }, // Eblan Icetrap			{ 10659, new List<PositionInfo>() { new PositionInfo { X = 19.8f, Y = 29.1f, Radius = 150 } } }, // Ovibos			{ 10660, new List<PositionInfo>() { new PositionInfo { X = 22.3f, Y = 24.9f, Radius = 150 } } }, // Jotunn			{ 10661, new List<PositionInfo>() { new PositionInfo { X = 28.4f, Y = 33.0f, Radius = 150 } } }, // Ceruleum Zoblyn			{ 10662, new List<PositionInfo>() { new PositionInfo { X = 25.4f, Y = 31.5f, Radius = 150 } } }, // Ilsabardian Tursus			{ 10663, new List<PositionInfo>() { new PositionInfo { X = 18.7f, Y = 24.8f, Radius = 150 } } }, // Canis Lupinus			{ 10664, new List<PositionInfo>() { new PositionInfo { X = 26.1f, Y = 26.5f, Radius = 150 } } }, // Overgrown Rose
+			{ 10648, new List<PositionInfo>() { new PositionInfo { X = 18.8f, Y = 09.8f, Radius = 150 } } }, // Automated Satellite
+			{ 10649, new List<PositionInfo>() { new PositionInfo { X = 25.5f, Y = 17.5f, Radius = 150 } } }, // Automated Death Machine
+			{ 10650, new List<PositionInfo>() { new PositionInfo { X = 15.5f, Y = 19.5f, Radius = 150 } } }, // Automated Cavalry
+			{ 10651, new List<PositionInfo>() { new PositionInfo { X = 21.8f, Y = 17.4f, Radius = 150 } } }, // Automated Bit
+			{ 10652, new List<PositionInfo>() { new PositionInfo { X = 15.7f, Y = 09.8f, Radius = 150 } } }, // Automated Roader
+			{ 10653, new List<PositionInfo>() { new PositionInfo { X = 29.5f, Y = 13.7f, Radius = 150 } } }, // Automated Slasher
+			{ 10654, new List<PositionInfo>() { new PositionInfo { X = 24.3f, Y = 14.9f, Radius = 150 } } }, // Automated Colossus
+			{ 10655, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 11.7f, Radius = 150 } } }, // Automated Avenger
+			{ 10656, new List<PositionInfo>() { new PositionInfo { X = 29.6f, Y = 30.3f, Radius = 150 } } }, // Almasty
+			{ 10657, new List<PositionInfo>() { new PositionInfo { X = 14.6f, Y = 26.1f, Radius = 150 } } }, // Eblan Bear
+			{ 10658, new List<PositionInfo>() { new PositionInfo { X = 31.3f, Y = 17.4f, Radius = 150 } } }, // Eblan Icetrap
+			{ 10659, new List<PositionInfo>() { new PositionInfo { X = 19.8f, Y = 29.1f, Radius = 150 } } }, // Ovibos
+			{ 10660, new List<PositionInfo>() { new PositionInfo { X = 22.3f, Y = 24.9f, Radius = 150 } } }, // Jotunn
+			{ 10661, new List<PositionInfo>() { new PositionInfo { X = 28.4f, Y = 33.0f, Radius = 150 } } }, // Ceruleum Zoblyn
+			{ 10662, new List<PositionInfo>() { new PositionInfo { X = 25.4f, Y = 31.5f, Radius = 150 } } }, // Ilsabardian Tursus
+			{ 10663, new List<PositionInfo>() { new PositionInfo { X = 18.7f, Y = 24.8f, Radius = 150 } } }, // Canis Lupinus
+			{ 10664, new List<PositionInfo>() { new PositionInfo { X = 26.1f, Y = 26.5f, Radius = 150 } } }, // Overgrown Rose
+
 			// Mare Lamentorum
-			{ 10458, new List<PositionInfo>() { new PositionInfo { X = 23.9f, Y = 20.0f, Radius = 150 } } }, // Daphnia			{ 10459, new List<PositionInfo>() { new PositionInfo { X = 23.7f, Y = 20.3f, Radius = 150 } } }, // Osculator			{ 10460, new List<PositionInfo>() { new PositionInfo { X = 08.6f, Y = 35.5f, Radius = 150 } } }, // Sweeper			{ 10461, new List<PositionInfo>() { new PositionInfo { X = 27.3f, Y = 26.0f, Radius = 150 } } }, // Wanderer			{ 10462, new List<PositionInfo>() { new PositionInfo { X = 31.1f, Y = 32.2f, Radius = 150 } } }, // Weeper			{ 10463, new List<PositionInfo>() { new PositionInfo { X = 19.8f, Y = 22.5f, Radius = 150 } } }, // Thinker			{ 10464, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 34.0f, Radius = 150 } } }, // Regolith			{ 10465, new List<PositionInfo>() { new PositionInfo { X = 21.4f, Y = 32.2f, Radius = 150 } } }, // Trimmer			{ 10467, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 36.7f, Radius = 150 } } }, // Panopt			{ 10468, new List<PositionInfo>() { new PositionInfo { X = 11.5f, Y = 22.3f, Radius = 150 } } }, // Dynamite			{ 10469, new List<PositionInfo>() { new PositionInfo { X = 16.7f, Y = 31.8f, Radius = 150 } } }, // Armalcolite			{ 10470, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 09.6f, Radius = 150 } } }, // Caretaker			{ 10471, new List<PositionInfo>() { new PositionInfo { X = 16.1f, Y = 24.9f, Radius = 150 } } }, // Mousse			{ 10473, new List<PositionInfo>() { new PositionInfo { X = 31.2f, Y = 27.0f, Radius = 150 } } }, // Downfall Alarum			{ 10474, new List<PositionInfo>() { new PositionInfo { X = 33.6f, Y = 26.2f, Radius = 150 } } }, // Downfall Droid			{ 10475, new List<PositionInfo>() { new PositionInfo { X = 34.5f, Y = 28.0f, Radius = 150 } } }, // Downfall Hunter			{ 10476, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 150 } } }, // Supporter			{ 10477, new List<PositionInfo>() { new PositionInfo { X = 30.1f, Y = 11.0f, Radius = 150 } } }, // Scraper
+			{ 10458, new List<PositionInfo>() { new PositionInfo { X = 23.9f, Y = 20.0f, Radius = 150 } } }, // Daphnia
+			{ 10459, new List<PositionInfo>() { new PositionInfo { X = 23.7f, Y = 20.3f, Radius = 150 } } }, // Osculator
+			{ 10460, new List<PositionInfo>() { new PositionInfo { X = 08.6f, Y = 35.5f, Radius = 150 } } }, // Sweeper
+			{ 10461, new List<PositionInfo>() { new PositionInfo { X = 27.3f, Y = 26.0f, Radius = 150 } } }, // Wanderer
+			{ 10462, new List<PositionInfo>() { new PositionInfo { X = 31.1f, Y = 32.2f, Radius = 150 } } }, // Weeper
+			{ 10463, new List<PositionInfo>() { new PositionInfo { X = 19.8f, Y = 22.5f, Radius = 150 } } }, // Thinker
+			{ 10464, new List<PositionInfo>() { new PositionInfo { X = 26.0f, Y = 34.0f, Radius = 150 } } }, // Regolith
+			{ 10465, new List<PositionInfo>() { new PositionInfo { X = 21.4f, Y = 32.2f, Radius = 150 } } }, // Trimmer
+			{ 10467, new List<PositionInfo>() { new PositionInfo { X = 12.0f, Y = 36.7f, Radius = 150 } } }, // Panopt
+			{ 10468, new List<PositionInfo>() { new PositionInfo { X = 11.5f, Y = 22.3f, Radius = 150 } } }, // Dynamite
+			{ 10469, new List<PositionInfo>() { new PositionInfo { X = 16.7f, Y = 31.8f, Radius = 150 } } }, // Armalcolite
+			{ 10470, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 09.6f, Radius = 150 } } }, // Caretaker
+			{ 10471, new List<PositionInfo>() { new PositionInfo { X = 16.1f, Y = 24.9f, Radius = 150 } } }, // Mousse
+			{ 10473, new List<PositionInfo>() { new PositionInfo { X = 31.2f, Y = 27.0f, Radius = 150 } } }, // Downfall Alarum
+			{ 10474, new List<PositionInfo>() { new PositionInfo { X = 33.6f, Y = 26.2f, Radius = 150 } } }, // Downfall Droid
+			{ 10475, new List<PositionInfo>() { new PositionInfo { X = 34.5f, Y = 28.0f, Radius = 150 } } }, // Downfall Hunter
+			{ 10476, new List<PositionInfo>() { new PositionInfo { X = 13.0f, Y = 10.0f, Radius = 150 } } }, // Supporter
+			{ 10477, new List<PositionInfo>() { new PositionInfo { X = 30.1f, Y = 11.0f, Radius = 150 } } }, // Scraper
+
 			// Elpis
-			{ 10590, new List<PositionInfo>() { new PositionInfo { X = 25.7f, Y = 33.9f, Radius = 150 } } }, // Ophion			{ 10591, new List<PositionInfo>() { new PositionInfo { X = 16.5f, Y = 29.9f, Radius = 150 } } }, // Yggdreant			{ 10592, new List<PositionInfo>() { new PositionInfo { X = 22.6f, Y = 20.0f, Radius = 150 } } }, // Okyupete			{ 10594, new List<PositionInfo>() { new PositionInfo { X = 12.4f, Y = 31.8f, Radius = 150 } } }, // Gryps			{ 10595, new List<PositionInfo>() { new PositionInfo { X = 26.6f, Y = 29.7f, Radius = 150 } } }, // Monoceros			{ 10596, new List<PositionInfo>() { new PositionInfo { X = 10.1f, Y = 14.1f, Radius = 150 } } }, // Pegasos			{ 10597, new List<PositionInfo>() { new PositionInfo { X = 28.7f, Y = 25.6f, Radius = 150 } } }, // Bird of Elpis			{ 10599, new List<PositionInfo>() { new PositionInfo { X = 33.4f, Y = 14.3f, Radius = 150 } } }, // Hippe			{ 10600, new List<PositionInfo>() { new PositionInfo { X = 14.1f, Y = 09.9f, Radius = 150 } } }, // Harpuia			{ 10601, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 10.0f, Radius = 150 } } }, // Morbol Marquis			{ 10602, new List<PositionInfo>() { new PositionInfo { X = 29.2f, Y = 09.3f, Radius = 150 } } }, // Akantha			{ 10603, new List<PositionInfo>() { new PositionInfo { X = 24.4f, Y = 14.3f, Radius = 150 } } }, // Lykopersikon			{ 10606, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 06.3f, Radius = 150 } } }, // Lotis			{ 10607, new List<PositionInfo>() { new PositionInfo { X = 10.2f, Y = 34.6f, Radius = 150 } } }, // Phanopsyche			{ 10608, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 23.4f, Radius = 150 } } }, // Melanion			{ 10609, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 08.7f, Radius = 150 } } }, // Ophiotauros			{ 10610, new List<PositionInfo>() { new PositionInfo { X = 13.3f, Y = 15.7f, Radius = 150 } } }, // Elpis Minotaur			{ 10611, new List<PositionInfo>() { new PositionInfo { X = 30.7f, Y = 17.1f, Radius = 150 } } }, // Remora
+			{ 10590, new List<PositionInfo>() { new PositionInfo { X = 25.7f, Y = 33.9f, Radius = 150 } } }, // Ophion
+			{ 10591, new List<PositionInfo>() { new PositionInfo { X = 16.5f, Y = 29.9f, Radius = 150 } } }, // Yggdreant
+			{ 10592, new List<PositionInfo>() { new PositionInfo { X = 22.6f, Y = 20.0f, Radius = 150 } } }, // Okyupete
+			{ 10594, new List<PositionInfo>() { new PositionInfo { X = 12.4f, Y = 31.8f, Radius = 150 } } }, // Gryps
+			{ 10595, new List<PositionInfo>() { new PositionInfo { X = 26.6f, Y = 29.7f, Radius = 150 } } }, // Monoceros
+			{ 10596, new List<PositionInfo>() { new PositionInfo { X = 10.1f, Y = 14.1f, Radius = 150 } } }, // Pegasos
+			{ 10597, new List<PositionInfo>() { new PositionInfo { X = 28.7f, Y = 25.6f, Radius = 150 } } }, // Bird of Elpis
+			{ 10599, new List<PositionInfo>() { new PositionInfo { X = 33.4f, Y = 14.3f, Radius = 150 } } }, // Hippe
+			{ 10600, new List<PositionInfo>() { new PositionInfo { X = 14.1f, Y = 09.9f, Radius = 150 } } }, // Harpuia
+			{ 10601, new List<PositionInfo>() { new PositionInfo { X = 25.0f, Y = 10.0f, Radius = 150 } } }, // Morbol Marquis
+			{ 10602, new List<PositionInfo>() { new PositionInfo { X = 29.2f, Y = 09.3f, Radius = 150 } } }, // Akantha
+			{ 10603, new List<PositionInfo>() { new PositionInfo { X = 24.4f, Y = 14.3f, Radius = 150 } } }, // Lykopersikon
+			{ 10606, new List<PositionInfo>() { new PositionInfo { X = 21.5f, Y = 06.3f, Radius = 150 } } }, // Lotis
+			{ 10607, new List<PositionInfo>() { new PositionInfo { X = 10.2f, Y = 34.6f, Radius = 150 } } }, // Phanopsyche
+			{ 10608, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 23.4f, Radius = 150 } } }, // Melanion
+			{ 10609, new List<PositionInfo>() { new PositionInfo { X = 12.9f, Y = 08.7f, Radius = 150 } } }, // Ophiotauros
+			{ 10610, new List<PositionInfo>() { new PositionInfo { X = 13.3f, Y = 15.7f, Radius = 150 } } }, // Elpis Minotaur
+			{ 10611, new List<PositionInfo>() { new PositionInfo { X = 30.7f, Y = 17.1f, Radius = 150 } } }, // Remora
+
 			// Ultima Thule
-			{ 10419, new List<PositionInfo>() { new PositionInfo { X = 30.1f, Y = 25.9f, Radius = 150 } } }, // Broken Omicron			{ 10420, new List<PositionInfo>() { new PositionInfo { X = 19.3f, Y = 11.8f, Radius = 150 } } }, // Drifting Ea			{ 10421, new List<PositionInfo>() { new PositionInfo { X = 34.8f, Y = 28.8f, Radius = 150 } } }, // Beta			{ 10422, new List<PositionInfo>() { new PositionInfo { X = 32.9f, Y = 28.8f, Radius = 150 } } }, // Delta			{ 10423, new List<PositionInfo>() { new PositionInfo { X = 36.5f, Y = 25.9f, Radius = 150 } } }, // Lambda			{ 10424, new List<PositionInfo>() { new PositionInfo { X = 32.1f, Y = 26.6f, Radius = 150 } } }, // Level Tricker			{ 10427, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 30.0f, Radius = 150 } } }, // Stellar Amphiptere			{ 10430, new List<PositionInfo>() { new PositionInfo { X = 14.4f, Y = 28.2f, Radius = 150 } } }, // Stellar Brobinyak			{ 10435, new List<PositionInfo>() { new PositionInfo { X = 16.3f, Y = 14.1f, Radius = 150 } } }, // Other One		};
+			{ 10419, new List<PositionInfo>() { new PositionInfo { X = 30.1f, Y = 25.9f, Radius = 150 } } }, // Broken Omicron
+			{ 10420, new List<PositionInfo>() { new PositionInfo { X = 19.3f, Y = 11.8f, Radius = 150 } } }, // Drifting Ea
+			{ 10421, new List<PositionInfo>() { new PositionInfo { X = 34.8f, Y = 28.8f, Radius = 150 } } }, // Beta
+			{ 10422, new List<PositionInfo>() { new PositionInfo { X = 32.9f, Y = 28.8f, Radius = 150 } } }, // Delta
+			{ 10423, new List<PositionInfo>() { new PositionInfo { X = 36.5f, Y = 25.9f, Radius = 150 } } }, // Lambda
+			{ 10424, new List<PositionInfo>() { new PositionInfo { X = 32.1f, Y = 26.6f, Radius = 150 } } }, // Level Tricker
+			{ 10427, new List<PositionInfo>() { new PositionInfo { X = 10.0f, Y = 30.0f, Radius = 150 } } }, // Stellar Amphiptere
+			{ 10430, new List<PositionInfo>() { new PositionInfo { X = 14.4f, Y = 28.2f, Radius = 150 } } }, // Stellar Brobinyak
+			{ 10435, new List<PositionInfo>() { new PositionInfo { X = 16.3f, Y = 14.1f, Radius = 150 } } }, // Other One
+		};
 
 		public enum OpenType
 		{
@@ -1505,30 +1804,28 @@ namespace HuntBuddy
 				return;
 			}
 
-			var firstPos = MapToWorldCoordinates(Database[mobHuntId][0].Coordinate, mapId);
-
-			map->IsFlagMarkerSet = 0;
-			map->SetFlagMapMarker(territoryType, mapId, firstPos.X, firstPos.Y, 60004);
-
 			switch (openType)
 			{
 				case OpenType.None:
 					break;
 				case OpenType.ShowOpen:
-					map->AgentInterface.Hide();
-					for (var i = (index * 5) - 5; i < (index*5); i++)
+					map->ResetMapMarkers();
+					if (Database[mobHuntId].Count == 1 && Database[mobHuntId][0].Fate != 0)
 					{
-						try
+						var thing = Database[mobHuntId][0];
+						var pos = MapToWorldCoordinates(Database[mobHuntId][0].Coordinate, mapId);
+						map->AddGatheringTempMarker(pos.X, pos.Y, Database[mobHuntId][0].Radius, 60004, 4, mobHuntName);
+						map->OpenMap(mapId, territoryType, $"FATE: {Plugin.DataManager.GetExcelSheet<Fate>()!.GetRow(thing.Fate)!.Name}", MapType.GatheringLog);
+						break;
+					}
+					foreach (var i in Database[mobHuntId])
+					{
+                        var pos = MapToWorldCoordinates(i.Coordinate, mapId);
+						if (!map->AddMapMarker(new Vector3 { X = pos.X, Y = 0, Z = pos.Y }, 60004))
 						{
-							var positionInfo = Database[mobHuntId][i];
-							var pos = MapToWorldCoordinates(positionInfo.Coordinate, mapId);
-							map->AddGatheringTempMarker(pos.X, pos.Y, positionInfo.Radius, 60004, 4, mobHuntName);
+							Plugin.PluginLog.Debug("Unable to place all markers on map");
 						}
-						catch (ArgumentOutOfRangeException)
-						{
-							break; ;
-						}
-                    }
+					}
 					map->OpenMap(mapId, territoryType, mobHuntName, MapType.GatheringLog);
 					break;
 				case OpenType.MarkerOpen:

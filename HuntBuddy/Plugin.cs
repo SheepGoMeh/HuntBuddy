@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -149,90 +150,7 @@ public class Plugin: IDalamudPlugin {
 					this.Configuration.Save();
 					break;
 				case "next":
-					if (this.MobHuntEntries.Count > 0) {
-						bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark ||
-							this.MobHuntStruct->CurrentKills[
-								entry.CurrentKillsOffset] <
-							entry.NeededKills;
-						Location.OpenType openType = Location.OpenType.None;
-						Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
-						Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState
-							.TerritoryType)!.Map!.Value!;
-						Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
-						MobHuntEntry? chosen = this.CurrentAreaMobHuntEntries
-							.Where(filterPredicate)
-							.OrderBy(entry =>
-								entry.IsEliteMark
-									? float.MaxValue
-									: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
-							.FirstOrDefault();
-						if (chosen == null) {
-							Service.PluginLog.Information("No marks in current zone, looking in current expansion");
-							openType = this.Configuration.IncludeAreaOnMap
-								? Location.OpenType.ShowOpen
-								: Location.OpenType.MarkerOpen;
-							SeString? expansion =
-								Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState
-									.TerritoryType)!.ExVersion.Value!.Name;
-							Service.PluginLog.Information(
-								$"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
-							List<MobHuntEntry> candidates = this.MobHuntEntries.ContainsKey(expansion)
-								? this.MobHuntEntries[expansion]
-									.Values
-									.SelectMany(l => l)
-									.Where(filterPredicate)
-									.ToList()
-								: [];
-							// if we didn't find any candidates, we try a different method to fill it
-							if (candidates.Count == 0) {
-								Service.PluginLog.Information(
-									"Nothing available in current expansion, looking globally");
-								candidates =
-									this.MobHuntEntries.Values
-										.SelectMany(dict => dict.Values)
-										.SelectMany(l => l)
-										.Where(filterPredicate)
-										.ToList();
-							}
-
-							// regardless of HOW we got our candidates, assuming we did in fact get them, we pick one
-							// note that this can't be merged into the above block because the above MAY run, and if so MUST run first,
-							// but this block must ALWAYS run, regardless
-							if (candidates.Count >= 1) {
-								Service.PluginLog.Information($"Found {candidates.Count}");
-								chosen = candidates[new Random().Next(candidates.Count)];
-							}
-						}
-
-						if (chosen != null) {
-							if (chosen.IsEliteMark) {
-								Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
-								if (!this.Configuration.SuppressEliteMarkLocationWarning) {
-									Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
-										+ "\n(You can suppress this warning in the plugin settings)");
-								}
-							}
-							else {
-								long remaining = chosen.NeededKills -
-												 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
-								Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
-								Location.CreateMapMarker(
-									chosen.TerritoryType,
-									chosen.MapId,
-									chosen.MobHuntId,
-									chosen.Name,
-									openType);
-							}
-							if (this.Configuration.EnableXivEspIntegration && this.Configuration.AutoSetEspSearchOnNextHuntCommand && Plugin.EspConsumer?.IsAvailable == true)
-								Plugin.EspConsumer.SearchFor(chosen.Name!);
-						}
-						else {
-							Service.PluginLog.Information("Unable to find a hunt mark to target");
-							Service.Chat.Print(
-								"Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
-						}
-					}
-
+					Task.Run(this.TriggerNextHuntMark);
 					break;
 				case "ls":
 				case "list":
@@ -256,6 +174,79 @@ public class Plugin: IDalamudPlugin {
 		catch (Exception e) {
 			Service.PluginLog.Error($"Error in command handler: {e}");
 		}
+	}
+
+	public unsafe void TriggerNextHuntMark() {
+		if (!this.TryFindNextHuntMark(out MobHuntEntry? chosen, out Location.OpenType mapOpenMode)) {
+			Task.Run(this.ReloadData).Wait();
+		}
+		if (chosen is not null || this.TryFindNextHuntMark(out chosen, out mapOpenMode)) {
+			if (chosen.IsEliteMark) {
+				Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+				if (!this.Configuration.SuppressEliteMarkLocationWarning) {
+					Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
+						+ "\n(You can suppress this warning in the plugin settings)");
+				}
+			}
+			else {
+				long remaining = chosen.NeededKills - this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
+				Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
+				Location.CreateMapMarker(chosen, mapOpenMode);
+			}
+			if (this.Configuration.EnableXivEspIntegration && this.Configuration.AutoSetEspSearchOnNextHuntCommand && EspConsumer?.IsAvailable == true)
+				EspConsumer.SearchFor(chosen.Name!);
+		}
+		else {
+			Service.PluginLog.Information("Unable to find a hunt mark to target");
+			Service.Chat.Print("Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
+		}
+	}
+
+	public unsafe bool TryFindNextHuntMark([NotNullWhen(true)] out MobHuntEntry? hunt, out Location.OpenType mapMode) {
+		hunt = null;
+		mapMode = Location.OpenType.None;
+		if (this.MobHuntEntries.Count > 0) {
+			bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark || this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills;
+			Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
+			Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.Map!.Value!;
+			Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
+			IEnumerable<MobHuntEntry> candidates = this.CurrentAreaMobHuntEntries
+				.Where(filterPredicate)
+				.OrderBy(entry =>
+					entry.IsEliteMark
+						? float.MaxValue // elite marks are always at the end of the list, since they're annoying to track down
+						: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2));
+
+			// if we found nothing in the current zone, look wider within the current zone's expac
+			if (!candidates.Any()) {
+				Service.PluginLog.Information("No marks in current zone, looking in current expansion");
+				mapMode = this.Configuration.IncludeAreaOnMap
+					? Location.OpenType.ShowOpen
+					: Location.OpenType.MarkerOpen;
+				SeString? expansion = Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.ExVersion.Value!.Name;
+				Service.PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+				candidates = this.MobHuntEntries.ContainsKey(expansion)
+					? this.MobHuntEntries[expansion]
+						.Values
+						.SelectMany(l => l)
+						.Where(filterPredicate)
+					: [];
+			}
+
+			// if we didn't find any candidates in the expact, we look globally
+			if (!candidates.Any()) {
+				Service.PluginLog.Information("Nothing available in current expansion, looking globally");
+				candidates = this.MobHuntEntries.Values
+					.SelectMany(dict => dict.Values)
+					.SelectMany(l => l)
+					.Where(filterPredicate)
+					.ToList();
+			}
+
+			// if we didn't find anything, this'll just be null, so we don't need any kind of checks on it
+			hunt = candidates.FirstOrDefault();
+		}
+		return hunt is not null;
 	}
 
 	public unsafe void ReloadData() {

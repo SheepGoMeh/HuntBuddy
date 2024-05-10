@@ -1,9 +1,6 @@
 ﻿using System;
 
-namespace HuntBuddy.Attributes
-{
-	[AttributeUsage(AttributeTargets.Method)]
-	public class DoNotShowInHelpAttribute : Attribute
-	{
-	}
-}
+namespace HuntBuddy.Attributes;
+
+[AttributeUsage(AttributeTargets.Method)]
+public class DoNotShowInHelpAttribute: Attribute;

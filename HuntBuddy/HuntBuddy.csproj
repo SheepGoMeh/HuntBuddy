@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0-windows</TargetFramework>
+        <TargetFramework>net8-windows</TargetFramework>
         <Nullable>enable</Nullable>
-        <AssemblyVersion>1.0.3.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.1</AssemblyVersion>
         <FileVersion>$(AssemblyVersion)</FileVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>HuntBuddy</RootNamespace>

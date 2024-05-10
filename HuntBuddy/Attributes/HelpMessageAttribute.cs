@@ -1,15 +1,12 @@
 ﻿using System;
 
-namespace HuntBuddy.Attributes
-{
-	[AttributeUsage(AttributeTargets.Method)]
-	public class HelpMessageAttribute : Attribute
-	{
-		public string HelpMessage { get; }
+namespace HuntBuddy.Attributes;
 
-		public HelpMessageAttribute(string helpMessage)
-		{
-			this.HelpMessage = helpMessage;
-		}
+[AttributeUsage(AttributeTargets.Method)]
+public class HelpMessageAttribute: Attribute {
+	public string HelpMessage {
+		get;
 	}
+
+	public HelpMessageAttribute(string helpMessage) => this.HelpMessage = helpMessage;
 }

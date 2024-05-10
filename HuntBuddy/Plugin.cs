@@ -87,8 +87,8 @@ public class Plugin: IDalamudPlugin {
 		this.WindowSystem.AddWindow(new LocalHuntsWindow());
 		this.WindowSystem.AddWindow(this.ConfigurationWindow);
 
-		Plugin.TeleportConsumer = new TeleportConsumer();
-		Plugin.EspConsumer = new EspConsumer();
+		TeleportConsumer = new TeleportConsumer();
+		EspConsumer = new EspConsumer();
 		Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
 		Service.PluginInterface.UiBuilder.Draw += this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
@@ -293,7 +293,7 @@ public class Plugin: IDalamudPlugin {
 								or BillEnum.ShbElite or BillEnum.EwElite,
 							CurrentKillsOffset = (5 * (uint)billNumber) + mobHuntOrderRow.SubRowId,
 							NeededKills = mobHuntOrderRow.NeededKills,
-							Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
+							Icon = LoadIcon(mobHuntOrderRow.Target.Value.Icon)
 						});
 				}
 				else {

@@ -164,7 +164,7 @@ public class Plugin: IDalamudPlugin {
 							.OrderBy(entry =>
 								entry.IsEliteMark
 									? float.MaxValue
-									: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
+									: Vector2.Distance(Location.Database[entry.MobHuntId][0].Coordinate, playerVec2))
 							.FirstOrDefault();
 						if (chosen == null) {
 							Service.PluginLog.Information("No marks in current zone, looking in current expansion");

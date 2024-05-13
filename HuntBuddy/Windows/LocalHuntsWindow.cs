@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 using Dalamud.Interface;
@@ -130,6 +131,10 @@ public class LocalHuntsWindow: Window {
 			}
 
 			ImGui.Text($"{mobHuntEntry.Name} ({currentKills}/{mobHuntEntry.NeededKills})");
+
+			if (Location.Database.TryGetValue(mobHuntEntry.MobHuntId, out List<Location.PositionInfo>? value) && value[0].Fate != 0) {
+				ImGui.Text($"FATE: {Service.DataManager.GetExcelSheet<Lumina.Excel.GeneratedSheets2.Fate>()!.GetRow(value[0].Fate)!.Name}");
+			}
 
 			if (!Plugin.Instance.Configuration.ShowLocalHuntIcons) {
 				continue;

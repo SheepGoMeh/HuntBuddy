@@ -31,7 +31,7 @@ public class TeleportConsumer: ConsumerBase {
 			return this.consumerTeleport.InvokeFunc(aetheryteId, 0);
 		}
 		catch {
-			Service.Chat.PrintError("Teleporter plugin is not responding");
+			Service.Chat.PrintError("Teleporter plugin is not responding", Plugin.Instance.Name);
 			return false;
 		}
 	}

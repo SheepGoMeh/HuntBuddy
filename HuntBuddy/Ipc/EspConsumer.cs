@@ -51,7 +51,7 @@ public class EspConsumer: ConsumerBase {
 		}
 		catch (Exception ex) {
 			Service.PluginLog.Error($"XivEsp is not responding to IPC: {ex}");
-			Service.Chat.PrintError("XivEsp plugin is not responding");
+			Service.Chat.PrintError("XivEsp plugin is not responding", Plugin.Instance.Name);
 			return false;
 		}
 	}

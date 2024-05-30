@@ -13,6 +13,8 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using HuntBuddy.Structs;
@@ -24,7 +26,8 @@ using Lumina.Data.Files;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 using Lumina.Extensions;
-using Lumina.Text;
+
+using Map = Lumina.Excel.GeneratedSheets.Map;
 
 namespace HuntBuddy;
 
@@ -92,6 +95,7 @@ public class Plugin: IDalamudPlugin {
 		Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
 		Service.PluginInterface.UiBuilder.Draw += this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
+		Service.PluginInterface.UiBuilder.OpenMainUi += this.DrawInterface;
 		Service.Framework.Update += this.FrameworkOnUpdate;
 	}
 
@@ -129,6 +133,7 @@ public class Plugin: IDalamudPlugin {
 		Service.Framework.Update -= this.FrameworkOnUpdate;
 		Service.PluginInterface.UiBuilder.Draw -= this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
+		Service.PluginInterface.UiBuilder.OpenMainUi -= this.DrawInterface;
 
 		this.WindowSystem.RemoveAllWindows();
 
@@ -177,24 +182,24 @@ public class Plugin: IDalamudPlugin {
 	}
 
 	public unsafe void TriggerNextHuntMark() {
-		if (!this.TryFindNextHuntMark(out MobHuntEntry? chosen, out Location.OpenType mapOpenMode)) {
+		if (!this.TryFindNextHuntMark(out MobHuntEntry? target, out Location.OpenType mapOpenMode)) {
 			Task.Run(this.ReloadData).Wait();
 		}
-		if (chosen is not null || this.TryFindNextHuntMark(out chosen, out mapOpenMode)) {
-			if (chosen.IsEliteMark) {
-				Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+		if (target is not null || this.TryFindNextHuntMark(out target, out mapOpenMode)) {
+			if (target.IsEliteMark) {
+				Service.Chat.Print($"Hunting elite mark {target.Name} in {target.TerritoryName}");
 				if (!this.Configuration.SuppressEliteMarkLocationWarning) {
 					Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
 						+ "\n(You can suppress this warning in the plugin settings)");
 				}
 			}
 			else {
-				long remaining = chosen.NeededKills - this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
-				Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
-				Location.CreateMapMarker(chosen, mapOpenMode);
+				long remaining = target.NeededKills - this.MobHuntStruct->CurrentKills[target.CurrentKillsOffset];
+				Service.Chat.Print($"Hunting {remaining}x {target.Name} in {target.TerritoryName}");
+				Location.CreateMapMarker(target, mapOpenMode);
 			}
 			if (this.Configuration.EnableXivEspIntegration && this.Configuration.AutoSetEspSearchOnNextHuntCommand && EspConsumer?.IsAvailable == true)
-				EspConsumer.SearchFor(chosen.Name!);
+				EspConsumer.SearchFor(target.Name!);
 		}
 		else {
 			Service.PluginLog.Information("Unable to find a hunt mark to target");
@@ -202,51 +207,131 @@ public class Plugin: IDalamudPlugin {
 		}
 	}
 
-	public unsafe bool TryFindNextHuntMark([NotNullWhen(true)] out MobHuntEntry? hunt, out Location.OpenType mapMode) {
-		hunt = null;
-		mapMode = Location.OpenType.None;
-		if (this.MobHuntEntries.Count > 0) {
-			bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark || this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills;
-			Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
-			Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.Map!.Value!;
-			Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
-			IEnumerable<MobHuntEntry> candidates = this.CurrentAreaMobHuntEntries
-				.Where(filterPredicate)
-				.OrderBy(entry =>
-					entry.IsEliteMark
-						? float.MaxValue // elite marks are always at the end of the list, since they're annoying to track down
-						: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2));
-
-			// if we found nothing in the current zone, look wider within the current zone's expac
-			if (!candidates.Any()) {
-				Service.PluginLog.Information("No marks in current zone, looking in current expansion");
-				mapMode = this.Configuration.IncludeAreaOnMap
-					? Location.OpenType.ShowOpen
-					: Location.OpenType.MarkerOpen;
-				SeString? expansion = Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.ExVersion.Value!.Name;
-				Service.PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
-				candidates = this.MobHuntEntries.ContainsKey(expansion)
-					? this.MobHuntEntries[expansion]
-						.Values
-						.SelectMany(l => l)
-						.Where(filterPredicate)
-					: [];
-			}
-
-			// if we didn't find any candidates in the expact, we look globally
-			if (!candidates.Any()) {
-				Service.PluginLog.Information("Nothing available in current expansion, looking globally");
-				candidates = this.MobHuntEntries.Values
-					.SelectMany(dict => dict.Values)
-					.SelectMany(l => l)
-					.Where(filterPredicate)
-					.ToList();
-			}
-
-			// if we didn't find anything, this'll just be null, so we don't need any kind of checks on it
-			hunt = candidates.FirstOrDefault();
+	public unsafe bool TryFindNextHuntMark([NotNullWhen(true)] out MobHuntEntry? target, out Location.OpenType mapOpenMode) {
+		target = null;
+		mapOpenMode = Location.OpenType.None;
+		Telepo* tp = Telepo.Instance();
+		if (tp == null || tp->UpdateAetheryteList() == null) {
+			return false;
 		}
-		return hunt is not null;
+
+		// if there aren't any marks, then we don't need to bother doing anything
+		if (this.MobHuntEntries.Count == 0)
+			return false;
+
+		// this is used to determine the cheapest zone to get to
+		// threaded so it can maybe run while we're doing other shit, instead of blocking every time
+		Dictionary<uint, uint> prices = [];
+		Task priceLoader = Task.Run(() => {
+			ulong unlockedAetherytes = tp->TeleportList.Size();
+			for (ulong i = 0; i < unlockedAetherytes; ++i) {
+				TeleportInfo info = tp->TeleportList.Get(i);
+				prices[info.AetheryteId] = info.GilCost;
+			}
+		});
+
+		bool stillNeedToHunt(MobHuntEntry entry) => entry.IsEliteMark || this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] < entry.NeededKills;
+		Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
+		Map playerMap = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.Map!.Value!;
+		Vector2 playerPosMap = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), playerMap);
+		IEnumerable<MobHuntEntry> candidates = this.CurrentAreaMobHuntEntries
+			.Where(stillNeedToHunt)
+			.OrderBy(entry => entry.IsEliteMark
+				? float.MaxValue // elite marks are always at the end of the list, since they're annoying to track down
+				: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerPosMap));
+
+		// if we found nothing in the current zone, look wider within the current zone's expac
+		if (!candidates.Any()) {
+			Service.PluginLog.Information("No marks in current zone, looking in current expansion");
+			mapOpenMode = this.Configuration.IncludeAreaOnMap
+				? Location.OpenType.ShowOpen
+				: Location.OpenType.MarkerOpen;
+			string? expansion = Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.ExVersion.Value!.Name.RawString;
+			Service.PluginLog.Information($"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+			candidates = this.MobHuntEntries.TryGetValue(expansion, out Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>? whatEvenIsThisDataStructure)
+				? whatEvenIsThisDataStructure.Values
+					.SelectMany(l => l)
+					.Where(stillNeedToHunt)
+				: [];
+		}
+
+		// if we didn't find any candidates in the expact, we look globally
+		if (!candidates.Any()) {
+			Service.PluginLog.Information("Nothing available in current expansion, looking globally");
+			candidates = this.MobHuntEntries.Values
+				.SelectMany(dict => dict.Values)
+				.SelectMany(l => l)
+				.Where(stillNeedToHunt)
+				.ToList();
+		}
+
+		// at this point, we need to know teleport costs to find the cheapest aetheryte, so if the task hasn't finished yet then we just have to wait
+		priceLoader.Wait();
+		if (!priceLoader.IsCompletedSuccessfully) {
+			Service.PluginLog.Error(priceLoader.Exception, $"Failed to load aetheryte teleport prices");
+			Service.Chat.PrintError("There was an error loading teleport prices", this.Name);
+			return false;
+		}
+
+		// if we didn't find anything, this'll just end up null, so we don't need any kind of checks on it
+		// failure is indicated by a null output and return value of false, and the return value is just "is the output not null"
+		target = candidates
+			// caching is done in stages because we want to filter out anything that somehow doesn't have a map associated with it
+			.Select(mob => new {
+				mob,
+				map = Service.DataManager.Excel.GetSheet<Map>()?.GetRow(mob.MapId),
+			})
+			.Where(mark => mark.map != null)
+			// and then we cache everything else we need so we don't have to keep querying lumina
+			.Select(mark => {
+				bool aetheryteInZone = mark.mob.TerritoryType != 399; // Dravanian Hinterlands don't have an aetheryte, because fuck you
+				ExcelSheet<MapMarker>? markers = Service.DataManager.Excel.GetSheet<MapMarker>();
+				// if I didn't have to handle the ONE SINGULAR EDGE CASE of the hinterlands being shitass
+				// and not having an aetheryte, this would all be half the size and a quarter the effort
+				ushort? nearestAetheryteId = markers
+					?.Where(marker => marker.DataType == 3 && marker.RowId == mark.map!.MapMarkerRange)
+					.Select(marker => new {
+						distance = Vector2.DistanceSquared(
+							Location.Database[mark.mob.MobHuntId].Coordinate,
+							Location.ConvertPixelPositionToMapCoordinate(marker.X, marker.Y, mark.map!.SizeFactor)),
+						rowId = marker.DataKey,
+					})
+					.OrderBy(x => x.distance)
+					.FirstOrDefault()
+					?.rowId;
+				Aetheryte? nearestAetheryte = !aetheryteInZone
+					? mark.map?.TerritoryType?.Value?.Aetheryte.Value
+					: Service.DataManager.Excel.GetSheet<Aetheryte>()?
+						.FirstOrDefault(a => a.IsAetheryte && a.Territory.Row == mark.mob.TerritoryType && a.RowId == nearestAetheryteId);
+				MapMarker? aetheryteMarker = aetheryteInZone && nearestAetheryte != null
+					? markers?.GetRow(nearestAetheryte.RowId)
+					: null;
+				float? distance = aetheryteMarker != null && Location.Database.TryGetValue(mark.mob.MobHuntId, out Location.PositionInfo? position)
+					? Vector2.DistanceSquared(
+						position.Coordinate,
+						Location.ConvertPixelPositionToMapCoordinate(aetheryteMarker.X, aetheryteMarker.Y, mark.map!.SizeFactor))
+					: null;
+				return new {
+					mark.mob,
+					mark.map,
+					aetheryte = nearestAetheryte,
+					distance,
+				};
+			})
+			// collect everything by where it is
+			.GroupBy(mark => mark.aetheryte?.RowId ?? uint.MaxValue)
+			// sort for cheapest teleport
+			.OrderBy(group => prices.TryGetValue(group.Key, out uint price) ? price : uint.MaxValue)
+			// look only at stuff in the cheapest zone
+			.FirstOrDefault()?
+			// sort hunt marks by distance
+			.OrderBy(mark => mark.distance ?? float.MaxValue)
+			// for any that are somehow at the same distance, sort by name so it's at least deterministic
+			.ThenBy(mark => mark.mob.Name)
+			// take only the first thing, if any
+			.FirstOrDefault()
+			?.mob;
+		return target is not null;
 	}
 
 	public unsafe void ReloadData() {

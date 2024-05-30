@@ -497,7 +497,7 @@ public static class Location {
 	public static unsafe void CreateMapMarker(MobHuntEntry mob, OpenType openType) => CreateMapMarker(mob.TerritoryType, mob.MapId, mob.MobHuntId, mob.Name, openType);
 	public static unsafe void CreateMapMarker(MobHuntEntry mob) => CreateMapMarker(mob.TerritoryType, mob.MapId, mob.MobHuntId, mob.Name);
 
-	private static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId) {
+	internal static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId) {
 		ushort scale = Service.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;
 		float num = scale / 100f;
 		float x = (float)(((pos.X - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
@@ -507,14 +507,14 @@ public static class Location {
 		return ((int)x, (int)y);
 	}
 
-	private static Vector2 ConvertPixelPositionToMapCoordinate(int x, int y, float scale) {
+	internal static Vector2 ConvertPixelPositionToMapCoordinate(int x, int y, float scale) {
 		float num = scale / 100f;
 		return new Vector2(
 			ConvertRawPositionToMapCoordinate((int)((x - 1024) * num * 1000f), scale),
 			ConvertRawPositionToMapCoordinate((int)((y - 1024) * num * 1000f), scale));
 	}
 
-	private static float ConvertRawPositionToMapCoordinate(int pos, float scale) {
+	internal static float ConvertRawPositionToMapCoordinate(int pos, float scale) {
 		float num1 = scale / 100f;
 		float num2 = (float)(pos * (double)num1 / 1000.0f);
 		return (40.96f / num1 * ((num2 + 1024.0f) / 2048.0f)) + 1.0f;

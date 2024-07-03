@@ -1,8 +1,14 @@
 ﻿using System.Numerics;
 
 using Dalamud.Interface;
-
+using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.Plugin.Services;
+using Dalamud.Interface.Textures;
 using ImGuiNET;
+
+using Lumina.Data.Files;
+
+using Lumina.Extensions;
 
 namespace HuntBuddy.Utils;
 
@@ -36,7 +42,26 @@ public static class InterfaceUtil {
 				Plugin.Instance.Configuration.IconBackgroundColourU32);
 		}
 
-		drawList.AddImage(mobHuntEntry.Icon.ImGuiHandle, cursorPos, cursorPos + imageSize);
+		drawList.AddImage(LoadIcon(mobHuntEntry.Icon).ImGuiHandle, cursorPos, cursorPos + imageSize);
+	}
+
+	/// <summary>
+	/// Returns a IDalamudTextureWrap for an icon.
+	/// Will request a Hi-Res version and fallback to normal resolution otherwise.
+	/// </summary>
+	/// <param name="id">Icon ID</param>
+	/// <returns>IDalamudTextureWrap for the icon, or an empty wrap if the icon is not found.</returns>
+	private static IDalamudTextureWrap LoadIcon(uint id) {
+		if (Service.TextureProvider.TryGetFromGameIcon(new GameIconLookup {
+			IconId = id,
+			HiRes = true,
+		}, out var texture)) {
+			return texture.GetWrapOrEmpty();
+		}
+		return Service.TextureProvider.GetFromGameIcon(new GameIconLookup {
+			IconId = id,
+			HiRes = false,
+		}).GetWrapOrEmpty();
 	}
 
 	/// <summary>

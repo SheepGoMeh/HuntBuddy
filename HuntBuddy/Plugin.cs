@@ -6,7 +6,6 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 
-using Dalamud.Interface.Internal;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -19,10 +18,8 @@ using HuntBuddy.Windows;
 
 using ImGuiNET;
 
-using Lumina.Data.Files;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
-using Lumina.Extensions;
 using Lumina.Text;
 
 namespace HuntBuddy;
@@ -60,7 +57,7 @@ public class Plugin: IDalamudPlugin {
 		internal set;
 	} = null!;
 
-	public Plugin(DalamudPluginInterface pluginInterface) {
+	public Plugin(IDalamudPluginInterface pluginInterface) {
 		Instance = this;
 
 		pluginInterface.Create<Service>();
@@ -91,6 +88,7 @@ public class Plugin: IDalamudPlugin {
 		Service.ClientState.TerritoryChanged += this.ClientStateOnTerritoryChanged;
 		Service.PluginInterface.UiBuilder.Draw += this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi += this.OpenConfigUi;
+		Service.PluginInterface.UiBuilder.OpenMainUi += this.OpenMainUi;
 		Service.Framework.Update += this.FrameworkOnUpdate;
 	}
 
@@ -117,6 +115,7 @@ public class Plugin: IDalamudPlugin {
 	private void DrawInterface() => this.MainWindow.Toggle();
 
 	public void OpenConfigUi() => this.ConfigurationWindow.Toggle();
+	public void OpenMainUi() => this.MainWindow.Toggle();
 
 	private void Dispose(bool disposing) {
 		if (!disposing) {
@@ -128,6 +127,7 @@ public class Plugin: IDalamudPlugin {
 		Service.Framework.Update -= this.FrameworkOnUpdate;
 		Service.PluginInterface.UiBuilder.Draw -= this.WindowSystem.Draw;
 		Service.PluginInterface.UiBuilder.OpenConfigUi -= this.OpenConfigUi;
+		Service.PluginInterface.UiBuilder.OpenMainUi -= this.OpenMainUi;
 
 		this.WindowSystem.RemoveAllWindows();
 
@@ -298,11 +298,10 @@ public class Plugin: IDalamudPlugin {
 							MapId = mobHuntOrderRow.Target.Value!.TerritoryType.Row,
 							TerritoryType = mobHuntOrderRow.Target.Value!.TerritoryType.Value.TerritoryType.Row,
 							MobHuntId = mobHuntOrderRow.Target.Value!.Name.Row,
-							IsEliteMark = billNumber is BillEnum.ArrElite or BillEnum.HwElite or BillEnum.SbElite
-								or BillEnum.ShbElite or BillEnum.EwElite,
+							IsEliteMark = mobHuntOrderTypeRow.Type == 2,
 							CurrentKillsOffset = (5 * (uint)billNumber) + mobHuntOrderRow.SubRowId,
 							NeededKills = mobHuntOrderRow.NeededKills,
-							Icon = Plugin.LoadIcon(mobHuntOrderRow.Target.Value.Icon)
+							Icon = mobHuntOrderRow.Target.Value.Icon,
 						});
 				}
 				else {
@@ -332,13 +331,6 @@ public class Plugin: IDalamudPlugin {
 		this.ClientStateOnTerritoryChanged(0);
 
 		this.MobHuntEntriesReady = true;
-	}
-
-	private static IDalamudTextureWrap LoadIcon(uint id) {
-		TexFile icon = Service.DataManager.GameData.GetHqIcon(id) ?? Service.DataManager.GameData.GetIcon(id)!;
-		byte[] iconData = icon.GetRgbaImageData();
-
-		return Service.PluginInterface.UiBuilder.LoadImageRaw(iconData, icon.Header.Width, icon.Header.Height, 4);
 	}
 
 	public void Dispose() {

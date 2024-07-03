@@ -48,8 +48,8 @@ public class PluginCommandManager<THost>: IDisposable {
 	}
 
 	private IEnumerable<(string, CommandInfo)> GetCommandInfoTuple(MethodInfo method) {
-		CommandInfo.HandlerDelegate handlerDelegate = (CommandInfo.HandlerDelegate)Delegate.CreateDelegate(
-			typeof(CommandInfo.HandlerDelegate),
+		IReadOnlyCommandInfo.HandlerDelegate handlerDelegate = (IReadOnlyCommandInfo.HandlerDelegate)Delegate.CreateDelegate(
+			typeof(IReadOnlyCommandInfo.HandlerDelegate),
 			this.host,
 			method);
 

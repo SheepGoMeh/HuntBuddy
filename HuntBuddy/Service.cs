@@ -7,7 +7,7 @@ namespace HuntBuddy;
 
 public class Service {
 	[PluginService]
-	public static DalamudPluginInterface PluginInterface {
+	public static IDalamudPluginInterface PluginInterface {
 		get;
 		set;
 	} = null!;
@@ -56,6 +56,12 @@ public class Service {
 
 	[PluginService]
 	public static IPluginLog PluginLog {
+		get;
+		set;
+	} = null!;
+
+	[PluginService]
+	public static ITextureProvider TextureProvider {
 		get;
 		set;
 	} = null!;

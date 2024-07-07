@@ -258,6 +258,7 @@ public static class Location {
 		{ 05728, new PositionInfo { X = 17.0f, Y = 08.0f } }, // Specter
 		{ 05726, new PositionInfo { X = 25.0f, Y = 29.0f } }, // Vepar
 		{ 05719, new PositionInfo { X = 20.0f, Y = 25.0f } }, // Yabby
+
 		// Shadowbringers
 		// Lakeland
 		{ 08498, new PositionInfo { X = 19.0f, Y = 09.0f } }, // Chiliad Cama
@@ -457,6 +458,130 @@ public static class Location {
 		{ 10427, new PositionInfo { X = 10.0f, Y = 30.0f } }, // Stellar Amphiptere
 		{ 10430, new PositionInfo { X = 14.4f, Y = 28.2f } }, // Stellar Brobinyak
 		{ 10435, new PositionInfo { X = 16.3f, Y = 14.1f } }, // Other One
+
+		// Dawntrail
+		// Urqopacha
+		{ 13079, new PositionInfo { X = 32.0f, Y = 13.4f } }, // Alpaca
+		{ 13090, new PositionInfo { X = 22.5f, Y = 16.9f } }, // Bandercoeurl
+		{ 13083, new PositionInfo { X = 22.5f, Y = 11.8f } }, // Barbmole
+		{ 13081, new PositionInfo { X = 33.5f, Y = 34.2f } }, // Bloodsucker
+		{ 13087, new PositionInfo { X = 28.7f, Y = 09.1f } }, // Chaba Gedan
+		{ 13084, new PositionInfo { X = 22.4f, Y = 33.9f } }, // Chirwagur Sabreur
+		{ 13085, new PositionInfo { X = 16.6f, Y = 28.0f } }, // Flint
+		{ 13094, new PositionInfo { X = 15.9f, Y = 23.7f } }, // Huallepen
+		{ 13096, new PositionInfo { X = 25.3f, Y = 22.2f } }, // Longjaw
+		{ 13080, new PositionInfo { X = 19.5f, Y = 14.8f } }, // Megamaguey
+		{ 13095, new PositionInfo { X = 35.0f, Y = 27.5f } }, // Molten Phoebad
+		{ 13091, new PositionInfo { X = 19.3f, Y = 17.1f } }, // Mountain Bear
+		{ 13093, new PositionInfo { X = 24.2f, Y = 27.3f } }, // Naryordor
+		{ 13092, new PositionInfo { X = 15.2f, Y = 13.3f } }, // Notocactuar
+		{ 13097, new PositionInfo { X = 09.4f, Y = 22.9f } }, // Ridgetrap
+		{ 13088, new PositionInfo { X = 25.7f, Y = 17.0f } }, // Siehnam
+		{ 13082, new PositionInfo { X = 25.9f, Y = 14.0f } }, // Silver Lobo
+		{ 13086, new PositionInfo { X = 31.9f, Y = 18.5f } }, // Tulichu
+		{ 13098, new PositionInfo { X = 28.1f, Y = 28.4f } }, // Tulidile
+		{ 13089, new PositionInfo { X = 30.8f, Y = 15.4f } }, // Turali Ratel
+
+		// Kozama'uka
+		{ 12946, new PositionInfo { X = 19.5f, Y = 23.8f } }, // Bird of Ligaka
+		{ 12935, new PositionInfo { X = 14.0f, Y = 19.3f } }, // Glowfly
+		{ 12930, new PositionInfo { X = 10.2f, Y = 09.5f } }, // Hammerhead Crocodile
+		{ 12936, new PositionInfo { X = 21.1f, Y = 12.7f } }, // Heavy Matamata
+		{ 12952, new PositionInfo { X = 13.2f, Y = 29.6f } }, // Jungle Iguana
+		{ 12934, new PositionInfo { X = 14.2f, Y = 16.3f } }, // Jungle Orobon
+		{ 12938, new PositionInfo { X = 13.8f, Y = 11.2f } }, // Jungle Pelican
+		{ 12943, new PositionInfo { X = 11.2f, Y = 22.8f } }, // Lesser Apollyon
+		{ 12941, new PositionInfo { X = 33.0f, Y = 14.6f } }, // Ocelot
+		{ 12949, new PositionInfo { X = 36.9f, Y = 34.9f } }, // Paper Wasp
+		{ 12939, new PositionInfo { X = 29.9f, Y = 15.5f } }, // Poison Frog
+		{ 12933, new PositionInfo { X = 15.7f, Y = 14.4f } }, // Rhino Beetle
+		{ 12937, new PositionInfo { X = 26.8f, Y = 12.3f } }, // Stinkshell
+		{ 12944, new PositionInfo { X = 19.9f, Y = 28.4f } }, // Swampmonk
+		{ 12948, new PositionInfo { X = 34.2f, Y = 27.5f } }, // Tegu
+		{ 12947, new PositionInfo { X = 08.0f, Y = 32.5f } }, // Tomaton
+		{ 12932, new PositionInfo { X = 20.7f, Y = 15.8f } }, // Toucalibri
+		{ 12950, new PositionInfo { X = 17.9f, Y = 32.2f } }, // Turali Morbol
+		{ 12951, new PositionInfo { X = 08.7f, Y = 26.7f } }, // Turali Netzach
+		{ 12942, new PositionInfo { X = 31.5f, Y = 19.5f } }, // U'out
+		{ 12931, new PositionInfo { X = 14.8f, Y = 05.5f } }, // Uolon
+		{ 12945, new PositionInfo { X = 28.9f, Y = 25.3f } }, // Widowmaker
+		{ 12940, new PositionInfo { X = 33.6f, Y = 08.5f } }, // Woodsman
+
+		// Yak T'el
+		{ 12957, new PositionInfo { X = 21.1f, Y = 05.6f } }, // Balyaborr
+		{ 12966, new PositionInfo { X = 07.4f, Y = 24.4f } }, // Blue Leafkin
+		{ 12969, new PositionInfo { X = 16.4f, Y = 28.9f } }, // Blue Morpho
+		{ 12964, new PositionInfo { X = 17.8f, Y = 24.4f } }, // Branchbearer
+		{ 12971, new PositionInfo { X = 16.3f, Y = 37.7f } }, // Fly Agaric
+		{ 12970, new PositionInfo { X = 20.4f, Y = 18.1f } }, // Ja Tiika Moth
+		{ 12958, new PositionInfo { X = 24.3f, Y = 06.3f } }, // Killer Piranha
+		{ 12955, new PositionInfo { X = 09.5f, Y = 20.4f } }, // Leaf Mantis
+		{ 12965, new PositionInfo { X = 30.2f, Y = 28.3f } }, // Mourner
+		{ 12954, new PositionInfo { X = 17.0f, Y = 13.8f } }, // Necrosis 
+		{ 12962, new PositionInfo { X = 35.3f, Y = 23.1f } }, // Pitcher Weed
+		{ 12967, new PositionInfo { X = 30.6f, Y = 35.7f } }, // Sarracenia
+		{ 12960, new PositionInfo { X = 28.0f, Y = 18.4f } }, // T'ohsoq
+		{ 12961, new PositionInfo { X = 32.8f, Y = 20.5f } }, // T'ohts'on
+		{ 12953, new PositionInfo { X = 24.0f, Y = 11.8f } }, // Ty'aitya
+		{ 12956, new PositionInfo { X = 12.4f, Y = 09.9f } }, // Vawtsaral Br'aax
+		{ 12959, new PositionInfo { X = 32.2f, Y = 12.7f } }, // Yak T'el Squib
+
+		// Shaaloani
+		{ 12990, new PositionInfo { X = 14.7f, Y = 09.4f } }, // Aspis
+		{ 12989, new PositionInfo { X = 27.6f, Y = 13.1f } }, // Ceratoraptor
+		{ 12975, new PositionInfo { X = 11.4f, Y = 17.1f } }, // Cerule Anala
+		{ 12977, new PositionInfo { X = 19.9f, Y = 21.5f } }, // Cerule Bomb
+		{ 12992, new PositionInfo { X = 31.8f, Y = 23.8f } }, // Flying Popoto
+		{ 12996, new PositionInfo { X = 28.8f, Y = 23.5f } }, // Grasslands Worm
+		{ 12995, new PositionInfo { X = 24.4f, Y = 15.6f } }, // Gritclaw
+		{ 12997, new PositionInfo { X = 12.3f, Y = 12.9f } }, // Horned Lizard
+		{ 12988, new PositionInfo { X = 21.4f, Y = 31.8f } }, // Lunyucaua'pya
+		{ 12987, new PositionInfo { X = 18.0f, Y = 31.6f } }, // Lunyuhiyshahe
+		{ 12991, new PositionInfo { X = 24.3f, Y = 11.3f } }, // Rroneek
+		{ 12976, new PositionInfo { X = 25.9f, Y = 29.0f } }, // Sunbeard
+		{ 12993, new PositionInfo { X = 35.1f, Y = 11.1f } }, // Toari Alligator
+		{ 12972, new PositionInfo { X = 30.3f, Y = 33.1f } }, // Tumbleclaw
+		{ 12994, new PositionInfo { X = 29.2f, Y = 07.9f } }, // Turali Hawksbill
+		{ 12978, new PositionInfo { X = 14.1f, Y = 23.3f } }, // Wild Dhara
+		{ 12986, new PositionInfo { X = 12.7f, Y = 30.2f } }, // Yeheheceyaa
+
+		// Heritage Found
+		{ 13115, new PositionInfo { X = 09.6f, Y = 19.5f } }, // Asterodia
+		{ 13101, new PositionInfo { X = 33.4f, Y = 27.7f } }, // Axe Beak
+		{ 13103, new PositionInfo { X = 22.5f, Y = 16.7f } }, // Bolt Hound
+		{ 13116, new PositionInfo { X = 28.2f, Y = 26.7f } }, // Cauahealoa
+		{ 13117, new PositionInfo { X = 32.6f, Y = 22.7f } }, // Cauahepya
+		{ 13108, new PositionInfo { X = 15.8f, Y = 22.2f } }, // Defective Aerostat
+		{ 13107, new PositionInfo { X = 15.8f, Y = 22.2f } }, // Defective Sentry R8
+		{ 13106, new PositionInfo { X = 10.6f, Y = 26.2f } }, // Defective Sentry S8
+		{ 13109, new PositionInfo { X = 11.3f, Y = 11.5f } }, // Defective Turret
+		{ 13105, new PositionInfo { X = 21.3f, Y = 27.6f } }, // Eyeclops
+		{ 13104, new PositionInfo { X = 14.8f, Y = 17.2f } }, // Gomphotherium
+		{ 13113, new PositionInfo { X = 35.2f, Y = 14.2f } }, // Katoblepas
+		{ 13112, new PositionInfo { X = 24.3f, Y = 20.9f } }, // Myrmeleon
+		{ 13114, new PositionInfo { X = 11.2f, Y = 33.2f } }, // Python
+		{ 13111, new PositionInfo { X = 30.8f, Y = 13.9f } }, // Thunder Spirit
+		{ 13110, new PositionInfo { X = 15.6f, Y = 32.4f } }, // Woolback
+		{ 13102, new PositionInfo { X = 24.8f, Y = 07.3f } }, // Yyenisheyni Bat
+
+		// Living Memory
+		{ 13121, new PositionInfo { X = 33.1f, Y = 34.4f } }, // Acrocat
+		{ 13137, new PositionInfo { X = 12.0f, Y = 18.7f } }, // Agavoides
+		{ 13133, new PositionInfo { X = 30.5f, Y = 17.1f } }, // Alexandrian Clipper
+		{ 13130, new PositionInfo { X = 26.9f, Y = 17.6f } }, // Blazing Soul
+		{ 13127, new PositionInfo { X = 35.9f, Y = 27.2f } }, // Brownie
+		{ 13136, new PositionInfo { X = 17.8f, Y = 21.9f } }, // Everlasting Yew
+		{ 13124, new PositionInfo { X = 09.9f, Y = 36.2f } }, // Fluid Soul
+		{ 13131, new PositionInfo { X = 36.5f, Y = 18.3f } }, // Gargantua
+		{ 13120, new PositionInfo { X = 32.3f, Y = 27.1f } }, // Gemkeeper
+		{ 13129, new PositionInfo { X = 26.6f, Y = 08.7f } }, // Matchlock Scorpion
+		{ 13118, new PositionInfo { X = 33.2f, Y = 16.3f } }, // Outrunner
+		{ 13132, new PositionInfo { X = 30.3f, Y = 12.5f } }, // Pineapple
+		{ 13125, new PositionInfo { X = 13.0f, Y = 34.5f } }, // Remembird
+		{ 13119, new PositionInfo { X = 28.4f, Y = 31.6f } }, // Seeker Bat
+		{ 13139, new PositionInfo { X = 18.0f, Y = 15.2f } }, // Timberman
+		{ 13122, new PositionInfo { X = 17.7f, Y = 30.5f } }, // Torbalan
+		{ 13138, new PositionInfo { X = 11.8f, Y = 12.9f } }, // Walking Tree
 	};
 
 	public enum OpenType {

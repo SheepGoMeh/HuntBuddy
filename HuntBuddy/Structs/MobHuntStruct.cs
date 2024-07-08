@@ -22,6 +22,10 @@ public enum BillEnum: uint {
 	EwRank2,
 	EwRank3,
 	EwElite,
+	DtRank1,
+	DtRank2,
+	DtRank3,
+	DtElite,
 }
 
 [Flags]
@@ -44,13 +48,17 @@ public enum ObtainedBillEnum: uint {
 	EwRank2 = 1 << 15,
 	EwRank3 = 1 << 16,
 	EwElite = 1 << 17,
+	DtRank1 = 1 << 18,
+	DtRank2 = 1 << 19,
+	DtRank3 = 1 << 20,
+	DtElite = 1 << 21,
 }
 
 // Signature to get struct address
 // D1 48 8D 0D ? ? ? ? 48 83 C4 20 5F E9 ? ? ? ?
 [StructLayout(LayoutKind.Explicit, Size = 0x198)]
 public unsafe struct MobHuntStruct {
-	[FieldOffset(0x1A)] public fixed byte BillOffset[18];
-	[FieldOffset(0x2C)] public fixed int CurrentKills[5 * 18];
-	[FieldOffset(0x194)] public readonly ObtainedBillEnum ObtainedBillEnumFlags;
+	[FieldOffset(0x1E)] public fixed byte BillOffset[22];
+	[FieldOffset(0x34)] public fixed int CurrentKills[5 * 22];
+	[FieldOffset(0x1EC)] public readonly ObtainedBillEnum ObtainedBillEnumFlags;
 }

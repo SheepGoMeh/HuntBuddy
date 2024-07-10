@@ -65,4 +65,10 @@ public class Service {
 		get;
 		set;
 	} = null!;
+
+	[PluginService]
+	public static ICondition Condition {
+		get;
+		set;
+	} = null!;
 }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
 
@@ -47,6 +48,7 @@ public class LocalHuntsWindow: Window {
 	}
 
 	public override unsafe bool DrawConditions() => Plugin.Instance.Configuration.ShowLocalHunts
+		&& !Service.Condition.Any(ConditionFlag.WatchingCutscene, ConditionFlag.OccupiedInCutSceneEvent)
 		&& !Plugin.Instance.CurrentAreaMobHuntEntries.IsEmpty
 		&& Plugin.Instance.CurrentAreaMobHuntEntries
 			.Count(x => Plugin.Instance.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) != Plugin.Instance.CurrentAreaMobHuntEntries.Count;

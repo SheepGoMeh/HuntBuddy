@@ -510,7 +510,7 @@ public static class Location {
 		// Yak T'el
 		{ 12957, new PositionInfo { X = 21.1f, Y = 05.6f } }, // Balyaborr
 		{ 12966, new PositionInfo { X = 07.4f, Y = 24.4f } }, // Blue Leafkin
-		{ 12969, new PositionInfo { X = 16.4f, Y = 28.9f } }, // Blue Morpho
+		{ 12969, new PositionInfo { X = 16.4f, Y = 30.9f } }, // Blue Morpho
 		{ 12964, new PositionInfo { X = 17.8f, Y = 24.4f } }, // Branchbearer
 		{ 12971, new PositionInfo { X = 16.3f, Y = 37.7f } }, // Fly Agaric
 		{ 12970, new PositionInfo { X = 20.4f, Y = 18.1f } }, // Ja Tiika Moth

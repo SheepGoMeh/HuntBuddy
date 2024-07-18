@@ -34,20 +34,20 @@ public class ConfigurationWindow: Window {
 	public override void Draw() {
 		bool save = false;
 
-		ImGui.BeginDisabled(Plugin.EspConsumer?.IsAvailable == false);
+		if (Plugin.EspConsumer?.IsAvailable == true) { // probably shouldn't name a 3pp if it's not installed
 
-		save |= ImGui.Checkbox("Enable XivEsp plugin integration?", ref Plugin.Instance.Configuration.EnableXivEspIntegration);
+			save |= ImGui.Checkbox("Enable XivEsp plugin integration?", ref Plugin.Instance.Configuration.EnableXivEspIntegration);
 
-		ImGui.Indent();
-		save |= ImGui.Checkbox("Set XivEsp search when using '/phb next' command?", ref Plugin.Instance.Configuration.AutoSetEspSearchOnNextHuntCommand);
-		ImGui.Unindent();
-		if (ImGui.IsItemHovered()) {
-			InterfaceUtil.DrawWrappedTooltip(ImGuiHelpers.GlobalScale * BaseTooltipWidth,
-				"If enabled and XivEsp is available, the '/phb next' command will automatically set XivEsp's search"
-				+ "to the name of the chosen mark, EVEN IF you already have a custom search active.");
+			ImGui.Indent();
+			save |= ImGui.Checkbox("Set XivEsp search when using '/phb next' command?", ref Plugin.Instance.Configuration.AutoSetEspSearchOnNextHuntCommand);
+			ImGui.Unindent();
+			if (ImGui.IsItemHovered()) {
+				InterfaceUtil.DrawWrappedTooltip(ImGuiHelpers.GlobalScale * BaseTooltipWidth,
+					"If enabled and XivEsp is available, the '/phb next' command will automatically set XivEsp's search"
+					+ "to the name of the chosen mark, EVEN IF you already have a custom search active.");
+			}
+
 		}
-
-		ImGui.EndDisabled();
 
 		ImGui.Spacing();
 

@@ -20,6 +20,7 @@ public class ConfigurationWindow: Window {
 		true) {
 		this.Size = Vector2.Zero;
 		this.SizeCondition = ImGuiCond.Always;
+		this.RespectCloseHotkey = !Plugin.Instance.Configuration.IgnoreCloseHotkey;
 	}
 
 	public override void PreOpenCheck() {
@@ -50,6 +51,13 @@ public class ConfigurationWindow: Window {
 		}
 
 		ImGui.Spacing();
+
+		if (ImGui.Checkbox("Ignore close hotkey",
+			    ref Plugin.Instance.Configuration.IgnoreCloseHotkey)) {
+			this.RespectCloseHotkey = !Plugin.Instance.Configuration.IgnoreCloseHotkey;
+			Plugin.Instance.MainWindow.RespectCloseHotkey = !Plugin.Instance.Configuration.IgnoreCloseHotkey;
+			save = true;
+		}
 
 		save |= ImGui.Checkbox("Lock plugin window positions and sizes",
 			ref Plugin.Instance.Configuration.LockWindowPositions);

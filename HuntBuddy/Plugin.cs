@@ -44,7 +44,7 @@ public class Plugin: IDalamudPlugin {
 		get;
 	}
 
-	private MainWindow MainWindow {
+	internal MainWindow MainWindow {
 		get;
 	}
 

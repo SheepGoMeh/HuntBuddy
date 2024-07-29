@@ -23,6 +23,7 @@ public class MainWindow: Window {
 		true) {
 		this.Size = new Vector2(400 * ImGui.GetIO().FontGlobalScale, 500);
 		this.SizeCondition = ImGuiCond.FirstUseEver;
+		this.RespectCloseHotkey = !Plugin.Instance.Configuration.IgnoreCloseHotkey;
 	}
 
 	public override void PreOpenCheck() {

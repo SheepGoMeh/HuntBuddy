@@ -24,6 +24,9 @@ public static class Location {
 		}
 
 		public Vector2 Coordinate => new(this.X, this.Y);
+
+		public uint NearestAetheryteId;
+		public float DistanceToAetheryte;
 	}
 
 	// MobHuntId as key
@@ -643,14 +646,14 @@ public static class Location {
 		return (40.96f / num1 * ((num2 + 1024.0f) / 2048.0f)) + 1.0f;
 	}
 
-	public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId) {
+	public static (uint, float) FindNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId) {
 		Map? mapRow = Service.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
 
 		if (mapRow == null) {
-			return;
+			return (0, float.MaxValue);
 		}
 
-		ushort? nearestAetheryteId = Service.DataManager.Excel.GetSheet<MapMarker>()
+		var nearestAetheryteInfo = Service.DataManager.Excel.GetSheet<MapMarker>()
 			?.Where(x => x.DataType == 3 && x.RowId == mapRow.MapMarkerRange)
 			.Select(
 				x => new {
@@ -660,19 +663,23 @@ public static class Location {
 					rowId = x.DataKey
 				})
 			.OrderBy(x => x.distance)
-			.FirstOrDefault()?.rowId;
+			.FirstOrDefault();
 
 		Aetheryte? nearestAetheryte =
 			territoryType == 399 // Support the unique case of aetheryte not being in the same map
 				? mapRow.TerritoryType?.Value?.Aetheryte.Value
 				: Service.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(
 					x =>
-						x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
+						x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteInfo?.rowId);
 
-		if (nearestAetheryte == null) {
-			return;
+		return (nearestAetheryte?.RowId ?? 0, nearestAetheryteInfo?.distance ?? float.MaxValue);
+	}
+
+	public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId) {
+		(uint nearestAetheryteId, _) = FindNearestAetheryte(territoryType, mapId, mobHuntId);
+
+		if (nearestAetheryteId != 0) {
+			Plugin.TeleportConsumer?.Teleport(nearestAetheryteId);
 		}
-
-		Plugin.TeleportConsumer?.Teleport(nearestAetheryte.RowId);
 	}
 }

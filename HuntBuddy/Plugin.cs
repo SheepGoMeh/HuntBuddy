@@ -11,6 +11,8 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using HuntBuddy.Structs;
@@ -30,6 +32,8 @@ public class Plugin: IDalamudPlugin {
 	private readonly PluginCommandManager<Plugin> commandManager;
 
 	private ObtainedBillEnum lastState;
+
+	private readonly Dictionary<uint, Dictionary<uint, List<MobHuntEntry>>> pathMap = new();
 
 	// Dictionary<string ExpansionName, Dictionary<KeyValuePair<uint MobTerritoryType, string MobTerritoryName>, List<MobHuntEntry MobsInZone>>>
 	public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
@@ -149,90 +153,7 @@ public class Plugin: IDalamudPlugin {
 					this.Configuration.Save();
 					break;
 				case "next":
-					if (this.MobHuntEntries.Count > 0) {
-						bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark ||
-							this.MobHuntStruct->CurrentKills[
-								entry.CurrentKillsOffset] <
-							entry.NeededKills;
-						Location.OpenType openType = Location.OpenType.None;
-						Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
-						Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState
-							.TerritoryType)!.Map!.Value!;
-						Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);
-						MobHuntEntry? chosen = this.CurrentAreaMobHuntEntries
-							.Where(filterPredicate)
-							.OrderBy(entry =>
-								entry.IsEliteMark
-									? float.MaxValue
-									: Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2))
-							.FirstOrDefault();
-						if (chosen == null) {
-							Service.PluginLog.Information("No marks in current zone, looking in current expansion");
-							openType = this.Configuration.IncludeAreaOnMap
-								? Location.OpenType.ShowOpen
-								: Location.OpenType.MarkerOpen;
-							SeString? expansion =
-								Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState
-									.TerritoryType)!.ExVersion.Value!.Name;
-							Service.PluginLog.Information(
-								$"Player is in a zone from {expansion}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
-							List<MobHuntEntry> candidates = this.MobHuntEntries.ContainsKey(expansion)
-								? this.MobHuntEntries[expansion]
-									.Values
-									.SelectMany(l => l)
-									.Where(filterPredicate)
-									.ToList()
-								: [];
-							// if we didn't find any candidates, we try a different method to fill it
-							if (candidates.Count == 0) {
-								Service.PluginLog.Information(
-									"Nothing available in current expansion, looking globally");
-								candidates =
-									this.MobHuntEntries.Values
-										.SelectMany(dict => dict.Values)
-										.SelectMany(l => l)
-										.Where(filterPredicate)
-										.ToList();
-							}
-
-							// regardless of HOW we got our candidates, assuming we did in fact get them, we pick one
-							// note that this can't be merged into the above block because the above MAY run, and if so MUST run first,
-							// but this block must ALWAYS run, regardless
-							if (candidates.Count >= 1) {
-								Service.PluginLog.Information($"Found {candidates.Count}");
-								chosen = candidates[new Random().Next(candidates.Count)];
-							}
-						}
-
-						if (chosen != null) {
-							if (chosen.IsEliteMark) {
-								Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
-								if (!this.Configuration.SuppressEliteMarkLocationWarning) {
-									Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
-										+ "\n(You can suppress this warning in the plugin settings)");
-								}
-							}
-							else {
-								long remaining = chosen.NeededKills -
-												 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
-								Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
-								Location.CreateMapMarker(
-									chosen.TerritoryType,
-									chosen.MapId,
-									chosen.MobHuntId,
-									chosen.Name,
-									openType);
-							}
-							if (this.Configuration.EnableXivEspIntegration && this.Configuration.AutoSetEspSearchOnNextHuntCommand && Plugin.EspConsumer?.IsAvailable == true)
-								Plugin.EspConsumer.SearchFor(chosen.Name!);
-						}
-						else {
-							Service.PluginLog.Information("Unable to find a hunt mark to target");
-							Service.Chat.Print(
-								"Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
-						}
-					}
-
+					this.NextHunt();
 					break;
 				case "ls":
 				case "list":
@@ -256,6 +177,106 @@ public class Plugin: IDalamudPlugin {
 		catch (Exception e) {
 			Service.PluginLog.Error($"Error in command handler: {e}");
 		}
+	}
+
+	private unsafe void NextHunt() {
+		if (this.MobHuntEntries.Count <= 0) return;
+
+		Location.OpenType openType = Location.OpenType.None;
+		Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
+		Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState.TerritoryType)!.Map!.Value!);
+		MobHuntEntry? chosen = this.CurrentAreaMobHuntEntries
+			.Where(FilterPredicate).MinBy(entry =>
+				entry.IsEliteMark
+					? float.MaxValue
+					: float.Min(Vector2.Distance(Location.Database[entry.MobHuntId].Coordinate, playerVec2), Location.Database[entry.MobHuntId].DistanceToAetheryte));
+		if (chosen == null) {
+			Service.PluginLog.Information("No marks in current zone, looking in current expansion");
+			openType = this.Configuration.IncludeAreaOnMap
+				? Location.OpenType.ShowOpen
+				: Location.OpenType.MarkerOpen;
+			ExVersion expansion =
+				Service.DataManager.Excel.GetSheet<TerritoryType>()!.GetRow(Service.ClientState
+					.TerritoryType)!.ExVersion.Value!;
+			Service.PluginLog.Information(
+				$"Player is in a zone from {expansion.Name}; known expansions are {string.Join(", ", this.MobHuntEntries.Keys)}");
+			
+			Telepo* tp = Telepo.Instance();
+			if (tp == null || tp->UpdateAetheryteList() == null) {
+				return;
+			}
+
+			Dictionary<uint, uint> prices = [];
+			int unlockedAetherytes = tp->TeleportList.Count;
+			for (int i = 0; i < unlockedAetherytes; ++i) {
+				TeleportInfo info = tp->TeleportList[i];
+				prices[info.AetheryteId] = info.GilCost;
+			}
+
+			List<MobHuntEntry> candidates = this.pathMap.TryGetValue(expansion.RowId, out Dictionary<uint, List<MobHuntEntry>>? entry)
+				? entry
+					.Values
+					.SelectMany(l => l)
+					.Where(FilterPredicate)
+					.ToList()
+				: [];
+			// if we didn't find any candidates, we try a different method to fill it
+			if (candidates.Count == 0) {
+				Service.PluginLog.Information(
+					"Nothing available in current expansion, looking globally");
+				candidates =
+					this.MobHuntEntries.Values
+						.SelectMany(dict => dict.Values)
+						.SelectMany(l => l)
+						.Where(FilterPredicate)
+						.ToList();
+			}
+
+			// regardless of HOW we got our candidates, assuming we did in fact get them, we pick one
+			// note that this can't be merged into the above block because the above MAY run, and if so MUST run first,
+			// but this block must ALWAYS run, regardless
+			if (candidates.Count >= 1) {
+				Service.PluginLog.Information($"Found {candidates.Count}");
+				chosen = candidates
+					.OrderBy(x => prices[Location.Database[x.MobHuntId].NearestAetheryteId])
+					.ThenBy(x => Location.Database[x.MobHuntId].DistanceToAetheryte)
+					.First();
+			}
+		}
+
+		if (chosen != null) {
+			if (chosen.IsEliteMark) {
+				Service.Chat.Print($"Hunting elite mark {chosen.Name} in {chosen.TerritoryName}");
+				if (!this.Configuration.SuppressEliteMarkLocationWarning) {
+					Service.Chat.Print("Elite mark spawn locations are not available, since there are so many possibilities and the mob will only ever be in one place at a time."
+					                   + "\n(You can suppress this warning in the plugin settings)");
+				}
+			}
+			else {
+				long remaining = chosen.NeededKills -
+				                 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
+				Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
+				Location.CreateMapMarker(
+					chosen.TerritoryType,
+					chosen.MapId,
+					chosen.MobHuntId,
+					chosen.Name,
+					openType);
+			}
+			if (this.Configuration is { EnableXivEspIntegration: true, AutoSetEspSearchOnNextHuntCommand: true } && Plugin.EspConsumer?.IsAvailable == true)
+				Plugin.EspConsumer.SearchFor(chosen.Name!);
+		}
+		else {
+			Service.PluginLog.Information("Unable to find a hunt mark to target");
+			Service.Chat.Print(
+				"Couldn't find any hunt marks. Either you have no bills, or this is a bug.");
+		}
+
+		return;
+
+		bool FilterPredicate(MobHuntEntry entry) => entry.IsEliteMark ||
+		                                            this.MobHuntStruct->CurrentKills[entry.CurrentKillsOffset] <
+		                                            entry.NeededKills;
 	}
 
 	public unsafe void ReloadData() {
@@ -312,10 +333,16 @@ public class Plugin: IDalamudPlugin {
 			}
 		}
 
+		this.pathMap.Clear();
+
 		foreach (MobHuntEntry entry in mobHuntList) {
 			string key = entry.ExpansionName ?? "Unknown";
 			KeyValuePair<uint, string> subKey =
 				new(entry.TerritoryType, entry.TerritoryName ?? "Unknown");
+
+			(uint nearestAetheryteId, float distanceToNearestAetheryte) = Location.FindNearestAetheryte(entry.TerritoryType, entry.MapId, entry.MobHuntId);
+			Location.Database[entry.MobHuntId].NearestAetheryteId = nearestAetheryteId;
+			Location.Database[entry.MobHuntId].DistanceToAetheryte = distanceToNearestAetheryte;
 
 			if (!this.MobHuntEntries.ContainsKey(key)) {
 				this.MobHuntEntries[key] = [];
@@ -326,6 +353,16 @@ public class Plugin: IDalamudPlugin {
 			}
 
 			this.MobHuntEntries[key][subKey].Add(entry);
+
+			if (!this.pathMap.ContainsKey(entry.ExpansionId)) {
+				this.pathMap[entry.ExpansionId] = [];
+			}
+
+			if (!this.pathMap[entry.ExpansionId].ContainsKey(entry.TerritoryType)) {
+				this.pathMap[entry.ExpansionId][entry.TerritoryType] = [];
+			}
+
+			this.pathMap[entry.ExpansionId][entry.TerritoryType].Add(entry);
 		}
 
 		this.ClientStateOnTerritoryChanged(0);

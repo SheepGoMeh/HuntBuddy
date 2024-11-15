@@ -5,7 +5,7 @@ using System.Numerics;
 
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 using MapType = FFXIVClientStructs.FFXIV.Client.UI.Agent.MapType;
 
@@ -621,7 +621,7 @@ public static class Location {
 	}
 
 	private static (int X, int Y) MapToWorldCoordinates(Vector2 pos, uint mapId) {
-		ushort scale = Service.DataManager.GetExcelSheet<Map>()?.GetRow(mapId)?.SizeFactor ?? 100;
+		ushort scale = Service.DataManager.GetExcelSheet<Map>().GetRowOrDefault(mapId)?.SizeFactor ?? 100;
 		float num = scale / 100f;
 		float x = (float)(((pos.X - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
 		float y = (float)(((pos.Y - 1.0) * num / 41.0 * 2048.0) - 1024.0) / num * 1000f;
@@ -644,35 +644,34 @@ public static class Location {
 	}
 
 	public static void TeleportToNearestAetheryte(uint territoryType, uint mapId, uint mobHuntId) {
-		Map? mapRow = Service.DataManager.Excel.GetSheet<Map>()?.GetRow(mapId);
+		Map? mapRow = Service.DataManager.Excel.GetSheet<Map>().GetRowOrDefault(mapId);
 
 		if (mapRow == null) {
 			return;
 		}
 
-		ushort? nearestAetheryteId = Service.DataManager.Excel.GetSheet<MapMarker>()
-			?.Where(x => x.DataType == 3 && x.RowId == mapRow.MapMarkerRange)
+		uint? nearestAetheryteId = Service.DataManager.GetSubrowExcelSheet<MapMarker>()[mapRow.Value.MapMarkerRange]
+			.Where(x => x.DataType == 3 && x.RowId == mapRow.Value.MapMarkerRange)
 			.Select(
 				x => new {
 					distance = Vector2.DistanceSquared(
 						Database[mobHuntId].Coordinate,
-						ConvertPixelPositionToMapCoordinate(x.X, x.Y, mapRow.SizeFactor)),
-					rowId = x.DataKey
+						ConvertPixelPositionToMapCoordinate(x.X, x.Y, mapRow.Value.SizeFactor)),
+					rowId = x.DataKey.RowId
 				})
 			.OrderBy(x => x.distance)
 			.FirstOrDefault()?.rowId;
 
 		Aetheryte? nearestAetheryte =
 			territoryType == 399 // Support the unique case of aetheryte not being in the same map
-				? mapRow.TerritoryType?.Value?.Aetheryte.Value
-				: Service.DataManager.Excel.GetSheet<Aetheryte>()?.FirstOrDefault(
-					x =>
-						x.IsAetheryte && x.Territory.Row == territoryType && x.RowId == nearestAetheryteId);
+				? mapRow.Value.TerritoryType.ValueNullable?.Aetheryte.Value
+				: Service.DataManager.GetExcelSheet<Aetheryte>().FirstOrDefault(x =>
+					x.IsAetheryte && x.Territory.Value.RowId == territoryType && x.RowId == nearestAetheryteId);
 
 		if (nearestAetheryte == null) {
 			return;
 		}
 
-		Plugin.TeleportConsumer?.Teleport(nearestAetheryte.RowId);
+		Plugin.TeleportConsumer?.Teleport(nearestAetheryte.Value.RowId);
 	}
 }

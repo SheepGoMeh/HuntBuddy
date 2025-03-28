@@ -5,6 +5,8 @@ using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
 
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+
 using HuntBuddy.Utils;
 
 using ImGuiNET;
@@ -51,11 +53,11 @@ public class LocalHuntsWindow: Window {
 		&& !Service.Condition.Any(ConditionFlag.WatchingCutscene, ConditionFlag.OccupiedInCutSceneEvent)
 		&& !Plugin.Instance.CurrentAreaMobHuntEntries.IsEmpty
 		&& Plugin.Instance.CurrentAreaMobHuntEntries
-			.Count(x => Plugin.Instance.MobHuntStruct->CurrentKills[x.CurrentKillsOffset] == x.NeededKills) != Plugin.Instance.CurrentAreaMobHuntEntries.Count;
+			.Count(x => MobHunt.Instance()->GetKillCount(x.BillNumber, x.MobIndex) == x.NeededKills) != Plugin.Instance.CurrentAreaMobHuntEntries.Count;
 
 	public override unsafe void Draw() {
 		foreach (MobHuntEntry? mobHuntEntry in Plugin.Instance.CurrentAreaMobHuntEntries) {
-			int currentKills = Plugin.Instance.MobHuntStruct->CurrentKills[mobHuntEntry.CurrentKillsOffset];
+			int currentKills = MobHunt.Instance()->GetKillCount(mobHuntEntry.BillNumber, mobHuntEntry.MobIndex);
 
 			if (Plugin.Instance.Configuration.HideCompletedHunts && currentKills == mobHuntEntry.NeededKills) {
 				continue;

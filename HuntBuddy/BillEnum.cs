@@ -1,0 +1,26 @@
+﻿namespace HuntBuddy;
+
+public enum BillEnum: uint {
+	ArrRank1,
+	HwRank1,
+	HwRank2,
+	HwRank3,
+	ArrElite,
+	HwElite,
+	SbRank1,
+	SbRank2,
+	SbRank3,
+	SbElite,
+	ShbRank1,
+	ShbRank2,
+	ShbRank3,
+	ShbElite,
+	EwRank1,
+	EwRank2,
+	EwRank3,
+	EwElite,
+	DtRank1,
+	DtRank2,
+	DtRank3,
+	DtElite,
+}

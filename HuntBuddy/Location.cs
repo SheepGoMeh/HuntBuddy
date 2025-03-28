@@ -600,7 +600,7 @@ public static class Location {
 
 		(int X, int Y) pos = MapToWorldCoordinates(Database[mobHuntId].Coordinate, mapId);
 
-		map->IsFlagMarkerSet = 0;
+		map->IsFlagMarkerSet = false;
 		map->SetFlagMapMarker(territoryType, mapId, pos.X, pos.Y, 60004);
 
 		switch (openType) {

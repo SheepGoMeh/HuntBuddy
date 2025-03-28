@@ -17,7 +17,9 @@ public class MobHuntEntry {
 
 	public bool IsEliteMark { get; init; }
 
-	public uint CurrentKillsOffset { get; init; }
+	public byte BillNumber { get; set; }
+
+	public byte MobIndex { get; set; }
 
 	public uint NeededKills { get; set; }
 

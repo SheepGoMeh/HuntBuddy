@@ -11,17 +11,18 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
-using HuntBuddy.Structs;
 using HuntBuddy.Windows;
 
 using ImGuiNET;
 
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
-using Lumina.Text;
-using Lumina.Text.ReadOnly;
+
+using Map = Lumina.Excel.Sheets.Map;
 
 namespace HuntBuddy;
 
@@ -30,13 +31,12 @@ public class Plugin: IDalamudPlugin {
 
 	private readonly PluginCommandManager<Plugin> commandManager;
 
-	private ObtainedBillEnum lastState;
+	private int lastState;
 
 	// Dictionary<string ExpansionName, Dictionary<KeyValuePair<uint MobTerritoryType, string MobTerritoryName>, List<MobHuntEntry MobsInZone>>>
 	public readonly Dictionary<string, Dictionary<KeyValuePair<uint, string>, List<MobHuntEntry>>> MobHuntEntries;
 	public readonly ConcurrentBag<MobHuntEntry> CurrentAreaMobHuntEntries;
 	public bool MobHuntEntriesReady = true;
-	public readonly unsafe MobHuntStruct* MobHuntStruct;
 	public readonly Configuration Configuration;
 	public static TeleportConsumer? TeleportConsumer { get; private set; }
 	public static EspConsumer? EspConsumer { get; private set; }
@@ -70,12 +70,6 @@ public class Plugin: IDalamudPlugin {
 		this.Configuration.IconBackgroundColourU32 =
 			ImGui.ColorConvertFloat4ToU32(this.Configuration.IconBackgroundColour);
 
-		unsafe {
-			this.MobHuntStruct =
-				(MobHuntStruct*)Service.SigScanner.GetStaticAddressFromSig(
-					"48 8D 0D ?? ?? ?? ?? 8B D8 0F B6 52");
-		}
-
 		this.MainWindow = new MainWindow();
 		this.ConfigurationWindow = new ConfigurationWindow();
 
@@ -94,11 +88,11 @@ public class Plugin: IDalamudPlugin {
 	}
 
 	private unsafe void FrameworkOnUpdate(IFramework framework) {
-		if (this.lastState == this.MobHuntStruct->ObtainedBillEnumFlags) {
+		if (this.lastState == MobHunt.Instance()->ObtainedFlags) {
 			return;
 		}
 
-		this.lastState = this.MobHuntStruct->ObtainedBillEnumFlags;
+		this.lastState = MobHunt.Instance()->ObtainedFlags;
 		this.PluginCommand(string.Empty, "reload");
 	}
 
@@ -152,9 +146,8 @@ public class Plugin: IDalamudPlugin {
 				case "next":
 					if (this.MobHuntEntries.Count > 0) {
 						bool filterPredicate(MobHuntEntry entry) => entry.IsEliteMark ||
-							this.MobHuntStruct->CurrentKills[
-								entry.CurrentKillsOffset] <
-							entry.NeededKills;
+						                                            MobHunt.Instance()->GetKillCount(entry.BillNumber,
+							                                            entry.MobIndex) < entry.NeededKills;
 						Location.OpenType openType = Location.OpenType.None;
 						Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
 						Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState
@@ -211,8 +204,7 @@ public class Plugin: IDalamudPlugin {
 								}
 							}
 							else {
-								long remaining = chosen.NeededKills -
-												 this.MobHuntStruct->CurrentKills[chosen.CurrentKillsOffset];
+								long remaining = chosen.NeededKills - MobHunt.Instance()->GetKillCount(chosen.BillNumber, chosen.MobIndex);
 								Service.Chat.Print($"Hunting {remaining}x {chosen.Name} in {chosen.TerritoryName}");
 								Location.CreateMapMarker(
 									chosen.TerritoryType,
@@ -262,7 +254,7 @@ public class Plugin: IDalamudPlugin {
 		SubrowExcelSheet<MobHuntOrder> mobHuntOrderSheet = Service.DataManager.GetSubrowExcelSheet<MobHuntOrder>();
 
 		foreach (BillEnum billNumber in Enum.GetValues<BillEnum>()) {
-			if (!this.MobHuntStruct->ObtainedBillEnumFlags.HasFlag((ObtainedBillEnum)(1 << (int)billNumber))) {
+			if ((MobHunt.Instance()->ObtainedFlags & (1 << (int)billNumber)) == 0) {
 				continue;
 			}
 
@@ -270,7 +262,7 @@ public class Plugin: IDalamudPlugin {
 				Service.DataManager.Excel.GetSheet<MobHuntOrderType>()!.GetRow((uint)billNumber)!;
 
 			uint rowId = mobHuntOrderTypeRow.OrderStart.Value!.RowId +
-						 (uint)(this.MobHuntStruct->BillOffset[mobHuntOrderTypeRow.RowId] - 1);
+						 (uint)(MobHunt.Instance()->ObtainedMarkId[(int)mobHuntOrderTypeRow.RowId] - 1);
 
 			IEnumerable<MobHuntOrder> mobHuntOrderRows = mobHuntOrderSheet[rowId];
 
@@ -293,7 +285,8 @@ public class Plugin: IDalamudPlugin {
 							TerritoryType = mobHuntOrderRow.Target.Value.TerritoryType.Value.TerritoryType.RowId,
 							MobHuntId = mobHuntOrderRow.Target.Value.Name.RowId,
 							IsEliteMark = mobHuntOrderTypeRow.Type == 2,
-							CurrentKillsOffset = (5 * (uint)billNumber) + mobHuntOrderRow.SubrowId,
+							BillNumber = (byte)billNumber,
+							MobIndex = (byte)mobHuntOrderRow.SubrowId,
 							NeededKills = mobHuntOrderRow.NeededKills,
 							Icon = mobHuntOrderRow.Target.Value.Icon,
 						});

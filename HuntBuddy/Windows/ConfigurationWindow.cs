@@ -1,11 +1,10 @@
 ﻿using System.Numerics;
 
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Windowing;
 
 using HuntBuddy.Utils;
-
-using ImGuiNET;
 
 namespace HuntBuddy.Windows;
 

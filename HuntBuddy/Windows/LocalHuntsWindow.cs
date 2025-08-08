@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
@@ -8,8 +9,6 @@ using Dalamud.Interface.Windowing;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 using HuntBuddy.Utils;
-
-using ImGuiNET;
 
 namespace HuntBuddy.Windows;
 

@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
 
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures;
-using ImGuiNET;
 
 namespace HuntBuddy.Utils;
 
@@ -37,7 +37,7 @@ public static class InterfaceUtil {
 				Plugin.Instance.Configuration.IconBackgroundColourU32);
 		}
 
-		drawList.AddImage(LoadIcon(mobHuntEntry.Icon).ImGuiHandle, cursorPos, cursorPos + imageSize);
+		drawList.AddImage(LoadIcon(mobHuntEntry.Icon).Handle, cursorPos, cursorPos + imageSize);
 	}
 
 	/// <summary>

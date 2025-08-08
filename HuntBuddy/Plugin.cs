@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 
+using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -16,8 +17,6 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using HuntBuddy.Attributes;
 using HuntBuddy.Ipc;
 using HuntBuddy.Windows;
-
-using ImGuiNET;
 
 using Lumina.Excel;
 using Lumina.Excel.Sheets;

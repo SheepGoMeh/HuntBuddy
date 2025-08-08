@@ -600,6 +600,7 @@ public static class Location {
 
 		(int X, int Y) pos = MapToWorldCoordinates(Database[mobHuntId].Coordinate, mapId);
 
+		map->FlagMarkerCount = 0; // Weird hack to make the map marker show up
 		map->SetFlagMapMarker(territoryType, mapId, pos.X, pos.Y, 60004);
 
 		switch (openType) {

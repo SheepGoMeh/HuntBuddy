@@ -148,7 +148,7 @@ public class Plugin: IDalamudPlugin {
 						                                            MobHunt.Instance()->GetKillCount(entry.BillNumber,
 							                                            entry.MobIndex) < entry.NeededKills;
 						Location.OpenType openType = Location.OpenType.None;
-						Vector3 playerLocation = Service.ClientState.LocalPlayer!.Position;
+						Vector3 playerLocation = Service.ObjectTable.LocalPlayer!.Position;
 						Map map = Service.DataManager.GetExcelSheet<TerritoryType>()!.GetRow(Service.ClientState
 							.TerritoryType)!.Map!.Value!;
 						Vector2 playerVec2 = MapUtil.WorldToMap(new Vector2(playerLocation.X, playerLocation.Z), map);

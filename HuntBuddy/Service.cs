@@ -40,6 +40,12 @@ public class Service {
 		get;
 		set;
 	} = null!;
+	
+	[PluginService]
+	public static IObjectTable ObjectTable {
+		get;
+		set;
+	} = null!;
 
 	[PluginService]
 	public static IFramework Framework {

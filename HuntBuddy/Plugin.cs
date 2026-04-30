@@ -95,7 +95,7 @@ public class Plugin: IDalamudPlugin {
 		this.PluginCommand(string.Empty, "reload");
 	}
 
-	private void ClientStateOnTerritoryChanged(ushort e) {
+	private void ClientStateOnTerritoryChanged(uint e) {
 		this.CurrentAreaMobHuntEntries.Clear();
 
 		foreach (MobHuntEntry mobHuntEntry in this.MobHuntEntries.SelectMany(
@@ -274,14 +274,13 @@ public class Plugin: IDalamudPlugin {
 						new MobHuntEntry {
 							Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(
 								mobHuntOrderRow.Target.Value.Name.Value.Singular.ToString()),
-							TerritoryName =
-								mobHuntOrderRow.Target.Value.TerritoryType.Value.PlaceName.Value.Name.ToString(),
-							ExpansionName = mobHuntOrderRow.Target.Value.TerritoryType.Value.TerritoryType.Value
+							TerritoryName = mobHuntOrderRow.Target.Value.Map.Value.PlaceName.Value.Name.ToString(),
+							ExpansionName = mobHuntOrderRow.Target.Value.Map.Value.TerritoryType.Value
 								.ExVersion.Value.Name.ToString(),
-							ExpansionId = mobHuntOrderRow.Target.Value.TerritoryType.Value.TerritoryType.Value
+							ExpansionId = mobHuntOrderRow.Target.Value.Map.Value.TerritoryType.Value
 								.ExVersion.RowId,
-							MapId = mobHuntOrderRow.Target.Value.TerritoryType.RowId,
-							TerritoryType = mobHuntOrderRow.Target.Value.TerritoryType.Value.TerritoryType.RowId,
+							MapId = mobHuntOrderRow.Target.Value.Map.RowId,
+							TerritoryType = mobHuntOrderRow.Target.Value.Map.Value.TerritoryType.RowId,
 							MobHuntId = mobHuntOrderRow.Target.Value.Name.RowId,
 							IsEliteMark = mobHuntOrderTypeRow.Type == 2,
 							BillNumber = (byte)billNumber,
